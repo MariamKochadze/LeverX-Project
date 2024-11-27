@@ -1,0 +1,215 @@
+:root {
+    --navigation-background: #1e5cbe;
+    --navigation-underline-background:#1450af;
+    --navigation-active-unerline-background:#5591ff;
+    --navigation-button-background :#1450af;
+    --search-button-background: #5591ff;
+    --main-background: #f5f5fa;
+    --white: #ffffff;
+    --text-logo-color: #6f96d6;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.header {
+    background-color: var(--navigation-background);
+    color: var(--white);
+    position: relative;
+    padding: 10px 20px;
+}
+
+.header::before {
+    content: '';
+    position: absolute;
+    bottom: -3px;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background-color: var(--navigation-underline-background);
+}
+
+.header__nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.header__nav-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.header__title {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    padding: 10px 15px;
+    border-radius: 5px;
+    width: fit-content;
+    text-decoration: none;
+    color: var(--white);
+}
+
+.header__title--small {
+    font-size: 10px;
+    font-weight: 400;
+    text-transform: uppercase;
+    margin: 0;
+    color: var(--text-logo-color);
+}
+
+.header__title--large {
+    font-size: 16px;
+    font-weight: 600;
+    margin: 3px 0 0;
+}
+
+.header__tab {
+    position: relative;
+    cursor: pointer;
+}
+
+.header__active-tab::before {
+    content: '';
+    position: absolute;
+    bottom: -29px;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background-color: var(--navigation-active-unerline-background);
+}
+
+.header__actions {
+    display: flex;
+    gap: 10px;
+}
+
+.header__button {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    padding: 5px 15px;
+    text-decoration: none;
+    background-color: var(--navigation-button-background);
+    border: none;
+    border-radius: 5px;
+    font-size: 1em;
+    cursor: pointer;
+    color: var(--white);
+}
+
+.header__button.log-out {
+    border-radius: 50%;
+    padding: 10px;
+}
+
+.header__button--img {
+    width: 20px;
+    height: 20px;
+}
+
+.header__burger-input {
+    display: none;
+}
+
+.header__burger {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    z-index: 2;
+}
+
+.header__burger-line {
+    width: 25px;
+    height: 3px;
+    background-color: var(--white);
+    border-radius: 2px;
+    transition: all 0.3s ease;
+}
+
+@media (max-width: 768px) {
+    .header__nav {
+        position: relative;
+    }
+
+    .header__burger {
+        display: flex;
+        order: 2;
+    }
+
+    .header__nav-list {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .header__logo {
+        order: 1;
+        display: flex;
+        align-items: center;
+    }
+
+    .header__tab, 
+    .header__actions {
+        display: none;
+        padding: 20px;
+        background-color: var(--navigation-background);
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .header__burger-input:checked ~ .header__nav-list .header__tab,
+    .header__burger-input:checked ~ .header__nav-list .header__actions {
+        display: flex;
+    }
+
+    .header__actions {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .header__burger-input:checked ~ .header__burger .header__burger-line:nth-child(1) {
+        transform: rotate(45deg) translate(6px, 6px);
+    }
+
+    .header__burger-input:checked ~ .header__burger .header__burger-line:nth-child(2) {
+        opacity: 0;
+    }
+
+    .header__burger-input:checked ~ .header__burger .header__burger-line:nth-child(3) {
+        transform: rotate(-45deg) translate(6px, -6px);
+    }
+
+    .header__button {
+        justify-content: center;
+        width: 100%;
+        padding: 10px 15px;
+    }
+
+    .header__button.log-out {
+        width: 45px;
+        height: 45px;
+        margin: 0 auto;
+        padding: 12px;
+    }
+
+    .header__active-tab::before {
+        bottom: -10px;
+        height: 2px;
+    }
+
+    .header__title {
+        padding: 5px 0;
+    }
+}
