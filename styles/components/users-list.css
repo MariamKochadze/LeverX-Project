@@ -1,0 +1,53 @@
+.users-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: var(--main-background);
+}
+
+.view-toggle {
+    display: inline-block;
+    flex: 1;
+    margin-right: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    text-align: center;
+    color: var(--text-color);
+    cursor: pointer;
+    padding: 16px;
+}
+
+input#grid-view:checked + .view-toggle,
+input#list-view:checked + .view-toggle {
+    background-color: var(--primary-color);
+    color: var(--white);
+    border-color: var(--primary-color);
+}
+
+/* Users Body */
+.users-body {
+    background-color: var(--white);
+    padding: 20px;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.users-view {
+    display: none;
+}
+
+#grid-view:checked ~ .users-body #grid-view-content {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 16px;
+    background-color: var(--white);
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+#list-view:checked ~ .users-body #list-view-content {
+    display: block;
+    gap: 16px;
+}

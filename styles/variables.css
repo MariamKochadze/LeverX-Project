@@ -1,0 +1,18 @@
+:root {
+    --navigation-background: #1e5cbe;
+    --navigation-underline-background: #1450af;
+    --navigation-active-unerline-background: #5591ff;
+    --navigation-inactive-unerline-background: #ecf1fa;
+    --navigation-button-background: #1450af;
+    --navigation-button-background-mobile: #0a41a5;
+    --search-button-background: #5591ff;
+    --search-button-color: #7c838c;
+    --search-button-color-inactive: #ced3da;
+    --search-button-border-color: #dee6ea;
+    --main-background: #f5f5fa;
+    --white: #ffffff;
+    --border-color: #e0e8ec;
+
+    --text-logo-color: #6f96d6;
+    --text-main-color: #4d535d;
+}
