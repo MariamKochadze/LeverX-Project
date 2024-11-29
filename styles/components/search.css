@@ -169,6 +169,12 @@ label {
         margin-top: 10px;
         cursor: pointer;
     }
+    .header__nav-list{
+        position: absolute;
+        top:105px;
+        z-index: 2;
+        background-color: var(--white);
+    }
 
     .search__icon {
         width: 20px;
