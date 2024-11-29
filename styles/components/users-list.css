@@ -289,3 +289,82 @@ input#list-view:checked + .view-toggle {
 #list-view:checked ~ .users-body .grid-view {
     display: none;
 }
+
+@media screen and (max-width: 768px) {
+    .users-header .view-options{
+        display: none;
+    }
+
+    .detail-item.code {
+        display: none !important;
+    }
+
+    /* Hide the grid view */
+    .users-view.grid-view {
+        display: none !important; /* Ensure grid view is completely hidden */
+    }
+
+    /* Show only the list view */
+    .users-view.list-view {
+        display: flex !important; /* Ensure the list view is visible */
+        flex-direction: column;
+        gap: 16px;
+        width: 100%;
+    }
+
+    /* Card layout for list view on mobile */
+    .users-view.list-view .card {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        padding: 15px;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        background-color: #fff;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        margin-bottom: 15px;
+        transition: opacity 0.3s ease;
+    }
+
+    /* Avatar styling */
+    .users-view.list-view .card .avatar-container {
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        overflow: hidden;
+    }
+
+    .users-view.list-view .card .avatar-container img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    /* Name styling */
+    .users-view.list-view .card .name {
+        font-weight: bold;
+        font-size: 16px;
+        margin-bottom: 5px;
+    }
+
+    /* Divider line */
+    .users-view.list-view .card .divider {
+        width: 100%;
+        height: 1px;
+        background-color: #ddd;
+        margin: 10px 0;
+    }
+
+    /* Details section styling */
+    .users-view.list-view .card .details {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .users-view.list-view .card .details .job-icon {
+        width: 24px;
+        height: 24px;
+    }
+
+}
