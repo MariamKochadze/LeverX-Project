@@ -26,6 +26,7 @@ input#list-view:checked + .view-toggle {
 
 /* Users Body */
 .users-body {
+    position: relative;
     background-color: var(--white);
     padding: 20px;
     border: 1px solid var(--border-color);
@@ -35,6 +36,7 @@ input#list-view:checked + .view-toggle {
 
 .users-view {
     display: none;
+    margin-top: 20px;
 }
 
 #grid-view:checked ~ .users-body #grid-view-content {
@@ -50,4 +52,240 @@ input#list-view:checked + .view-toggle {
 #list-view:checked ~ .users-body #list-view-content {
     display: block;
     gap: 16px;
+}
+
+.users-view.grid-view {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    padding: 20px;
+}
+
+.card {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    padding: 20px;
+    text-align: center;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.avatar-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.avatar {
+    width: 70%;
+    border-radius: 50%;
+}
+
+.name {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.divider {
+    width: 60%;
+    margin: 10px auto;
+    border: 1px solid #ddd;
+}
+
+.details {
+    margin-top: 10px;
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+}
+
+.detail-item {
+    display: flex;
+    align-items: center;
+    font-size: 14px;
+}
+
+.detail-item.department::before {
+    content: "";
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    margin-right: 8px;
+    background-image: url('../../assets/working-icon.svg');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.detail-item.code::before {
+    content: "";
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    margin-right: 8px;
+    background-image: url('../../assets/note-icon.svg');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+/* Radio toggle for view type */
+.view-options input[type="radio"] {
+    display: none;
+}
+
+.view-options label {
+    cursor: pointer;
+    padding: 5px 10px;
+    color: var(--search-button-color-inactive);
+  
+    border-radius: 5px;
+    margin-right: 10px;
+    font-size: 14px;
+}
+
+#grid-view:checked ~ .users-header .view-options label[for="grid-view"] {
+    color: var(--text-logo-color);
+}
+
+#list-view:checked ~ .users-header .view-options label[for="list-view"] {
+    color: var(--text-logo-color);
+}
+
+#grid-view:checked ~ .users-body .grid-view {
+    display: grid;
+}
+
+#list-view:checked ~ .users-body .list-view {
+    display: block;
+}
+
+
+.users-view {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+}
+
+
+#list-view:checked ~ .users-body .users-view {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+
+#list-view:checked ~ .users-body .card {
+    display: flex;
+    align-items: center;
+    text-align: left;
+    padding: 15px;
+}
+
+#list-view:checked ~ .users-body .avatar-container {
+    width: 80px;
+    margin: 0 20px 0 0;
+}
+
+#list-view:checked ~ .users-body .name {
+    flex: 1;
+    margin: 0;
+}
+
+#list-view:checked ~ .users-body .divider {
+    display: none;
+}
+
+#list-view:checked ~ .users-body .details {
+    margin: 0;
+    min-width: 250px;
+}
+
+#list-view:checked ~ .users-body .avatar {
+    width: 100%;
+}
+
+
+.users-view {
+    display: none;
+}
+
+
+#grid-view:checked ~ .users-body .grid-view {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+}
+
+
+#list-view:checked ~ .users-body .list-view {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+
+.list-view .card {
+    display: flex;
+    align-items: center;
+    text-align: left;
+    padding: 15px;
+}
+
+.list-view .avatar-container {
+    width: 80px;
+    margin: 0 20px 0 0;
+}
+
+.list-view .name {
+    flex: 1;
+    margin: 0;
+}
+
+.list-view .divider {
+    display: none;
+}
+
+.list-view .details {
+    margin: 0;
+    min-width: 250px;
+}
+
+.list-view .avatar {
+    width: 100%;
+}
+
+
+
+
+.grid-view {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+}
+
+.list-view {
+    display: none;
+}
+
+
+#grid-view:checked ~ .users-body .grid-view {
+    display: grid;
+}
+
+#grid-view:checked ~ .users-body .list-view {
+    display: none;
+}
+
+
+#list-view:checked ~ .users-body .list-view {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+#list-view:checked ~ .users-body .grid-view {
+    display: none;
 }

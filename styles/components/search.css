@@ -154,3 +154,18 @@ label {
 #basic-search:checked ~ .search-body #advanced-options {
     display: none;
 }
+
+
+@media (max-width: 768px) {
+   
+  .search-header{
+    display: none;
+  }
+
+  .search-body .search-btn{
+    display: none;
+  }
+ 
+ 
+     
+ }

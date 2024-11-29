@@ -23,11 +23,13 @@
                     </a>
                 </li>
                 <li class="header__tab header__active-tab" tabindex="0">Address Book</li>
-                <li class="header__actions">
+                <li class="header__actions" id="profile__icon">
                     <a href="#" class="header__button">
-                        <img class="header__button--img" src="./assets/" alt="Support Icon"/>SUPPORT
+                        <img class="header__button--img" src="./assets/question-mark.svg" alt="Support Icon"/>SUPPORT
                     </a>
-                    <a href="#" class="header__button">PROFILE</a>
+                    <a href="#" class="header__button" id="profile__button">
+                    <img src="./assets//avataaars (1).svg" alt="Avatar icon" class="header__profile--icon"/>
+                    Brendan Krueger</a>
                     <a href="#" class="header__button log-out">
                         <img class="header__button--img" src="./assets/power-off-solid.svg" alt="Log out icon"/>
                     </a>
@@ -54,9 +56,11 @@
                 <div class="search-options" id="basic-options">
                     <div class="basic-search">
                         <div class="input-container">
-                            <img class="search-icon" src="./assets/search-icon.svg" alt="Search icon">
-                            <input type="text" id="basic-input" placeholder="John Smith" />
-                            <button type="button" class="search-btn">SEARCH</button>
+                            <form action=".//notFound.html" method="GET">
+                                <img class="search-icon" src="./assets/search-icon.svg" alt="Search icon">
+                                <input type="text" id="basic-input" name="search" placeholder="John Smith" />
+                                <button type="submit" class="search-btn">SEARCH</button>
+                            </form>
                         </div>
                     </div>
                 </div>
@@ -120,25 +124,241 @@
     
         <!-- Users List -->
         <section class="main__users">
+            <input type="radio" id="grid-view" name="view-type" checked />
+            <input type="radio" id="list-view" name="view-type" />
+            
             <div class="users-header">
-                <span class="users-count">Users: 0</span>
+                <span class="users-count">9 employees displayed</span>
                 <div class="view-options">
-                    <input type="radio" id="grid-view" name="view-type" checked />
                     <label for="grid-view" class="view-toggle">Grid View</label>
-    
-                    <input type="radio" id="list-view" name="view-type" />
                     <label for="list-view" class="view-toggle">List View</label>
                 </div>
             </div>
             <div class="users-body">
-                <div class="users-view" id="grid-view-content">
-                    <p>Grid View Content Here</p>
+                <!-- Grid View -->
+                <div class="users-view grid-view">
+                    <div class="card">
+                        <div class="avatar-container">
+                            <img src="./assets/avataaars (1).svg" alt="User Avatar" class="avatar" />
+                        </div>
+                        <h3 class="name">Brendan Krueger</h3>
+                        <hr class="divider" />
+                        <div class="details">
+                            <div class="detail-item department">Web & Mobile</div>
+                            <div class="detail-item code">LPT1403</div>
+                        </div>
+                    </div>
+                
+                    <div class="card">
+                        <div class="avatar-container">
+                            <img src="./assets/avataaars (2).svg" alt="User Avatar" class="avatar" />
+                        </div>
+                        <h3 class="name">Andrew Savage</h3>
+                        <hr class="divider" />
+                        <div class="details">
+                            <div class="detail-item department">Web & Mobile</div>
+                            <div class="detail-item code">LPT1403</div>
+                        </div>
+                    </div>
+                
+                    <div class="card">
+                        <div class="avatar-container">
+                            <img src="./assets/avataaars (3).svg" alt="User Avatar" class="avatar" />
+                        </div>
+                        <h3 class="name">Lula Aguilar</h3>
+                        <hr class="divider" />
+                        <div class="details">
+                            <div class="detail-item department">Web & Mobile</div>
+                            <div class="detail-item code">LPT1403</div>
+                        </div>
+                    </div>
+                
+                    <div class="card">
+                        <div class="avatar-container">
+                            <img src="./assets/avataaars (4).svg" alt="User Avatar" class="avatar" />
+                        </div>
+                        <h3 class="name">Fintan Cruz</h3>
+                        <hr class="divider" />
+                        <div class="details">
+                            <div class="detail-item department">Web & Mobile</div>
+                            <div class="detail-item code">LPT1403</div>
+                        </div>
+                    </div>
+                
+                    <div class="card">
+                        <div class="avatar-container">
+                            <img src="./assets/avataaars (5).svg" alt="User Avatar" class="avatar" />
+                        </div>
+                        <h3 class="name">Suzanne Taylor</h3>
+                        <hr class="divider" />
+                        <div class="details">
+                            <div class="detail-item department">Web & Mobile</div>
+                            <div class="detail-item code">LPT1403</div>
+                        </div>
+                    </div>
+                
+                    <div class="card">
+                        <div class="avatar-container">
+                            <img src="./assets/avataaars (6).svg" alt="User Avatar" class="avatar" />
+                        </div>
+                        <h3 class="name">Francesco Reed</h3>
+                        <hr class="divider" />
+                        <div class="details">
+                            <div class="detail-item department">Web & Mobile</div>
+                            <div class="detail-item code">LPT1403</div>
+                        </div>
+                    </div>
+                
+                    <div class="card">
+                        <div class="avatar-container">
+                            <img src="./assets/avataaars (7).svg" alt="User Avatar" class="avatar" />
+                        </div>
+                        <h3 class="name">Arman Eaton</h3>
+                        <hr class="divider" />
+                        <div class="details">
+                            <div class="detail-item department">Web & Mobile</div>
+                            <div class="detail-item code">LPT1403</div>
+                        </div>
+                    </div>
+                
+                    <div class="card">
+                        <div class="avatar-container">
+                            <img src="./assets/avataaars (8).svg" alt="User Avatar" class="avatar" />
+                        </div>
+                        <h3 class="name">Luis Baker</h3>
+                        <hr class="divider" />
+                        <div class="details">
+                            <div class="detail-item department">Web & Mobile</div>
+                            <div class="detail-item code">LPT1403</div>
+                        </div>
+                    </div>
+                
+                    <div class="card">
+                        <div class="avatar-container">
+                            <img src="./assets/avataaars (4).svg" alt="User Avatar" class="avatar" />
+                        </div>
+                        <h3 class="name">Fintan Cruz</h3>
+                        <hr class="divider" />
+                        <div class="details">
+                            <div class="detail-item department">Web & Mobile</div>
+                            <div class="detail-item code">LPT1403</div>
+                        </div>
+                    </div>
                 </div>
-                <div class="users-view" id="list-view-content">
-                    <p>List View Content Here</p>
-                </div>
-            </div>
+                <!-- list -->
+
+                <div class="users-view list-view">
+                    <div class="users-view list-view">
+                        <div class="card">
+                            <div class="avatar-container">
+                                <img src="./assets/avataaars (1).svg" alt="User Avatar" class="avatar" />
+                            </div>
+                            <h3 class="name">Brendan Krueger</h3>
+                            <hr class="divider" />
+                            <div class="details">
+                                <div class="detail-item department">Web & Mobile</div>
+                                <div class="detail-item code">LPT1403</div>
+                            </div>
+                        </div>
+                    
+                        <div class="card">
+                            <div class="avatar-container">
+                                <img src="./assets/avataaars (2).svg" alt="User Avatar" class="avatar" />
+                            </div>
+                            <h3 class="name">Andrew Savage</h3>
+                            <hr class="divider" />
+                            <div class="details">
+                                <div class="detail-item department">Web & Mobile</div>
+                                <div class="detail-item code">LPT1403</div>
+                            </div>
+                        </div>
+                    
+                        <div class="card">
+                            <div class="avatar-container">
+                                <img src="./assets/avataaars (3).svg" alt="User Avatar" class="avatar" />
+                            </div>
+                            <h3 class="name">Lula Aguilar</h3>
+                            <hr class="divider" />
+                            <div class="details">
+                                <div class="detail-item department">Web & Mobile</div>
+                                <div class="detail-item code">LPT1403</div>
+                            </div>
+                        </div>
+                    
+                        <div class="card">
+                            <div class="avatar-container">
+                                <img src="./assets/avataaars (4).svg" alt="User Avatar" class="avatar" />
+                            </div>
+                            <h3 class="name">Fintan Cruz</h3>
+                            <hr class="divider" />
+                            <div class="details">
+                                <div class="detail-item department">Web & Mobile</div>
+                                <div class="detail-item code">LPT1403</div>
+                            </div>
+                        </div>
+                    
+                        <div class="card">
+                            <div class="avatar-container">
+                                <img src="./assets/avataaars (5).svg" alt="User Avatar" class="avatar" />
+                            </div>
+                            <h3 class="name">Suzanne Taylor</h3>
+                            <hr class="divider" />
+                            <div class="details">
+                                <div class="detail-item department">Web & Mobile</div>
+                                <div class="detail-item code">LPT1403</div>
+                            </div>
+                        </div>
+                    
+                        <div class="card">
+                            <div class="avatar-container">
+                                <img src="./assets/avataaars (6).svg" alt="User Avatar" class="avatar" />
+                            </div>
+                            <h3 class="name">Francesco Reed</h3>
+                            <hr class="divider" />
+                            <div class="details">
+                                <div class="detail-item department">Web & Mobile</div>
+                                <div class="detail-item code">LPT1403</div>
+                            </div>
+                        </div>
+                    
+                        <div class="card">
+                            <div class="avatar-container">
+                                <img src="./assets/avataaars (7).svg" alt="User Avatar" class="avatar" />
+                            </div>
+                            <h3 class="name">Arman Eaton</h3>
+                            <hr class="divider" />
+                            <div class="details">
+                                <div class="detail-item department">Web & Mobile</div>
+                                <div class="detail-item code">LPT1403</div>
+                            </div>
+                        </div>
+                    
+                        <div class="card">
+                            <div class="avatar-container">
+                                <img src="./assets/avataaars (8).svg" alt="User Avatar" class="avatar" />
+                            </div>
+                            <h3 class="name">Luis Baker</h3>
+                            <hr class="divider" />
+                            <div class="details">
+                                <div class="detail-item department">Web & Mobile</div>
+                                <div class="detail-item code">LPT1403</div>
+                            </div>
+                        </div>
+                    
+                        <div class="card">
+                            <div class="avatar-container">
+                                <img src="./assets/avataaars (4).svg" alt="User Avatar" class="avatar" />
+                            </div>
+                            <h3 class="name">Fintan Cruz</h3>
+                            <hr class="divider" />
+                            <div class="details">
+                                <div class="detail-item department">Web & Mobile</div>
+                                <div class="detail-item code">LPT1403</div>
+                            </div>
+                        </div>
+                    </div>
         </section>
+        
     </main>
     
     <footer></footer>
