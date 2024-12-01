@@ -1,0 +1,66 @@
+[
+    {
+      "id": 1,
+      "name": "Brendan Krueger",
+      "avatar": "./assets/avataaars (1).svg",
+      "department": "Web & Mobile",
+      "code": "LPT1403"
+    },
+    {
+      "id": 2,
+      "name": "Andrew Savage",
+      "avatar": "./assets/avataaars (2).svg",
+      "department": "Web & Mobile",
+      "code": "LPT1403"
+    },
+    {
+      "id": 3,
+      "name": "Lula Aguilar",
+      "avatar": "./assets/avataaars (3).svg",
+      "department": "Web & Mobile",
+      "code": "LPT1403"
+    },
+    {
+      "id": 4,
+      "name": "Fintan Cruz",
+      "avatar": "./assets/avataaars (4).svg",
+      "department": "Web & Mobile",
+      "code": "LPT1403"
+    },
+    {
+      "id": 5,
+      "name": "Suzanne Taylor",
+      "avatar": "./assets/avataaars (5).svg",
+      "department": "Web & Mobile",
+      "code": "LPT1403"
+    },
+    {
+      "id": 6,
+      "name": "Francesco Reed",
+      "avatar": "./assets/avataaars (6).svg",
+      "department": "Web & Mobile",
+      "code": "LPT1403"
+    },
+    {
+      "id": 7,
+      "name": "Arman Eaton",
+      "avatar": "./assets/avataaars (7).svg",
+      "department": "Web & Mobile",
+      "code": "LPT1403"
+    },
+    {
+      "id": 8,
+      "name": "Luis Baker",
+      "avatar": "./assets/avataaars (8).svg",
+      "department": "Web & Mobile",
+      "code": "LPT1403"
+    },
+    {
+      "id": 9,
+      "name": "Fintan Cruz",
+      "avatar": "./assets/avataaars (4).svg",
+      "department": "Web & Mobile",
+      "code": "LPT1403"
+    }
+  ]
+  

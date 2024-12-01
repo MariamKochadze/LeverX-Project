@@ -1,0 +1,37 @@
+{
+    "_id": "d6d206e5-2ca4-443d-8404-dc05284e2d15",
+    "isRemoteWork": true,
+    "user_avatar": "https://rickandmortyapi.com/api/character/avatar/451.jpeg",
+    "first_name": "Luffy",
+    "last_name": "Monkey",
+    "first_native_name": "Luffy",
+    "last_native_name": "Monkey",
+    "middle_native_name": "D.",
+    "department": "Web & Mobile",
+    "building": "Pilsudskiego 69 (Poland)",
+    "room": "1404",
+    "date_birth": {
+        "year": 1901,
+"month": 1,
+"day": 1
+},
+"desk_number": 20,
+"manager": {
+"id": "987ff8cb-b506-4d5e-9166-ab8c644bb891",
+"first_name": "John",
+"last_name": "Snow"
+},
+"phone": "+12931293129",
+"email": "luffy.monkey@leverx.com",
+"skype": "live:.cid.21asd41jd1m132",
+"cnumber": "C5336116",
+"citizenship": "Georgia",
+"visa": [
+{
+"issuing_country": "Poland",
+"type": "National visa type D",
+"start_date": 1652158800000,
+"end_date": 1683608400000
+}
+]
+}

@@ -1,8 +1,11 @@
+/* General Styling */
+
 .users-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
     background-color: var(--main-background);
+    padding: 20px;
 }
 
 .view-toggle {
@@ -25,6 +28,35 @@ input#list-view:checked + .view-toggle {
 }
 
 /* Users Body */
+.icons-container {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.icon-item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.icon {
+  width: 24px; /* Set width for icons */
+  height: 24px; /* Set height for icons */
+  margin-right: 8px; /* Space between icon and label */
+}
+
+.icon-label {
+  display: flex;
+  align-items: center;
+  font-size: 14px; /* Adjust font size if needed */
+}
+
+.icon-item img {
+  max-width: 100%;
+  height: auto;
+}
+
 .users-body {
     position: relative;
     background-color: var(--white);
@@ -131,7 +163,6 @@ input#list-view:checked + .view-toggle {
     background-position: center;
 }
 
-/* Radio toggle for view type */
 .view-options input[type="radio"] {
     display: none;
 }
@@ -140,7 +171,6 @@ input#list-view:checked + .view-toggle {
     cursor: pointer;
     padding: 5px 10px;
     color: var(--search-button-color-inactive);
-  
     border-radius: 5px;
     margin-right: 10px;
     font-size: 14px;
@@ -163,135 +193,66 @@ input#list-view:checked + .view-toggle {
 }
 
 
-.users-view {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 20px;
-}
-
-
-#list-view:checked ~ .users-body .users-view {
+.users-view.list-view {
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 16px;
 }
 
-
-#list-view:checked ~ .users-body .card {
+.users-view.list-view .card {
     display: flex;
     align-items: center;
     text-align: left;
     padding: 15px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #fff;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    margin-bottom: 15px;
+    transition: opacity 0.3s ease;
 }
 
-#list-view:checked ~ .users-body .avatar-container {
-    width: 80px;
-    margin: 0 20px 0 0;
+.users-view.list-view .card .avatar-container {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    overflow: hidden;
+    margin-right: 20px;
 }
 
-#list-view:checked ~ .users-body .name {
-    flex: 1;
-    margin: 0;
-}
-
-#list-view:checked ~ .users-body .divider {
-    display: none;
-}
-
-#list-view:checked ~ .users-body .details {
-    margin: 0;
-    min-width: 250px;
-}
-
-#list-view:checked ~ .users-body .avatar {
+.users-view.list-view .card .avatar-container img {
     width: 100%;
+    height: 100%;
+    object-fit: cover;
 }
 
-
-.users-view {
-    display: none;
+.users-view.list-view .card .name {
+    font-weight: bold;
+    font-size: 16px;
+    margin-bottom: 5px;
 }
 
-
-#grid-view:checked ~ .users-body .grid-view {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 20px;
+.users-view.list-view .card .divider {
+    width: 100%;
+    height: 1px;
+    background-color: #ddd;
+    margin: 10px 0;
 }
 
-
-#list-view:checked ~ .users-body .list-view {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-}
-
-
-.list-view .card {
+.users-view.list-view .card .details {
     display: flex;
     align-items: center;
-    text-align: left;
-    padding: 15px;
-}
-
-.list-view .avatar-container {
-    width: 80px;
-    margin: 0 20px 0 0;
-}
-
-.list-view .name {
-    flex: 1;
-    margin: 0;
-}
-
-.list-view .divider {
-    display: none;
-}
-
-.list-view .details {
-    margin: 0;
-    min-width: 250px;
-}
-
-.list-view .avatar {
-    width: 100%;
-}
-
-
-
-
-.grid-view {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 20px;
-}
-
-.list-view {
-    display: none;
-}
-
-
-#grid-view:checked ~ .users-body .grid-view {
-    display: grid;
-}
-
-#grid-view:checked ~ .users-body .list-view {
-    display: none;
-}
-
-
-#list-view:checked ~ .users-body .list-view {
-    display: flex;
-    flex-direction: column;
     gap: 10px;
 }
 
-#list-view:checked ~ .users-body .grid-view {
-    display: none;
+.users-view.list-view .card .details .job-icon {
+    width: 24px;
+    height: 24px;
 }
 
+/* Media Query for Mobile */
 @media screen and (max-width: 768px) {
-    .users-header .view-options{
+    .users-header .view-options {
         display: none;
     }
 
@@ -301,12 +262,20 @@ input#list-view:checked + .view-toggle {
 
     /* Hide the grid view */
     .users-view.grid-view {
+<<<<<<< Updated upstream
         display: none !important; /* Ensure grid view is completely hidden */
+=======
+        display: none !important;
+>>>>>>> Stashed changes
     }
 
     /* Show only the list view */
     .users-view.list-view {
+<<<<<<< Updated upstream
         display: flex !important; /* Ensure the list view is visible */
+=======
+        display: flex !important;
+>>>>>>> Stashed changes
         flex-direction: column;
         gap: 16px;
         width: 100%;
@@ -326,7 +295,10 @@ input#list-view:checked + .view-toggle {
         transition: opacity 0.3s ease;
     }
 
+<<<<<<< Updated upstream
     /* Avatar styling */
+=======
+>>>>>>> Stashed changes
     .users-view.list-view .card .avatar-container {
         width: 60px;
         height: 60px;
@@ -340,14 +312,20 @@ input#list-view:checked + .view-toggle {
         object-fit: cover;
     }
 
+<<<<<<< Updated upstream
     /* Name styling */
+=======
+>>>>>>> Stashed changes
     .users-view.list-view .card .name {
         font-weight: bold;
         font-size: 16px;
         margin-bottom: 5px;
     }
 
+<<<<<<< Updated upstream
     /* Divider line */
+=======
+>>>>>>> Stashed changes
     .users-view.list-view .card .divider {
         width: 100%;
         height: 1px;
@@ -355,7 +333,10 @@ input#list-view:checked + .view-toggle {
         margin: 10px 0;
     }
 
+<<<<<<< Updated upstream
     /* Details section styling */
+=======
+>>>>>>> Stashed changes
     .users-view.list-view .card .details {
         display: flex;
         align-items: center;
@@ -366,5 +347,4 @@ input#list-view:checked + .view-toggle {
         width: 24px;
         height: 24px;
     }
-
 }
