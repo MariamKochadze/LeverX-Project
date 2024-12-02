@@ -94,9 +94,7 @@ label {
     padding-left: 40px;
 }
 
-/* Existing styles remain the same */
 
-/* Updated and new styles for advanced search */
 .advanced-search {
     display: flex;
     flex-direction: column;
@@ -153,7 +151,7 @@ label {
     background-color: var(--search-button-hover);
 }
 
-/* View toggle styles */
+
 .view-toggle {
     padding: 8px 16px;
     margin: 0 5px;
@@ -170,7 +168,7 @@ label {
     border-color: var(--search-button-background);
 }
 
-/* Add these styles */
+
 #basic-options {
     display: block;
 }

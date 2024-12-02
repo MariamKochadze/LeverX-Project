@@ -11,6 +11,6 @@
 @import url("./styles/components/button.css");
 @import url("./styles/components/search.css");
 @import url("./styles/components/users-list.css");
-@import url("./styles/components//notFound.css");
-@import url("./styles/components//user-detail.css");
+@import url("./pages/notFound.css");
+@import url("./styles/components/user-detail.css");
 

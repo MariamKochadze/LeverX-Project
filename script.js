@@ -4,9 +4,10 @@ document.addEventListener('DOMContentLoaded', () => {
     const basicSearchInput = document.querySelector('#basic-input');
     const basicSearchBtn = document.querySelector('#basic-options .search-btn');
     const advancedSearchForm = document.querySelector('.advanced-search');
+    const infoContainer = document.querySelector('.info-container');
     let usersData = [];
 
-    // View toggle buttons setup remains the same
+    //  toggle grid and list
     const gridViewBtn = document.createElement('button');
     gridViewBtn.textContent = 'Grid View';
     gridViewBtn.classList.add('view-toggle', 'active');
@@ -20,7 +21,7 @@ document.addEventListener('DOMContentLoaded', () => {
     viewOptions.appendChild(gridViewBtn);
     viewOptions.appendChild(listViewBtn);
 
-    // Fetch users function remains the same
+    // Fetch users 
     const fetchUsers = async () => {
         try {
             const response = await fetch('./users.json');
@@ -32,6 +33,8 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     };
 
+
+    infoContainer.style.display = 'none';
     // Basic search functionality
     const basicSearch = (searchTerm) => {
         const term = searchTerm.toLowerCase();
@@ -90,13 +93,17 @@ document.addEventListener('DOMContentLoaded', () => {
         advancedSearch(formData);
     });
 
-    // Layout switch handlers remain the same
+    // Layout switch handlers 
     const handleLayoutSwitch = (event) => {
         const selectedLayout = event.target.dataset.view;
         if (selectedLayout) {
             document.querySelectorAll('.view-toggle').forEach(btn => {
                 btn.classList.toggle('active', btn.dataset.view === selectedLayout);
             });
+            
+            // Toggle info-container visibility
+            infoContainer.style.display = selectedLayout === 'list' ? 'flex' : 'none';
+            
             renderUsers(usersData, selectedLayout);
         }
     };
@@ -171,6 +178,5 @@ document.addEventListener('DOMContentLoaded', () => {
         countElement.textContent = `${count} employees displayed`;
     };
 
-    // Initialize
     fetchUsers();
 });

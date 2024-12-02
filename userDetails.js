@@ -1,4 +1,3 @@
-// Get user ID from the URL
 function getUserIdFromURL() {
     const urlHash = window.location.hash;
     const id = urlHash.split('/').pop();
@@ -10,7 +9,7 @@ const mainContainer = document.createElement('div');
 mainContainer.classList.add('main-container');
 document.body.appendChild(mainContainer);
 
-// Fetch user by ID
+// Fetch user
 async function fetchUserById(userId) {
     try {
         const response = await fetch('./users.json');
@@ -24,7 +23,6 @@ async function fetchUserById(userId) {
     }
 }
 
-// Helper function to create a field
 function createField(icon, label, value) {
     const p = document.createElement('p');
     p.innerHTML = `
@@ -36,7 +34,7 @@ function createField(icon, label, value) {
 }
 
 document.addEventListener('DOMContentLoaded', async () => {
-    // First section - User Details
+    // First section  User Details
     async function showUserDetails() {
         try {
             const userId = getUserIdFromURL();
@@ -48,7 +46,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             const container = document.createElement('div');
             container.classList.add('user__details-container');
 
-            // Create back button first
+            //  back button 
             const backButton = document.createElement('button');
             backButton.classList.add('back-button');
             backButton.innerHTML = `
@@ -104,7 +102,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         }
     }
 
-    // Second section - Combined Info
+    // Second section Details Info
     async function showCombinedInfo() {
         try {
             const userId = getUserIdFromURL();
@@ -134,7 +132,7 @@ document.addEventListener('DOMContentLoaded', async () => {
                     { icon: 'skype-icon.svg', label: 'Skype', value: user.skype },
                     { icon: 'id-icon.svg', label: 'C-Number', value: user.cnumber }
                 ],
-                // VISA INFO
+                // TRAVEL INFO
                 [
                     { icon: 'citizenship-icon.svg', label: 'Citizenship', value: user.citizenship },
                     { icon: 'visa-icon.svg', label: 'Visa Type', value: `${user.visa[0].type} (${user.visa[0].issuing_country})` },
@@ -165,7 +163,6 @@ document.addEventListener('DOMContentLoaded', async () => {
         }
     }
 
-    // Initialize
     await showUserDetails();
     await showCombinedInfo();
 });

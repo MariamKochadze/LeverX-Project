@@ -1,23 +1,24 @@
-/* General Styling */
-/* Adjust container styling */
 .users-header {
     display: flex;
-    flex-direction: column; /* Stack elements vertically */
+    flex-direction: column; 
     background-color: var(--main-background);
     padding: 20px;
-    gap: 10px; /* Space between rows */
+    gap: 10px; 
   }
   
   .users-count-container {
-    width: 100%; /* Ensure full width */
-    text-align: left; /* Align text to the left */
+    width: 100%; 
+    text-align: left; 
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
   }
   
   .info-container {
     display: flex;
     justify-content: space-between;
-    flex-wrap: wrap; /* Ensure wrapping on smaller screens */
-    width: 70%; /* Full width */
+    flex-wrap: wrap; 
+    width: 100%; 
     background-color: #f9f9f9;
     border: 1px solid #ddd;
     border-radius: 8px;
@@ -51,6 +52,7 @@
     color: var(--text-color);
     cursor: pointer;
     padding: 16px;
+    max-width: 100px;
 }
 
 input#grid-view:checked + .view-toggle,
@@ -194,6 +196,12 @@ input#list-view:checked + .view-toggle {
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
+}
+
+.view-options{
+    display: flex;
+    justify-content: end;
+
 }
 
 .view-options input[type="radio"] {

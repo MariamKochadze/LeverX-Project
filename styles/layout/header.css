@@ -223,12 +223,6 @@
       height: 20px;
     }
   
-  
-    .logout-btn:hover,
-    .support-btn__icon:hover {
-      color: #ff6600; 
-    }
-  
     .header__nav-list {
       padding: 60px 20px;
     }
