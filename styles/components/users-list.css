@@ -42,25 +42,33 @@
   
   
 
+/* Style for view toggle buttons */
 .view-toggle {
-    display: inline-block;
-    flex: 1;
-    margin-right: 8px;
-    font-size: 14px;
-    font-weight: 600;
-    text-align: center;
-    color: var(--text-color);
+    background: none;
+    border: none;
+    padding: 10px;
     cursor: pointer;
-    padding: 16px;
-    max-width: 100px;
+    transition: transform 0.3s ease;
 }
 
-input#grid-view:checked + .view-toggle,
-input#list-view:checked + .view-toggle {
-    background-color: var(--primary-color);
-    color: var(--white);
-    border-color: var(--primary-color);
+.view-toggle:hover {
+    transform: scale(1.1);
 }
+
+
+.view-icon {
+    width: 24px; 
+    height: 24px;
+}
+
+
+.view-toggle.active {
+    background-color: #f0f0f0; 
+    border-radius: 50%; 
+}
+
+
+
 
 /* Users Body */
 .icons-container {

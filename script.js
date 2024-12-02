@@ -7,19 +7,42 @@ document.addEventListener('DOMContentLoaded', () => {
     const infoContainer = document.querySelector('.info-container');
     let usersData = [];
 
-    //  toggle grid and list
+    // Toggle grid and list
     const gridViewBtn = document.createElement('button');
-    gridViewBtn.textContent = 'Grid View';
+    const gridIcon = document.createElement('img');
+    gridIcon.src = './assets/grid-icon.svg';
+    gridIcon.alt = 'Grid View Icon';
+    gridIcon.classList.add('view-icon');
     gridViewBtn.classList.add('view-toggle', 'active');
     gridViewBtn.dataset.view = 'grid';
+    gridViewBtn.appendChild(gridIcon);
 
     const listViewBtn = document.createElement('button');
-    listViewBtn.textContent = 'List View';
+    const listIcon = document.createElement('img');
+    listIcon.src = './assets/list-icon.svg';
+    listIcon.alt = 'List View Icon';
+    listIcon.classList.add('view-icon');
     listViewBtn.classList.add('view-toggle');
     listViewBtn.dataset.view = 'list';
+    listViewBtn.appendChild(listIcon);
 
     viewOptions.appendChild(gridViewBtn);
     viewOptions.appendChild(listViewBtn);
+
+    // Event listeners for toggling views
+    gridViewBtn.addEventListener('click', () => {
+        gridViewBtn.classList.add('active');
+        listViewBtn.classList.remove('active');
+        infoContainer.style.display = 'none';
+        renderUsers(usersData, 'grid');
+    });
+
+    listViewBtn.addEventListener('click', () => {
+        listViewBtn.classList.add('active');
+        gridViewBtn.classList.remove('active');
+        infoContainer.style.display = 'flex';
+        renderUsers(usersData, 'list');
+    });
 
     // Fetch users
     const fetchUsers = async () => {
@@ -34,6 +57,7 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     infoContainer.style.display = 'none';
+
     // Basic search functionality
     const basicSearch = (searchTerm) => {
         const term = searchTerm.toLowerCase();
@@ -43,7 +67,8 @@ document.addEventListener('DOMContentLoaded', () => {
             return fullName.includes(term) || id === term;
         });
 
-        renderUsers(filteredUsers, document.querySelector('.view-toggle.active').dataset.view);
+        const currentView = document.querySelector('.view-toggle.active').dataset.view;
+        renderUsers(filteredUsers, currentView);
         updateUserCount(filteredUsers.length);
     };
 
@@ -57,13 +82,13 @@ document.addEventListener('DOMContentLoaded', () => {
             const skypeMatch = !formData.skype || user.skype.toLowerCase().includes(formData.skype.toLowerCase());
             const billingMatch = !formData.billing || formData.billing === 'any' || user.building === formData.billing;
             const roomMatch = !formData.room || formData.room === 'any' || user.room === formData.room;
-            const departmentMatch =
-                !formData.department || formData.department === 'any' || user.department === formData.department;
+            const departmentMatch = !formData.department || formData.department === 'any' || user.department === formData.department;
 
             return nameMatch && emailMatch && phoneMatch && skypeMatch && billingMatch && roomMatch && departmentMatch;
         });
 
-        renderUsers(filteredUsers, document.querySelector('.view-toggle.active').dataset.view);
+        const currentView = document.querySelector('.view-toggle.active').dataset.view;
+        renderUsers(filteredUsers, currentView);
         updateUserCount(filteredUsers.length);
     };
 
@@ -91,24 +116,6 @@ document.addEventListener('DOMContentLoaded', () => {
         };
         advancedSearch(formData);
     });
-
-    // Layout switch handlers
-    const handleLayoutSwitch = (event) => {
-        const selectedLayout = event.target.dataset.view;
-        if (selectedLayout) {
-            document.querySelectorAll('.view-toggle').forEach((btn) => {
-                btn.classList.toggle('active', btn.dataset.view === selectedLayout);
-            });
-
-            // Toggle info-container visibility
-            infoContainer.style.display = selectedLayout === 'list' ? 'flex' : 'none';
-
-            renderUsers(usersData, selectedLayout);
-        }
-    };
-
-    gridViewBtn.addEventListener('click', handleLayoutSwitch);
-    listViewBtn.addEventListener('click', handleLayoutSwitch);
 
     // Render functions
     const renderUsers = (users, layout) => {
@@ -157,8 +164,7 @@ document.addEventListener('DOMContentLoaded', () => {
         usersView.appendChild(container);
     };
 
-
-    //not-found page
+    // Not-found page
     const renderNotFoundPage = () => {
         const elementsToToggle = [
             { element: document.querySelector('.header'), display: 'flex' },
@@ -167,13 +173,11 @@ document.addEventListener('DOMContentLoaded', () => {
             { element: document.querySelector('.users-count'), display: 'block' },
             { element: document.querySelector('.info-container'), display: 'none' }
         ];
-    
-        // Hide all elements
+
         elementsToToggle.forEach(({ element }) => {
             if (element) element.style.display = 'none';
         });
-    
-        // Render not-found page
+
         usersView.innerHTML = `
             <div class="not-found">
                 <div class="not-found__content">
@@ -186,13 +190,11 @@ document.addEventListener('DOMContentLoaded', () => {
                 </div>
             </div>
         `;
-    
-        // not-found back button
+
         document.getElementById('go-home-button').addEventListener('click', () => {
             window.location.href = 'index.html';
         });
     };
-    
-    
+
     fetchUsers();
 });
