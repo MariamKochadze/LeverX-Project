@@ -21,7 +21,7 @@ document.addEventListener('DOMContentLoaded', () => {
     viewOptions.appendChild(gridViewBtn);
     viewOptions.appendChild(listViewBtn);
 
-    // Fetch users 
+    // Fetch users
     const fetchUsers = async () => {
         try {
             const response = await fetch('./users.json');
@@ -33,12 +33,11 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     };
 
-
     infoContainer.style.display = 'none';
     // Basic search functionality
     const basicSearch = (searchTerm) => {
         const term = searchTerm.toLowerCase();
-        const filteredUsers = usersData.filter(user => {
+        const filteredUsers = usersData.filter((user) => {
             const fullName = `${user.first_name} ${user.last_name}`.toLowerCase();
             const id = user._id.toLowerCase();
             return fullName.includes(term) || id === term;
@@ -50,7 +49,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Advanced search functionality
     const advancedSearch = (formData) => {
-        const filteredUsers = usersData.filter(user => {
+        const filteredUsers = usersData.filter((user) => {
             const fullName = `${user.first_name} ${user.last_name}`.toLowerCase();
             const nameMatch = !formData.name || fullName.includes(formData.name.toLowerCase());
             const emailMatch = !formData.email || user.email.toLowerCase().includes(formData.email.toLowerCase());
@@ -58,10 +57,10 @@ document.addEventListener('DOMContentLoaded', () => {
             const skypeMatch = !formData.skype || user.skype.toLowerCase().includes(formData.skype.toLowerCase());
             const billingMatch = !formData.billing || formData.billing === 'any' || user.building === formData.billing;
             const roomMatch = !formData.room || formData.room === 'any' || user.room === formData.room;
-            const departmentMatch = !formData.department || formData.department === 'any' || user.department === formData.department;
+            const departmentMatch =
+                !formData.department || formData.department === 'any' || user.department === formData.department;
 
-            return nameMatch && emailMatch && phoneMatch && skypeMatch && 
-                   billingMatch && roomMatch && departmentMatch;
+            return nameMatch && emailMatch && phoneMatch && skypeMatch && billingMatch && roomMatch && departmentMatch;
         });
 
         renderUsers(filteredUsers, document.querySelector('.view-toggle.active').dataset.view);
@@ -88,22 +87,22 @@ document.addEventListener('DOMContentLoaded', () => {
             skype: document.querySelector('#skype').value,
             billing: document.querySelector('#billing').value,
             room: document.querySelector('#room').value,
-            department: document.querySelector('#department').value
+            department: document.querySelector('#department').value,
         };
         advancedSearch(formData);
     });
 
-    // Layout switch handlers 
+    // Layout switch handlers
     const handleLayoutSwitch = (event) => {
         const selectedLayout = event.target.dataset.view;
         if (selectedLayout) {
-            document.querySelectorAll('.view-toggle').forEach(btn => {
+            document.querySelectorAll('.view-toggle').forEach((btn) => {
                 btn.classList.toggle('active', btn.dataset.view === selectedLayout);
             });
-            
+
             // Toggle info-container visibility
             infoContainer.style.display = selectedLayout === 'list' ? 'flex' : 'none';
-            
+
             renderUsers(usersData, selectedLayout);
         }
     };
@@ -114,16 +113,16 @@ document.addEventListener('DOMContentLoaded', () => {
     // Render functions
     const renderUsers = (users, layout) => {
         usersView.innerHTML = '';
-        
+
         if (users.length === 0) {
-            renderNotFound();
+            renderNotFoundPage();
             return;
         }
-    
+
         const container = document.createElement('div');
         container.classList.add('users-view', `${layout}-view`);
-    
-        users.forEach(user => {
+
+        users.forEach((user) => {
             const card = document.createElement('div');
             card.className = 'card';
             card.innerHTML = `
@@ -147,36 +146,53 @@ document.addEventListener('DOMContentLoaded', () => {
                     </div>
                 </div>
             `;
-    
+
             card.addEventListener('click', () => {
                 window.location.href = `userDetails.html#/users/${user._id}`;
             });
-            
+
             container.appendChild(card);
         });
-    
+
         usersView.appendChild(container);
     };
-    
 
-    const renderNotFound = () => {
+
+    //not-found page
+    const renderNotFoundPage = () => {
+        const elementsToToggle = [
+            { element: document.querySelector('.header'), display: 'flex' },
+            { element: document.querySelector('.main__search'), display: 'block' },
+            { element: document.querySelector('.view-options'), display: 'flex' },
+            { element: document.querySelector('.users-count'), display: 'block' },
+            { element: document.querySelector('.info-container'), display: 'none' }
+        ];
+    
+        // Hide all elements
+        elementsToToggle.forEach(({ element }) => {
+            if (element) element.style.display = 'none';
+        });
+    
+        // Render not-found page
         usersView.innerHTML = `
             <div class="not-found">
                 <div class="not-found__content">
                     <img src="./assets/not-found.svg" alt="Not Found Icon" class="not-found__image">
-                    <h2 class="not-found__title">Nothing found</h2>
+                    <h2 class="not-found__title">404 PAGE NOT FOUND</h2>
                     <p class="not-found__description">
-                        No results match your search. Consider <br/> trying a different search request.
+                        Sorry, we can't find that page! It might be an older link or maybe it was removed.
                     </p>
+                    <button id="go-home-button">GO TO THE HOME PAGE</button>
                 </div>
             </div>
         `;
+    
+        // not-found back button
+        document.getElementById('go-home-button').addEventListener('click', () => {
+            window.location.href = 'index.html';
+        });
     };
-
-    const updateUserCount = (count) => {
-        const countElement = document.querySelector('.users-count');
-        countElement.textContent = `${count} employees displayed`;
-    };
-
+    
+    
     fetchUsers();
 });
