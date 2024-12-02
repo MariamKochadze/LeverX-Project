@@ -1,12 +1,45 @@
 /* General Styling */
-
+/* Adjust container styling */
 .users-header {
     display: flex;
-    justify-content: space-between;
-    align-items: center;
+    flex-direction: column; /* Stack elements vertically */
     background-color: var(--main-background);
     padding: 20px;
-}
+    gap: 10px; /* Space between rows */
+  }
+  
+  .users-count-container {
+    width: 100%; /* Ensure full width */
+    text-align: left; /* Align text to the left */
+  }
+  
+  .info-container {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap; /* Ensure wrapping on smaller screens */
+    width: 70%; /* Full width */
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 15px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  .info-container p {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 14px;
+    color: #333;
+    margin: 0;
+  }
+  
+  .info-container img {
+    width: 20px;
+    height: 20px;
+  }
+  
+  
 
 .view-toggle {
     display: inline-block;
@@ -29,32 +62,32 @@ input#list-view:checked + .view-toggle {
 
 /* Users Body */
 .icons-container {
-  display: flex;
-  justify-content: space-between;
-  width: 100%;
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
 }
 
 .icon-item {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .icon {
-  width: 24px; /* Set width for icons */
-  height: 24px; /* Set height for icons */
-  margin-right: 8px; /* Space between icon and label */
+    width: 24px;
+    height: 24px;
+    margin-right: 8px;
 }
 
 .icon-label {
-  display: flex;
-  align-items: center;
-  font-size: 14px; /* Adjust font size if needed */
+    display: flex;
+    align-items: center;
+    font-size: 14px;
 }
 
 .icon-item img {
-  max-width: 100%;
-  height: auto;
+    max-width: 100%;
+    height: auto;
 }
 
 .users-body {
@@ -192,7 +225,6 @@ input#list-view:checked + .view-toggle {
     display: block;
 }
 
-
 .users-view.list-view {
     display: flex;
     flex-direction: column;
@@ -260,28 +292,17 @@ input#list-view:checked + .view-toggle {
         display: none !important;
     }
 
-    /* Hide the grid view */
     .users-view.grid-view {
-<<<<<<< Updated upstream
-        display: none !important; /* Ensure grid view is completely hidden */
-=======
         display: none !important;
->>>>>>> Stashed changes
     }
 
-    /* Show only the list view */
     .users-view.list-view {
-<<<<<<< Updated upstream
-        display: flex !important; /* Ensure the list view is visible */
-=======
         display: flex !important;
->>>>>>> Stashed changes
         flex-direction: column;
         gap: 16px;
         width: 100%;
     }
 
-    /* Card layout for list view on mobile */
     .users-view.list-view .card {
         display: flex;
         align-items: center;
@@ -295,10 +316,6 @@ input#list-view:checked + .view-toggle {
         transition: opacity 0.3s ease;
     }
 
-<<<<<<< Updated upstream
-    /* Avatar styling */
-=======
->>>>>>> Stashed changes
     .users-view.list-view .card .avatar-container {
         width: 60px;
         height: 60px;
@@ -312,20 +329,12 @@ input#list-view:checked + .view-toggle {
         object-fit: cover;
     }
 
-<<<<<<< Updated upstream
-    /* Name styling */
-=======
->>>>>>> Stashed changes
     .users-view.list-view .card .name {
         font-weight: bold;
         font-size: 16px;
         margin-bottom: 5px;
     }
 
-<<<<<<< Updated upstream
-    /* Divider line */
-=======
->>>>>>> Stashed changes
     .users-view.list-view .card .divider {
         width: 100%;
         height: 1px;
@@ -333,10 +342,6 @@ input#list-view:checked + .view-toggle {
         margin: 10px 0;
     }
 
-<<<<<<< Updated upstream
-    /* Details section styling */
-=======
->>>>>>> Stashed changes
     .users-view.list-view .card .details {
         display: flex;
         align-items: center;

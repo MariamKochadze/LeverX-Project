@@ -30,7 +30,7 @@
                     </a>
                     <a href="#" class="header__button" id="profile__button">
                     <img src="./assets//avataaars (1).svg" alt="Avatar icon" class="header__profile--icon"/>
-                    Brendan Krueger</a>
+                    LUFFY MONKEY</a>
                     <a href="#" class="header__button log-out">
                         <img class="header__button--img" src="./assets/power-off-solid.svg" alt="Log out icon"/>
                     </a>
@@ -44,11 +44,9 @@
     </header>
 
     <main class="main">
-        <!-- Search Component -->
         <aside class="main__search">
             <input type="radio" id="basic-search" name="search-type" checked />
             <input type="radio" id="advanced-search" name="search-type" />
-            
             <div class="search-header">
                 <label for="basic-search" class="search-toggle">Basic Search</label>
                 <label for="advanced-search" class="search-toggle">Advanced Search</label>
@@ -57,27 +55,22 @@
                 <div class="search-options" id="basic-options">
                     <div class="basic-search">
                         <div class="input-container">
-                            <form action=".//notFound.html" method="GET">
-                                <img class="search-icon" src="./assets/search-icon.svg" alt="Search icon">
-                                <input type="text" id="basic-input" name="search" placeholder="John Smith" />
-                                <button type="submit" class="search-btn">SEARCH</button>
-                            </form>
+                            <img class="search-icon" src="./assets/search-icon.svg" alt="Search icon">
+                            <input type="text" id="basic-input" placeholder="John Smith" />
+                            <button type="button" class="search-btn">SEARCH</button>
                         </div>
                     </div>
                 </div>
-        
                 <div class="search-options" id="advanced-options">
                     <form class="advanced-search">
                         <div class="input-container">
                             <label for="name">Name</label>
                             <input type="text" id="name" placeholder="John Smith" />
                         </div>
-        
                         <div class="input-container">
                             <label for="email">Email</label>
                             <input type="email" id="email" placeholder="john.smith@leverex.com" />
                         </div>
-        
                         <div class="input-container half-width">
                             <label for="phone">Phone</label>
                             <input type="text" id="phone" placeholder="Phone number" />
@@ -86,90 +79,91 @@
                             <label for="skype">Skype</label>
                             <input type="text" id="skype" placeholder="SkypeID" />
                         </div>
-        
                         <div class="input-container billing-room">
                             <div class="billing">
                                 <label for="billing">Billing</label>
                                 <select id="billing">
                                     <option value="any">Any</option>
-                                    <option value="billing1">Billing 1</option>
-                                    <option value="billing2">Billing 2</option>
+                                    <option value="billing1">Pilsudskiego 69 (Poland)</option>
+                                    <option value="billing2">Pilsudskiego 68 (Poland)</option>
+                                    <option value="billing3">Pilsudskiego 67 (Poland)</option>
+                                    <option value="billing4">Pilsudskiego 66 (Poland)</option>
+                                    <option value="billing5">Pilsudskiego 65 (Poland)</option>
+                                    <option value="billing6">Pilsudskiego 64 (Poland)</option>
+                                    <option value="billing7">Pilsudskiego 63 (Poland)</option>
+                                    <option value="billing8">Pilsudskiego 62 (Poland)</option>
+                                    <option value="billing9">Pilsudskiego 61 (Poland)</option>
                                 </select>
                             </div>
                             <div class="room">
                                 <label for="room">Room</label>
                                 <select id="room">
                                     <option value="any">Any</option>
-                                    <option value="room1">Room 1</option>
-                                    <option value="room2">Room 2</option>
+                                    <option value="room1">1404</option>
+                                    <option value="room2">1405</option>
+                                    <option value="room3">1406</option>
+                                    <option value="room4">1407</option>
+                                    <option value="room5">1408</option>
+                                    <option value="room6">1409</option>
+                                    <option value="room7">1410</option>
+                                    <option value="room8">1411</option>
+                                    <option value="room9">1412</option>
+                                    
                                 </select>
                             </div>
                         </div>
-        
                         <div class="input-container">
                             <label for="department">Department</label>
                             <select id="department">
                                 <option value="any">Any</option>
-                                <option value="dept1">Department 1</option>
-                                <option value="dept2">Department 2</option>
+                                <option value="dept">Web & Mobile</option>
+                                
                             </select>
                         </div>
-        
                         <div class="input-container">
-                            <button type="submit" class="search-btn">Search</button>
+                            <button type="submit" class="search-btn">SEARCH</button>
                         </div>
                     </form>
                 </div>
             </div>
         </aside>
-    
-        <!-- Users List -->
-        <!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="stylesheet" href="styles.css" />
-  <title>User Cards</title>
-</head>
-<body>
-    <section class="main__users">
-        <div class="users-header">
-          <span class="users-count">9 employees displayed</span>
-          <div class="view-options"></div>
-        </div>
-        <div class="users-body">
-            <div class="icons-container">
-                <div class="icon-item">
-                    <span class="icon-label">
-                        <img class="icon" src="./assets/photo-icon.svg" alt="photo icon">
-                        Photo
-                    </span>
+
+        <section class="main__users">
+            <div class="users-header">
+                <div class="users-count-container">
+                  <span class="users-count">0 employees displayed</span>
                 </div>
-                <div class="icon-item">
-                    <span class="icon-label">
-                        <img class="icon" src="./assets/name-icon.svg" alt="name icon">
-                        Name
-                    </span>
-                </div>
-                <div class="icon-item">
-                    <span class="icon-label">
-                        <img class="icon" src="./assets/working-icon.svg" alt="department icon">
-                        Department
-                    </span>
-                </div>
-                <div class="icon-item">
-                    <span class="icon-label">
-                        <img class="icon" src="./assets/note-icon.svg" alt="room icon">
-                        Room
-                    </span>
+                <div class="info-container">
+                  <p>
+                    <img src="./assets/photo-icon.svg" alt="photo icon">
+                    Photo
+                  </p>
+                  <p>
+                    <img src="./assets/name-icon.svg" alt="name icon">
+                    Name
+                  </p>
+                  <p>
+                    <img src="./assets/working-icon.svg" alt="working icon">
+                    Department
+                  </p>
+                  <p>
+                    <img src="./assets/note-icon.svg" alt="room icon">
+                    Room
+                  </p>
                 </div>
               </div>
-        </div>
-      </section>
-      <script src="script.js"></script>
-      
-</body>    
-    <footer></footer>
+              
+                  
+                <div class="view-options">
+                    <!-- View toggles inserted by JavaScript -->
+                </div>
+            </div>
+            <div class="users-body">
+                <!-- User cards inserted by JavaScript -->
+            </div>
+        </section>
+    </main>
+
+    <script src="script.js"></script>
 </body>
 </html>

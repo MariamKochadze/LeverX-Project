@@ -46,6 +46,49 @@
 }
 
 
+
+.back-button {
+    display: flex;
+    align-items: center;
+    padding: 10px 10px;
+    background-color: var(--user-detail-copy-img-color);
+    color: #0000;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s;
+    flex-direction: row; /* Icon on the left, text on the right */
+    justify-content: flex-start; /* Align items to the left */
+}
+
+.back-button:hover {
+    background-color:var(--user-detail-header-color)
+}
+
+/* Styling for the icon */
+.back-icon {
+    width: 20px; /* Adjust size */
+    height: 20px;
+    border: none;
+    cursor: pointer;
+    margin-right: 10px; /* Space between icon and text */
+}
+
+/* Optional: Add a hover effect on the icon */
+.back-button:hover .back-icon {
+    transform: translateX(-5px); /* Slightly move the icon when hovering */
+}
+
+/* Optional: If you want the text to have a nice font style */
+.back-button span {
+    font-weight: bold;
+}
+
+  
+  
+  
+
 .user__details-top {
     display: flex;
     flex-direction: column;
@@ -192,4 +235,6 @@
 }
 
 
-
+.user__details-section p.highlight-field span {
+    color: #a2c4ff;
+  }
