@@ -7,8 +7,10 @@ document.addEventListener('DOMContentLoaded', () => {
     const infoContainer = document.querySelector('.info-container');
     let usersData = [];
 
+    // Check for search params on load
+    const urlParams = new URLSearchParams(window.location.search);
+    const searchQuery = urlParams.get('search');
 
-    //update users count
     const updateUserCount = (count) => {
         const userCountElement = document.querySelector('.users-count');
         if (userCountElement) {
@@ -16,58 +18,77 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     };
 
-    // Toggle grid and list
-    const gridViewBtn = document.createElement('button');
-    const gridIcon = document.createElement('img');
-    gridIcon.src = './assets/grid-icon.svg';
-    gridIcon.alt = 'Grid View Icon';
-    gridIcon.classList.add('view-icon');
-    gridViewBtn.classList.add('view-toggle', 'active');
-    gridViewBtn.dataset.view = 'grid';
-    gridViewBtn.appendChild(gridIcon);
+    // View toggle buttons
+    const createViewButton = (type, iconPath) => {
+        const button = document.createElement('button');
+        const icon = document.createElement('img');
+        icon.src = iconPath;
+        icon.alt = `${type} View Icon`;
+        icon.classList.add('view-icon');
+        button.classList.add('view-toggle');
+        button.dataset.view = type;
+        button.appendChild(icon);
+        return button;
+    };
 
-    const listViewBtn = document.createElement('button');
-    const listIcon = document.createElement('img');
-    listIcon.src = './assets/list-icon.svg';
-    listIcon.alt = 'List View Icon';
-    listIcon.classList.add('view-icon');
-    listViewBtn.classList.add('view-toggle');
-    listViewBtn.dataset.view = 'list';
-    listViewBtn.appendChild(listIcon);
+    const gridViewBtn = createViewButton('grid', './assets/grid-icon.svg');
+    const listViewBtn = createViewButton('list', './assets/list-icon.svg');
+    gridViewBtn.classList.add('active');
 
     viewOptions.appendChild(gridViewBtn);
     viewOptions.appendChild(listViewBtn);
 
-    // Event listeners for toggling views
-    gridViewBtn.addEventListener('click', () => {
-        gridViewBtn.classList.add('active');
-        listViewBtn.classList.remove('active');
-        infoContainer.style.display = 'none';
-        renderUsers(usersData, 'grid');
-    });
+    // View toggle handlers
+    const toggleView = (activeBtn, inactiveBtn, displayStyle) => {
+        activeBtn.classList.add('active');
+        inactiveBtn.classList.remove('active');
+        infoContainer.style.display = displayStyle;
+        renderUsers(usersData, activeBtn.dataset.view);
+       
+        const searchParams = new URLSearchParams(window.location.search);
+        searchParams.set('view', activeBtn.dataset.view);
+        window.history.pushState({}, '', `?${searchParams.toString()}`);
+    };
 
-    listViewBtn.addEventListener('click', () => {
-        listViewBtn.classList.add('active');
-        gridViewBtn.classList.remove('active');
-        infoContainer.style.display = 'flex';
-        renderUsers(usersData, 'list');
-    });
+    gridViewBtn.addEventListener('click', () => toggleView(gridViewBtn, listViewBtn, 'none'));
+    listViewBtn.addEventListener('click', () => toggleView(listViewBtn, gridViewBtn, 'flex'));
 
-    // Fetch users
+    // Fetch users with XMLHttpRequest fallback
     const fetchUsers = async () => {
         try {
+            if (!window.fetch) {
+                return new Promise((resolve, reject) => {
+                    const xhr = new XMLHttpRequest();
+                    xhr.open('GET', './users.json', true);
+                    xhr.onload = () => {
+                        if (xhr.status === 200) {
+                            resolve(JSON.parse(xhr.responseText));
+                        } else {
+                            reject(new Error(`Failed to load users: ${xhr.status}`));
+                        }
+                    };
+                    xhr.onerror = () => reject(new Error('Network error'));
+                    xhr.send();
+                });
+            }
+            
             const response = await fetch('./users.json');
             usersData = await response.json();
             renderUsers(usersData, 'grid');
             updateUserCount(usersData.length);
+            
+            // Apply search if present in URL
+            if (searchQuery) {
+                basicSearchInput.value = searchQuery;
+                basicSearch(searchQuery);
+            }
         } catch (error) {
             console.error('Error fetching users:', error);
+            renderNotFoundPage();
         }
     };
 
-    infoContainer.style.display = 'none';
-
-    // Basic search functionality
+    // Enhanced search functionality
     const basicSearch = (searchTerm) => {
         const term = searchTerm.toLowerCase();
         const filteredUsers = usersData.filter((user) => {
@@ -79,38 +100,47 @@ document.addEventListener('DOMContentLoaded', () => {
         const currentView = document.querySelector('.view-toggle.active').dataset.view;
         renderUsers(filteredUsers, currentView);
         updateUserCount(filteredUsers.length);
+
+        // Update URL with search term
+        const searchParams = new URLSearchParams(window.location.search);
+        searchParams.set('search', searchTerm);
+        window.history.pushState({}, '', `?${searchParams.toString()}`);
     };
 
-    // Advanced search functionality
-    const advancedSearch = (formData) => {
-        const filteredUsers = usersData.filter((user) => {
-            const fullName = `${user.first_name} ${user.last_name}`.toLowerCase();
-            const nameMatch = !formData.name || fullName.includes(formData.name.toLowerCase());
-            const emailMatch = !formData.email || user.email.toLowerCase().includes(formData.email.toLowerCase());
-            const phoneMatch = !formData.phone || user.phone.includes(formData.phone);
-            const skypeMatch = !formData.skype || user.skype.toLowerCase().includes(formData.skype.toLowerCase());
-            const billingMatch = !formData.billing || formData.billing === 'any' || user.building === formData.billing;
-            const roomMatch = !formData.room || formData.room === 'any' || user.room === formData.room;
-            const departmentMatch = !formData.department || formData.department === 'any' || user.department === formData.department;
+    // Event listeners
+    basicSearchBtn.addEventListener('click', () => basicSearch(basicSearchInput.value.trim()));
+    basicSearchInput.addEventListener('keypress', (e) => {
+        if (e.key === 'Enter') basicSearch(basicSearchInput.value.trim());
+    });
 
-            return nameMatch && emailMatch && phoneMatch && skypeMatch && billingMatch && roomMatch && departmentMatch;
+    // Advanced search with URL params
+    const advancedSearch = (formData) => {
+        const filteredUsers = usersData.filter(user => {
+            return Object.entries(formData).every(([key, value]) => {
+                if (!value || value === 'any') return true;
+                switch(key) {
+                    case 'name':
+                        return `${user.first_name} ${user.last_name}`
+                            .toLowerCase()
+                            .includes(value.toLowerCase());
+                    case 'billing':
+                        return user.building === value;
+                    default:
+                        return user[key]?.toLowerCase().includes(value.toLowerCase());
+                }
+            });
         });
 
         const currentView = document.querySelector('.view-toggle.active').dataset.view;
         renderUsers(filteredUsers, currentView);
         updateUserCount(filteredUsers.length);
+
+        const searchParams = new URLSearchParams(window.location.search);
+        Object.entries(formData).forEach(([key, value]) => {
+            if (value) searchParams.set(key, value);
+        });
+        window.history.pushState({}, '', `?${searchParams.toString()}`);
     };
-
-    // Event Listeners
-    basicSearchBtn.addEventListener('click', () => {
-        basicSearch(basicSearchInput.value.trim());
-    });
-
-    basicSearchInput.addEventListener('keypress', (e) => {
-        if (e.key === 'Enter') {
-            basicSearch(basicSearchInput.value.trim());
-        }
-    });
 
     advancedSearchForm.addEventListener('submit', (e) => {
         e.preventDefault();
@@ -129,7 +159,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Render functions
     const renderUsers = (users, layout) => {
         usersView.innerHTML = '';
-
+        
         if (users.length === 0) {
             renderNotFoundPage();
             return;
@@ -141,29 +171,29 @@ document.addEventListener('DOMContentLoaded', () => {
         users.forEach((user) => {
             const card = document.createElement('div');
             card.className = 'card';
-            card.innerHTML = `           
-  <div class="card-header">
-    <div class="avatar-container">
-      <img src="${user.user_avatar}" alt="${user.first_name}'s Avatar" class="avatar" />
-    </div>
-    <div class="user-info">
-      <h3 class="name">${user.first_name} ${user.last_name}</h3>
-    </div>
-  </div>
-  <hr class="divider" />
-  <div class="details">
-    <div class="detail-row">
-      <img src="./assets/working-icon.svg" alt="Department Icon" class="info-icon" />
-      <span class="detail-text">${user.department}</span>
-    </div>
-    <div class="detail-row">
-      <img src="./assets/note-icon.svg" alt="Room Icon" class="info-icon" />
-      <span class="detail-text">${user.room}</span>
-    </div>
-  </div>
-</div> `;
+            card.innerHTML = `
+                <div class="card-header">
+                    <div class="avatar-container">
+                        <img src="${user.user_avatar}" alt="${user.first_name}'s Avatar" class="avatar" />
+                    </div>
+                    <div class="user-info">
+                        <h3 class="name">${user.first_name} ${user.last_name}</h3>
+                    </div>
+                </div>
+                <hr class="divider" />
+                <div class="details">
+                    <div class="detail-row">
+                        <img src="./assets/working-icon.svg" alt="Department Icon" class="info-icon" />
+                        <span class="detail-text">${user.department}</span>
+                    </div>
+                    <div class="detail-row">
+                        <img src="./assets/note-icon.svg" alt="Room Icon" class="info-icon" />
+                        <span class="detail-text">${user.room}</span>
+                    </div>
+                </div>`;
+
             card.addEventListener('click', () => {
-                window.location.href = `userDetails.html#/users/${user._id}`;
+                window.location.href = `userDetails.html?id=${user._id}`;
             });
 
             container.appendChild(card);
@@ -172,17 +202,10 @@ document.addEventListener('DOMContentLoaded', () => {
         usersView.appendChild(container);
     };
 
-    // Not-found page
     const renderNotFoundPage = () => {
-        const elementsToToggle = [
-            { element: document.querySelector('.header'), display: 'flex' },
-            { element: document.querySelector('.main__search'), display: 'block' },
-            { element: document.querySelector('.view-options'), display: 'flex' },
-            { element: document.querySelector('.users-count'), display: 'block' },
-            { element: document.querySelector('.info-container'), display: 'none' }
-        ];
-
-        elementsToToggle.forEach(({ element }) => {
+        const elementsToHide = ['.header', '.main__search', '.view-options', '.users-count', '.info-container'];
+        elementsToHide.forEach(selector => {
+            const element = document.querySelector(selector);
             if (element) element.style.display = 'none';
         });
 
@@ -196,13 +219,13 @@ document.addEventListener('DOMContentLoaded', () => {
                     </p>
                     <button id="go-home-button">GO TO THE HOME PAGE</button>
                 </div>
-            </div>
-        `;
+            </div>`;
 
         document.getElementById('go-home-button').addEventListener('click', () => {
             window.location.href = 'index.html';
         });
     };
 
+    // Initialize
     fetchUsers();
 });
