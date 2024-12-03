@@ -29,6 +29,22 @@
     flex-direction: column;
 }
 
+.infoo-container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 20px; 
+}
+
+.user__details-header {
+    font-size: 24px;
+    font-weight: bold;
+    color: var(--user-detail-header-color);
+    margin-bottom: 10px;
+    text-align: left;
+}
+
+
 
 .user__details-container {
     display: flex;

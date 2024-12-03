@@ -4,8 +4,8 @@
     align-items: center;
     justify-content: center;
     text-align: center;
-    width: 100vw; /* Set width to 100% of the viewport width */
-    min-height: 100vh; /* Ensure it takes at least the full height of the viewport */
+    width: 100vw; 
+    min-height: 100vh; 
     padding: 40px;
     background-color: var(--main-background);
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
@@ -13,7 +13,7 @@
     border: 1px solid var(--border-color);
     margin: 0 auto;
     position: relative;
-    box-sizing: border-box; /* Ensure padding doesn't overflow the container */
+    box-sizing: border-box; 
 }
 
 .not-found__image {
@@ -51,25 +51,25 @@
     margin-top: 20px;
     text-decoration: none;
     font-weight: 600;
-    color: var(--link-color); /* Change this to match your theme */
+    color: var(--link-color); 
     font-size: 1.1rem;
     display: inline-block;
-    padding: 12px 24px; /* Added padding for a larger button */
-    background-color: var(--not-found-page-button); /* Button background */
-    border-radius: 8px; /* Rounded corners */
-    transition: background-color 0.3s ease, transform 0.3s ease; /* Add smooth transition */
-    border: none; /* Remove default border */
-    cursor: pointer; /* Pointer on hover */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Soft shadow for a lifted effect */
+    padding: 12px 24px; 
+    background-color: var(--not-found-page-button); 
+    border-radius: 8px; 
+    transition: background-color 0.3s ease, transform 0.3s ease; 
+    border: none; 
+    cursor: pointer; 
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 #go-home-button:hover {
-    background-color: var(--button-hover-background, #4a60df); /* Darker background on hover */
-    transform: scale(1.05); /* Slightly increase size on hover */
+    background-color: var(--button-hover-background, #4a60df); 
+    transform: scale(1.05); 
 }
 
 #go-home-button:focus {
-    outline: none; /* Remove focus outline */
-    box-shadow: 0 0 0 3px rgba(53, 53, 211, 0.5); /* Blue outline on focus for accessibility */
+    outline: none; 
+    box-shadow: 0 0 0 3px rgba(53, 53, 211, 0.5); 
 }
 

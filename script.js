@@ -7,6 +7,15 @@ document.addEventListener('DOMContentLoaded', () => {
     const infoContainer = document.querySelector('.info-container');
     let usersData = [];
 
+
+    //update users count
+    const updateUserCount = (count) => {
+        const userCountElement = document.querySelector('.users-count');
+        if (userCountElement) {
+            userCountElement.textContent = `${count} employees displayed`;
+        }
+    };
+
     // Toggle grid and list
     const gridViewBtn = document.createElement('button');
     const gridIcon = document.createElement('img');
@@ -132,28 +141,27 @@ document.addEventListener('DOMContentLoaded', () => {
         users.forEach((user) => {
             const card = document.createElement('div');
             card.className = 'card';
-            card.innerHTML = `
-                <div class="card-header">
-                    <div class="avatar-container">
-                        <img src="${user.user_avatar}" alt="${user.first_name}'s Avatar" class="avatar" />
-                    </div>
-                    <div class="user-info">
-                        <img src="./assets/user-icon.svg" alt="User" class="info-icon"/>
-                        <h3 class="name">${user.first_name} ${user.last_name}</h3>
-                    </div>
-                </div>
-                <div class="details">
-                    <div class="detail-row">
-                        <img src="./assets/department-icon.svg" alt="Department" class="info-icon"/>
-                        <span class="detail-text">${user.department}</span>
-                    </div>
-                    <div class="detail-row">
-                        <img src="./assets/room-icon.svg" alt="Room" class="info-icon"/>
-                        <span class="detail-text">${user.room}</span>
-                    </div>
-                </div>
-            `;
-
+            card.innerHTML = `           
+  <div class="card-header">
+    <div class="avatar-container">
+      <img src="${user.user_avatar}" alt="${user.first_name}'s Avatar" class="avatar" />
+    </div>
+    <div class="user-info">
+      <h3 class="name">${user.first_name} ${user.last_name}</h3>
+    </div>
+  </div>
+  <hr class="divider" />
+  <div class="details">
+    <div class="detail-row">
+      <img src="./assets/working-icon.svg" alt="Department Icon" class="info-icon" />
+      <span class="detail-text">${user.department}</span>
+    </div>
+    <div class="detail-row">
+      <img src="./assets/note-icon.svg" alt="Room Icon" class="info-icon" />
+      <span class="detail-text">${user.room}</span>
+    </div>
+  </div>
+</div> `;
             card.addEventListener('click', () => {
                 window.location.href = `userDetails.html#/users/${user._id}`;
             });

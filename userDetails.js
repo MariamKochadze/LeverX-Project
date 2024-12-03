@@ -107,61 +107,66 @@ document.addEventListener('DOMContentLoaded', async () => {
         try {
             const userId = getUserIdFromURL();
             const user = await fetchUserById(userId);
-
+    
             const section = document.createElement('section');
             section.classList.add('user__details-section', 'second-section');
-
-            const container = document.createElement('div');
-            container.classList.add('info-container');
-
-            const headers = ['GENERAL INFO', 'CONTACTS', 'VISA INFO'];
-            const fields = [
-                // GENERAL INFO
-                [
-                    { icon: 'working-icon.svg', label: 'Department', value: user.department },
-                    { icon: 'building-icon.svg', label: 'Building', value: user.building },
-                    { icon: 'id-icon.svg', label: 'Room', value: user.room },
-                    { icon: 'photo-icon.svg', label: 'Desk number', value: user.desk_number },
-                    { icon: 'id-icon.svg', label: 'Date of Birth', value: `${user.date_birth.day}/${user.date_birth.month}/${user.date_birth.year}` },
-                    { icon: 'name-icon.svg', label: 'Manager', value: `${user.manager.first_name} ${user.manager.last_name}` }
-                ],
-                // CONTACTS
-                [
-                    { icon: 'phone-icon.svg', label: 'Phone', value: user.phone },
-                    { icon: 'email-icon.svg', label: 'Email', value: user.email },
-                    { icon: 'skype-icon.svg', label: 'Skype', value: user.skype },
-                    { icon: 'id-icon.svg', label: 'C-Number', value: user.cnumber }
-                ],
-                // TRAVEL INFO
-                [
-                    { icon: 'citizenship-icon.svg', label: 'Citizenship', value: user.citizenship },
-                    { icon: 'visa-icon.svg', label: 'Visa Type', value: `${user.visa[0].type} (${user.visa[0].issuing_country})` },
-                    { icon: 'visa-icon.svg', label: 'Visa Start Date', value: new Date(user.visa[0].start_date).toLocaleDateString() },
-                    { icon: 'visa-icon.svg', label: 'Visa End Date', value: new Date(user.visa[0].end_date).toLocaleDateString() }
-                ]
+    
+            // Data mapping for each header
+            const data = [
+                {
+                    header: 'GENERAL INFO',
+                    fields: [
+                        { icon: 'working-icon.svg', label: 'Department', value: user.department },
+                        { icon: 'building-icon.svg', label: 'Building', value: user.building },
+                        { icon: 'id-icon.svg', label: 'Room', value: user.room },
+                        { icon: 'photo-icon.svg', label: 'Desk number', value: user.desk_number },
+                        { icon: 'id-icon.svg', label: 'Date of Birth', value: `${user.date_birth.day}/${user.date_birth.month}/${user.date_birth.year}` },
+                        { icon: 'name-icon.svg', label: 'Manager', value: `${user.manager.first_name} ${user.manager.last_name}` }
+                    ]
+                },
+                {
+                    header: 'CONTACTS',
+                    fields: [
+                        { icon: 'phone-icon.svg', label: 'Phone', value: user.phone },
+                        { icon: 'email-icon.svg', label: 'Email', value: user.email },
+                        { icon: 'skype-icon.svg', label: 'Skype', value: user.skype },
+                        { icon: 'id-icon.svg', label: 'C-Number', value: user.cnumber }
+                    ]
+                },
+                {
+                    header: 'TRAVEL INFO',
+                    fields: [
+                        { icon: 'citizenship-icon.svg', label: 'Citizenship', value: user.citizenship },
+                        { icon: 'visa-icon.svg', label: 'Visa Type', value: `${user.visa[0].type} (${user.visa[0].issuing_country})` },
+                        { icon: 'visa-icon.svg', label: 'Visa Start Date', value: new Date(user.visa[0].start_date).toLocaleDateString() },
+                        { icon: 'visa-icon.svg', label: 'Visa End Date', value: new Date(user.visa[0].end_date).toLocaleDateString() }
+                    ]
+                }
             ];
-
-            headers.forEach((header, index) => {
-                const sectionHeader = document.createElement('h1');
-                sectionHeader.textContent = header;
-                sectionHeader.classList.add('user__details-header');
-                container.appendChild(sectionHeader);
-
-                fields[index].forEach(({ icon, label, value }) => {
+    
+            data.forEach(({ header, fields }) => {
+                const headerElement = document.createElement('h1');
+                headerElement.textContent = header;
+                headerElement.classList.add('user__details-header');
+    
+                const container = document.createElement('div');
+                container.classList.add('infoo-container');
+    
+                fields.forEach(({ icon, label, value }) => {
                     const field = createField(icon, label, value);
-                    if (['Manager', 'Phone', 'Email', 'Skype'].includes(label)) {
-                        field.classList.add('highlight-field');
-                    }
                     container.appendChild(field);
                 });
+    
+                section.appendChild(headerElement);
+                section.appendChild(container);
             });
-
-            section.appendChild(container);
+    
             mainContainer.appendChild(section);
         } catch (error) {
             console.error('Error:', error.message);
         }
     }
+    
 
     await showUserDetails();
     await showCombinedInfo();

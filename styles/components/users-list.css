@@ -161,19 +161,15 @@
     font-size: 18px;
     font-weight: bold;
     margin-bottom: 10px;
+    color: #464f58;
 }
 
-.divider {
-    width: 60%;
-    margin: 10px auto;
-    border: 1px solid #ddd;
-}
 
 .details {
     margin-top: 10px;
     display: flex;
     justify-content: center;
-    gap: 15px;
+    gap: 10px;
 }
 
 .detail-item {
@@ -245,53 +241,70 @@
     display: flex;
     flex-direction: column;
     gap: 16px;
-}
-
-.users-view.list-view .card {
+  }
+  
+  .users-view.list-view .card {
     display: flex;
     align-items: center;
-    text-align: left;
     padding: 15px;
+    gap: 20px;
+    background-color: #fff;
     border: 1px solid #ddd;
     border-radius: 8px;
-    background-color: #fff;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     margin-bottom: 15px;
-    transition: opacity 0.3s ease;
-}
-
-.users-view.list-view .card .avatar-container {
+  }
+  
+  .users-view.list-view .card-header {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 0;
+    flex: 1;
+  }
+  
+  .users-view.list-view .avatar-container {
     width: 60px;
     height: 60px;
-    border-radius: 50%;
-    overflow: hidden;
-    margin-right: 20px;
-}
-
-.users-view.list-view .card .avatar-container img {
+    margin-bottom: 0;
+    flex-shrink: 0;
+  }
+  
+  .users-view.list-view .avatar {
     width: 100%;
     height: 100%;
     object-fit: cover;
-}
-
-.users-view.list-view .card .name {
-    font-weight: bold;
-    font-size: 16px;
-    margin-bottom: 5px;
-}
-
-.users-view.list-view .card .divider {
-    width: 100%;
-    height: 1px;
-    background-color: #ddd;
-    margin: 10px 0;
-}
-
-.users-view.list-view .card .details {
+    border-radius: 50%;
+  }
+  
+  .users-view.list-view .user-info {
     display: flex;
     align-items: center;
-    gap: 10px;
-}
+  }
+  
+  .users-view.list-view .name {
+    margin: 0;
+    font-size: 16px;
+  }
+  
+  .users-view.list-view .details {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    margin-top: 0;
+  }
+  
+  .users-view.list-view .detail-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  
+  .users-view.list-view .info-icon {
+    width: 20px;
+    height: 20px;
+  }
+  
 
 .users-view.list-view .card .details .job-icon {
     width: 24px;
@@ -351,12 +364,6 @@
         margin-bottom: 5px;
     }
 
-    .users-view.list-view .card .divider {
-        width: 100%;
-        height: 1px;
-        background-color: #ddd;
-        margin: 10px 0;
-    }
 
     .users-view.list-view .card .details {
         display: flex;
