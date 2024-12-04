@@ -1,4 +1,4 @@
-import { createElement } from '../../src/shared/create-element';
+import { createElement } from '../../shared/create-element.js';
 
 export interface ButtonOptions {
     type?: 'button' | 'submit' | 'reset' | undefined;

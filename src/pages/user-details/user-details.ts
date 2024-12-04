@@ -1,4 +1,6 @@
-function getUserIdFromURL() {
+import { User } from '../../models/user.model';
+
+function getUserIdFromURL(): string | undefined {
     const urlHash = window.location.hash;
     const id = urlHash.split('/').pop();
     return id;
@@ -10,20 +12,22 @@ mainContainer.classList.add('main-container');
 document.body.appendChild(mainContainer);
 
 // Fetch user
-async function fetchUserById(userId) {
+async function fetchUserById(userId: string): Promise<User | undefined> {
     try {
         const response = await fetch('../../users.json');
         if (!response.ok) {
             throw new Error(`Failed to fetch user data. Status: ${response.status}`);
         }
-        const users = await response.json();
+        const users: User[] = await response.json();
         return users.find((user) => user._id === userId);
-    } catch (error) {
-        console.error('Error:', error.message);
+    } catch (error: unknown) {
+        if (error instanceof Error) {
+            console.error('Error:', error.message);
+        }
     }
 }
 
-function createField(icon, label, value) {
+function createField(icon: string, label: string, value: string | number) {
     const p = document.createElement('p');
     p.innerHTML = `
         <img src="../../assets/${icon}" alt="${label} Icon" class="info-icon">
@@ -38,7 +42,14 @@ document.addEventListener('DOMContentLoaded', async () => {
     async function showUserDetails() {
         try {
             const userId = getUserIdFromURL();
+            if (!userId) {
+                return;
+            }
+
             const user = await fetchUserById(userId);
+            if (!user) {
+                return;
+            }
 
             const section = document.createElement('section');
             section.classList.add('user__details-section');
@@ -98,7 +109,9 @@ document.addEventListener('DOMContentLoaded', async () => {
 
             mainContainer.appendChild(section);
         } catch (error) {
-            console.error('Error:', error.message);
+            if (error instanceof Error) {
+                console.error('Error:', error.message);
+            }
         }
     }
 
@@ -106,7 +119,14 @@ document.addEventListener('DOMContentLoaded', async () => {
     async function showCombinedInfo() {
         try {
             const userId = getUserIdFromURL();
+            if (!userId) {
+                return;
+            }
+
             const user = await fetchUserById(userId);
+            if (!user) {
+                return;
+            }
 
             const section = document.createElement('section');
             section.classList.add('user__details-section', 'second-section');
@@ -183,7 +203,9 @@ document.addEventListener('DOMContentLoaded', async () => {
 
             mainContainer.appendChild(section);
         } catch (error) {
-            console.error('Error:', error.message);
+            if (error instanceof Error) {
+                console.error('Error:', error.message);
+            }
         }
     }
 

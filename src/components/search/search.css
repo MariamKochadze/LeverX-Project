@@ -1,4 +1,4 @@
-input[type="radio"] {
+input[type='radio'] {
     display: none;
 }
 
@@ -23,12 +23,12 @@ input[type="radio"] {
     border: none;
 }
 
-#basic-search:checked ~ .search-header label[for="basic-search"] {
+#basic-search:checked ~ .search-header label[for='basic-search'] {
     color: var(--text-main-color);
     border-bottom: 3px solid var(--search-button-background);
 }
 
-#advanced-search:checked ~ .search-header label[for="advanced-search"] {
+#advanced-search:checked ~ .search-header label[for='advanced-search'] {
     color: var(--text-main-color);
     border-bottom: 3px solid var(--search-button-background);
 }
@@ -41,7 +41,9 @@ input[type="radio"] {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-input[type="text"], input[type="email"], select {
+input[type='text'],
+input[type='email'],
+select {
     width: 100%;
     padding: 8px;
     margin: 8px 0;
@@ -71,7 +73,8 @@ label {
     width: 100%;
 }
 
-.basic-search input:focus, .advanced-search input:focus {
+.basic-search input:focus,
+.advanced-search input:focus {
     outline: 1px solid var(--search-button-background);
 }
 
@@ -93,7 +96,6 @@ label {
 .basic-search .input-container input {
     padding-left: 40px;
 }
-
 
 .advanced-search {
     display: flex;
@@ -117,13 +119,14 @@ label {
     margin-right: 0;
 }
 
-.advanced-search .billing-room {
+.advanced-search .building-room {
     display: flex;
     justify-content: space-between;
     gap: 20px;
 }
 
-.billing, .room {
+.building,
+.room {
     flex: 1;
 }
 
@@ -151,7 +154,6 @@ label {
     background-color: var(--search-button-hover);
 }
 
-
 .view-toggle {
     padding: 8px 16px;
     margin: 0 5px;
@@ -167,7 +169,6 @@ label {
     color: var(--white);
     border-color: var(--search-button-background);
 }
-
 
 #basic-options {
     display: block;
@@ -185,7 +186,6 @@ label {
     display: block;
 }
 
-
 /* Responsive adjustments */
 @media (max-width: 768px) {
     .advanced-search .half-width {
@@ -193,13 +193,11 @@ label {
         margin-right: 0;
     }
 
-    .advanced-search .billing-room {
+    .advanced-search .building-room {
         flex-direction: column;
         gap: 15px;
     }
 }
-
-
 
 @media (max-width: 768px) {
     .main__search {
@@ -215,9 +213,9 @@ label {
         margin-top: 10px;
         cursor: pointer;
     }
-    .header__nav-list{
+    .header__nav-list {
         position: absolute;
-        top:105px;
+        top: 105px;
         z-index: 2;
         background-color: var(--white);
     }
