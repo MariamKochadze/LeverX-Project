@@ -12,7 +12,7 @@ document.body.appendChild(mainContainer);
 // Fetch user
 async function fetchUserById(userId) {
     try {
-        const response = await fetch('./users.json');
+        const response = await fetch('../../users.json');
         if (!response.ok) {
             throw new Error(`Failed to fetch user data. Status: ${response.status}`);
         }
@@ -26,7 +26,7 @@ async function fetchUserById(userId) {
 function createField(icon, label, value) {
     const p = document.createElement('p');
     p.innerHTML = `
-        <img src="./assets/${icon}" alt="${label} Icon" class="info-icon">
+        <img src="../../assets/${icon}" alt="${label} Icon" class="info-icon">
         <strong>${label}:</strong>
         <span>${value}</span>
     `;
@@ -46,15 +46,15 @@ document.addEventListener('DOMContentLoaded', async () => {
             const container = document.createElement('div');
             container.classList.add('user__details-container');
 
-            //  back button 
+            //  back button
             const backButton = document.createElement('button');
             backButton.classList.add('back-button');
             backButton.innerHTML = `
-                <img src="./assets/back-icon.svg" alt="Back" class="back-icon">
+                <img src="../../assets/back-icon.svg" alt="Back" class="back-icon">
                 
             `;
             backButton.addEventListener('click', () => {
-                window.location.href = 'index.html';
+                window.location.href = '../../index.html';
             });
             container.appendChild(backButton);
 
@@ -63,7 +63,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
             const avatar = document.createElement('img');
             avatar.classList.add('user__details-avatar');
-            avatar.src = user.user_avatar;
+            avatar.src = `../../` + user.user_avatar;
             avatar.alt = `${user.first_name} ${user.last_name}`;
 
             const fullName = document.createElement('p');
@@ -79,11 +79,11 @@ document.addEventListener('DOMContentLoaded', async () => {
 
             const copyButton = document.createElement('button');
             copyButton.classList.add('user__details-copy-button');
-            copyButton.innerHTML = `<img src="./assets/copy-icon.svg" alt="copy icon" class="copy__icon">Copy link`;
+            copyButton.innerHTML = `<img src="../../assets/copy-icon.svg" alt="copy icon" class="copy__icon">Copy link`;
 
             const editButton = document.createElement('button');
             editButton.classList.add('user__details-edit-button');
-            editButton.innerHTML = `<img src="./assets/edit-icon.svg" alt="edit icon" class="edit__icon">EDIT`;
+            editButton.innerHTML = `<img src="../../assets/edit-icon.svg" alt="edit icon" class="edit__icon">EDIT`;
 
             topSection.appendChild(avatar);
             topSection.appendChild(fullName);
@@ -107,10 +107,10 @@ document.addEventListener('DOMContentLoaded', async () => {
         try {
             const userId = getUserIdFromURL();
             const user = await fetchUserById(userId);
-    
+
             const section = document.createElement('section');
             section.classList.add('user__details-section', 'second-section');
-    
+
             // Data mapping for each header
             const data = [
                 {
@@ -120,9 +120,17 @@ document.addEventListener('DOMContentLoaded', async () => {
                         { icon: 'building-icon.svg', label: 'Building', value: user.building },
                         { icon: 'id-icon.svg', label: 'Room', value: user.room },
                         { icon: 'photo-icon.svg', label: 'Desk number', value: user.desk_number },
-                        { icon: 'id-icon.svg', label: 'Date of Birth', value: `${user.date_birth.day}/${user.date_birth.month}/${user.date_birth.year}` },
-                        { icon: 'name-icon.svg', label: 'Manager', value: `${user.manager.first_name} ${user.manager.last_name}` }
-                    ]
+                        {
+                            icon: 'id-icon.svg',
+                            label: 'Date of Birth',
+                            value: `${user.date_birth.day}/${user.date_birth.month}/${user.date_birth.year}`,
+                        },
+                        {
+                            icon: 'name-icon.svg',
+                            label: 'Manager',
+                            value: `${user.manager.first_name} ${user.manager.last_name}`,
+                        },
+                    ],
                 },
                 {
                     header: 'CONTACTS',
@@ -130,43 +138,54 @@ document.addEventListener('DOMContentLoaded', async () => {
                         { icon: 'phone-icon.svg', label: 'Phone', value: user.phone },
                         { icon: 'email-icon.svg', label: 'Email', value: user.email },
                         { icon: 'skype-icon.svg', label: 'Skype', value: user.skype },
-                        { icon: 'id-icon.svg', label: 'C-Number', value: user.cnumber }
-                    ]
+                        { icon: 'id-icon.svg', label: 'C-Number', value: user.cnumber },
+                    ],
                 },
                 {
                     header: 'TRAVEL INFO',
                     fields: [
                         { icon: 'citizenship-icon.svg', label: 'Citizenship', value: user.citizenship },
-                        { icon: 'visa-icon.svg', label: 'Visa Type', value: `${user.visa[0].type} (${user.visa[0].issuing_country})` },
-                        { icon: 'visa-icon.svg', label: 'Visa Start Date', value: new Date(user.visa[0].start_date).toLocaleDateString() },
-                        { icon: 'visa-icon.svg', label: 'Visa End Date', value: new Date(user.visa[0].end_date).toLocaleDateString() }
-                    ]
-                }
+                        {
+                            icon: 'visa-icon.svg',
+                            label: 'Visa Type',
+                            value: `${user.visa[0].type} (${user.visa[0].issuing_country})`,
+                        },
+                        {
+                            icon: 'visa-icon.svg',
+                            label: 'Visa Start Date',
+                            value: new Date(user.visa[0].start_date).toLocaleDateString(),
+                        },
+                        {
+                            icon: 'visa-icon.svg',
+                            label: 'Visa End Date',
+                            value: new Date(user.visa[0].end_date).toLocaleDateString(),
+                        },
+                    ],
+                },
             ];
-    
+
             data.forEach(({ header, fields }) => {
                 const headerElement = document.createElement('h1');
                 headerElement.textContent = header;
                 headerElement.classList.add('user__details-header');
-    
+
                 const container = document.createElement('div');
                 container.classList.add('infoo-container');
-    
+
                 fields.forEach(({ icon, label, value }) => {
                     const field = createField(icon, label, value);
                     container.appendChild(field);
                 });
-    
+
                 section.appendChild(headerElement);
                 section.appendChild(container);
             });
-    
+
             mainContainer.appendChild(section);
         } catch (error) {
             console.error('Error:', error.message);
         }
     }
-    
 
     await showUserDetails();
     await showCombinedInfo();

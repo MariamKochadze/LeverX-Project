@@ -7,8 +7,8 @@
 @import url("./styles/layout/main.css");
 @import url("./styles/layout/footer.css");
 
-@import url("./styles/components/button.css");
-@import url("./styles/components/search.css");
-@import url("./styles/components/users-list.css");
-@import url("./styles/components/user-detail.css");
+@import url("./components/button/button.css");
+@import url("./components/search/search.css");
+@import url("./styles/pages/users-list.css");
+@import url("./pages/user-details/user-detail.css");
 

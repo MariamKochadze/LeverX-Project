@@ -21,6 +21,13 @@ document.addEventListener('DOMContentLoaded', () => {
     // View toggle buttons
     const createViewButton = (type, iconPath) => {
         const button = document.createElement('button');
+
+        // const icon = createElement('img', { src: iconPath, alt: `${type} View Icon`, className: 'view-icon' });
+
+        // const buttonElement = button({ type: 'button', className: 'view-toggle' }, icon);
+        // buttonElement.dataset.view = type;
+        // return buttonElement;
+
         const icon = document.createElement('img');
         icon.src = iconPath;
         icon.alt = `${type} View Icon`;
@@ -191,7 +198,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 </div>`;
 
             card.addEventListener('click', () => {
-                window.location.href = `userDetails.html#/users/${user._id}`;
+                window.location.href = `pages/user-details/user-details.html#/users/${user._id}`;
             });
 
             container.appendChild(card);
