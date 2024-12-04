@@ -44,7 +44,7 @@ document.addEventListener('DOMContentLoaded', () => {
         inactiveBtn.classList.remove('active');
         infoContainer.style.display = displayStyle;
         renderUsers(usersData, activeBtn.dataset.view);
-       
+
         const searchParams = new URLSearchParams(window.location.search);
         searchParams.set('view', activeBtn.dataset.view);
         window.history.pushState({}, '', `?${searchParams.toString()}`);
@@ -71,12 +71,12 @@ document.addEventListener('DOMContentLoaded', () => {
                     xhr.send();
                 });
             }
-            
+
             const response = await fetch('./users.json');
             usersData = await response.json();
             renderUsers(usersData, 'grid');
             updateUserCount(usersData.length);
-            
+
             // Apply search if present in URL
             if (searchQuery) {
                 basicSearchInput.value = searchQuery;
@@ -115,14 +115,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Advanced search with URL params
     const advancedSearch = (formData) => {
-        const filteredUsers = usersData.filter(user => {
+        const filteredUsers = usersData.filter((user) => {
             return Object.entries(formData).every(([key, value]) => {
                 if (!value || value === 'any') return true;
-                switch(key) {
+                switch (key) {
                     case 'name':
-                        return `${user.first_name} ${user.last_name}`
-                            .toLowerCase()
-                            .includes(value.toLowerCase());
+                        return `${user.first_name} ${user.last_name}`.toLowerCase().includes(value.toLowerCase());
                     case 'billing':
                         return user.building === value;
                     default:
@@ -159,7 +157,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Render functions
     const renderUsers = (users, layout) => {
         usersView.innerHTML = '';
-        
+
         if (users.length === 0) {
             renderNotFoundPage();
             return;
@@ -193,7 +191,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 </div>`;
 
             card.addEventListener('click', () => {
-                window.location.href = `userDetails.html?id=${user._id}`;
+                window.location.href = `userDetails.html#/users/${user._id}`;
             });
 
             container.appendChild(card);
@@ -204,7 +202,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const renderNotFoundPage = () => {
         const elementsToHide = ['.header', '.main__search', '.view-options', '.users-count', '.info-container'];
-        elementsToHide.forEach(selector => {
+        elementsToHide.forEach((selector) => {
             const element = document.querySelector(selector);
             if (element) element.style.display = 'none';
         });
