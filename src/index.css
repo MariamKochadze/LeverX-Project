@@ -1,14 +1,15 @@
-@import url("./styles/variables.css");
-@import url("./styles/base.css");
+@import url('./styles/variables.css');
+@import url('./styles/base.css');
 
-@import url("./styles/pages/notFound.css");
+@import url('./styles/pages/notFound.css');
 
-@import url("./styles/layout/header.css");
-@import url("./styles/layout/main.css");
-@import url("./styles/layout/footer.css");
+@import url('./styles/layout/header.css');
+@import url('./styles/layout/main.css');
+@import url('./styles/layout/footer.css');
 
-@import url("./components/button/button.css");
-@import url("./components/search/search.css");
-@import url("./styles/pages/users-list.css");
-@import url("./pages/user-details/user-detail.css");
+@import url('./components/button/button.css');
+@import url('./components/search/search.css');
+@import url('./styles/pages/users-list.css');
+@import url('./pages/user-details/user-detail.css');
 
+@import url('./styles/pages/sign-in.css');
