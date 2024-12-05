@@ -109,6 +109,13 @@
     line-height: 1.2;
 }
 
+#error-message {
+    display: none;
+    margin: 10px 0;
+    color: red;
+    font-size: 20px;
+}
+
 @media screen and (max-width: 768px) {
     .main__container {
         flex-direction: column;

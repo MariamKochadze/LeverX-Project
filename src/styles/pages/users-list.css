@@ -1,46 +1,44 @@
 .users-header {
     display: flex;
-    flex-direction: column; 
+    flex-direction: column;
     background-color: var(--main-background);
     padding: 20px;
-    gap: 10px; 
-  }
-  
-  .users-count-container {
-    width: 100%; 
-    text-align: left; 
+    gap: 10px;
+}
+
+.users-count-container {
+    width: 100%;
+    text-align: left;
     display: flex;
     align-items: center;
     justify-content: space-between;
-  }
-  
-  .info-container {
+}
+
+.info-container {
     display: flex;
     justify-content: space-between;
-    flex-wrap: wrap; 
-    width: 100%; 
+    flex-wrap: wrap;
+    width: 100%;
     background-color: #f9f9f9;
     border: 1px solid #ddd;
     border-radius: 8px;
     padding: 15px;
     box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-  }
-  
-  .info-container p {
+}
+
+.info-container p {
     display: flex;
     align-items: center;
     gap: 10px;
     font-size: 14px;
     color: #333;
     margin: 0;
-  }
-  
-  .info-container img {
+}
+
+.info-container img {
     width: 20px;
     height: 20px;
-  }
-  
-  
+}
 
 /* Style for view toggle buttons */
 .view-toggle {
@@ -55,20 +53,15 @@
     transform: scale(1.1);
 }
 
-
 .view-icon {
-    width: 24px; 
+    width: 24px;
     height: 24px;
 }
 
-
 .view-toggle.active {
-    background-color: #f0f0f0; 
-    border-radius: 50%; 
+    background-color: #f0f0f0;
+    border-radius: 50%;
 }
-
-
-
 
 /* Users Body */
 .icons-container {
@@ -164,7 +157,6 @@
     color: #464f58;
 }
 
-
 .details {
     margin-top: 10px;
     display: flex;
@@ -179,7 +171,7 @@
 }
 
 .detail-item.department::before {
-    content: "";
+    content: '';
     display: inline-block;
     width: 16px;
     height: 16px;
@@ -191,7 +183,7 @@
 }
 
 .detail-item.code::before {
-    content: "";
+    content: '';
     display: inline-block;
     width: 16px;
     height: 16px;
@@ -202,13 +194,12 @@
     background-position: center;
 }
 
-.view-options{
+.view-options {
     display: flex;
     justify-content: end;
-
 }
 
-.view-options input[type="radio"] {
+.view-options input[type='radio'] {
     display: none;
 }
 
@@ -221,11 +212,11 @@
     font-size: 14px;
 }
 
-#grid-view:checked ~ .users-header .view-options label[for="grid-view"] {
+#grid-view:checked ~ .users-header .view-options label[for='grid-view'] {
     color: var(--text-logo-color);
 }
 
-#list-view:checked ~ .users-header .view-options label[for="list-view"] {
+#list-view:checked ~ .users-header .view-options label[for='list-view'] {
     color: var(--text-logo-color);
 }
 
@@ -241,9 +232,9 @@
     display: flex;
     flex-direction: column;
     gap: 16px;
-  }
-  
-  .users-view.list-view .card {
+}
+
+.users-view.list-view .card {
     display: flex;
     align-items: center;
     padding: 15px;
@@ -253,58 +244,57 @@
     border-radius: 8px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     margin-bottom: 15px;
-  }
-  
-  .users-view.list-view .card-header {
+}
+
+.users-view.list-view .card-header {
     display: flex;
     align-items: center;
     gap: 15px;
     margin-bottom: 0;
     flex: 1;
-  }
-  
-  .users-view.list-view .avatar-container {
+}
+
+.users-view.list-view .avatar-container {
     width: 60px;
     height: 60px;
     margin-bottom: 0;
     flex-shrink: 0;
-  }
-  
-  .users-view.list-view .avatar {
+}
+
+.users-view.list-view .avatar {
     width: 100%;
     height: 100%;
     object-fit: cover;
     border-radius: 50%;
-  }
-  
-  .users-view.list-view .user-info {
+}
+
+.users-view.list-view .user-info {
     display: flex;
     align-items: center;
-  }
-  
-  .users-view.list-view .name {
+}
+
+.users-view.list-view .name {
     margin: 0;
     font-size: 16px;
-  }
-  
-  .users-view.list-view .details {
+}
+
+.users-view.list-view .details {
     display: flex;
     align-items: center;
     gap: 20px;
     margin-top: 0;
-  }
-  
-  .users-view.list-view .detail-row {
+}
+
+.users-view.list-view .detail-row {
     display: flex;
     align-items: center;
     gap: 8px;
-  }
-  
-  .users-view.list-view .info-icon {
+}
+
+.users-view.list-view .info-icon {
     width: 20px;
     height: 20px;
-  }
-  
+}
 
 .users-view.list-view .card .details .job-icon {
     width: 24px;
@@ -321,18 +311,21 @@
         display: none !important;
     }
 
-    .users-view.grid-view {
+    .view-toggle,
+    .info-container {
         display: none !important;
     }
 
-    .users-view.list-view {
+    .users-view.list-view,
+    .users-view.grid-view {
         display: flex !important;
         flex-direction: column;
         gap: 16px;
         width: 100%;
     }
 
-    .users-view.list-view .card {
+    .users-view.list-view .card,
+    .users-view.grid-view .card {
         display: flex;
         align-items: center;
         gap: 16px;
@@ -345,33 +338,49 @@
         transition: opacity 0.3s ease;
     }
 
-    .users-view.list-view .card .avatar-container {
+    .users-view.grid-view .card {
+        display: flex;
+        align-items: center;
+        padding: 15px;
+        gap: 20px;
+        background-color: #fff;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        margin-bottom: 15px;
+    }
+
+    .users-view.list-view .card .avatar-container,
+    .users-view.grid-view .card .avatar-container {
         width: 60px;
         height: 60px;
         border-radius: 50%;
         overflow: hidden;
     }
 
-    .users-view.list-view .card .avatar-container img {
+    .users-view.list-view .card .avatar-container img,
+    .users-view.grid-view .card .avatar-container img {
         width: 100%;
         height: 100%;
         object-fit: cover;
     }
 
-    .users-view.list-view .card .name {
+    .users-view.list-view .card .name,
+    .users-view.grid-view .card .name {
         font-weight: bold;
         font-size: 16px;
         margin-bottom: 5px;
     }
 
-
-    .users-view.list-view .card .details {
+    .users-view.list-view .card .details,
+    .users-view.grid-view .card .details {
         display: flex;
         align-items: center;
         gap: 10px;
     }
 
-    .users-view.list-view .card .details .job-icon {
+    .users-view.list-view .card .details .job-icon,
+    .users-view.grid-view .card .details .job-icon {
         width: 24px;
         height: 24px;
     }
