@@ -2,22 +2,22 @@ export interface Manager {
     id: string;
     first_name: string;
     last_name: string;
-  }
-  
-  export interface DateOfBirth {
+}
+
+export interface DateOfBirth {
     year: number;
     month: number;
     day: number;
-  }
-  
-  export interface Visa {
+}
+
+export interface Visa {
     issuing_country: string;
     type: string;
-    start_date: number; 
-    end_date: number;   
-  }
-  
-  export interface User {
+    start_date: number;
+    end_date: number;
+}
+
+export interface User {
     _id: string;
     isRemoteWork: boolean;
     user_avatar: string;
@@ -25,7 +25,7 @@ export interface Manager {
     last_name: string;
     first_native_name: string;
     last_native_name: string;
-    middle_native_name?: string; 
+    middle_native_name?: string;
     department: string;
     building: string;
     room: string;
@@ -38,5 +38,18 @@ export interface Manager {
     cnumber: string;
     citizenship: string;
     visa: Visa[];
-  }
-  
+    role: Role;
+}
+
+export interface EditUser {
+    img: { src: string; alt: string };
+    name: string;
+    surname: string;
+    role: Role;
+}
+
+export enum Role {
+    EMPLOYEE = 1,
+    HR = 2,
+    ADMIN = 3,
+}

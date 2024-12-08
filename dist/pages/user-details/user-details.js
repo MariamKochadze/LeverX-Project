@@ -1,4 +1,4 @@
-import { isAuthenticareUser } from '../../shared/authenticate-user.js';
+import { isAuthenticareUser, logOut } from '../../shared/authenticate-user.js';
 if (!isAuthenticareUser()) {
     window.location.href = '/src/pages/sign-in/sign-in.html';
 }
@@ -7,6 +7,7 @@ function getUserIdFromURL() {
     const id = urlHash.split('/').pop();
     return id;
 }
+const logOutBtn = document.querySelector('#logout__btn');
 // Main container
 const mainContainer = document.createElement('div');
 mainContainer.classList.add('main-container');
@@ -14,7 +15,7 @@ document.body.appendChild(mainContainer);
 // Fetch user
 async function fetchUserById(userId) {
     try {
-        const response = await fetch('../../users.json');
+        const response = await fetch('../../../users.json');
         if (!response.ok) {
             throw new Error(`Failed to fetch user data. Status: ${response.status}`);
         }
@@ -185,6 +186,9 @@ document.addEventListener('DOMContentLoaded', async () => {
             }
         }
     }
+    logOutBtn.addEventListener('click', () => {
+        logOut();
+    });
     await showUserDetails();
     await showCombinedInfo();
 });

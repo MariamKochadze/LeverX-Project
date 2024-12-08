@@ -84,7 +84,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Fetch users with XMLHttpRequest fallback
     const fetchUsers = async () => {
         try {
-            const response = await request<User[]>('./users.json', 'GET');
+            const response = await request<User[]>('../users.json', 'GET');
             usersData = await response.json();
             renderUsers(usersData, 'grid');
             updateUserCount(usersData.length);
