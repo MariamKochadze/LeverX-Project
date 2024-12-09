@@ -1,0 +1,18 @@
+// Variables and Base
+@import './styles/variables';
+@import './styles/base';
+
+// Pages
+@import './styles/pages/notFound';
+@import './styles/pages/users-list';
+@import './styles/pages/sign-in';
+@import './pages/user-details/user-detail';
+
+// Layout
+@import './styles/layout/header';
+@import './styles/layout/main';
+@import './styles/layout/footer';
+
+// Components
+@import './components/button/button';
+@import './components/search/search';
