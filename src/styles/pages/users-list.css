@@ -311,8 +311,12 @@
         display: none !important;
     }
 
+<<<<<<< HEAD:src/styles/pages/users-list.css
     .view-toggle,
     .info-container {
+=======
+    .users-view.grid-view {
+>>>>>>> main:styles/components/users-list.css
         display: none !important;
     }
 
@@ -338,6 +342,7 @@
         transition: opacity 0.3s ease;
     }
 
+<<<<<<< HEAD:src/styles/pages/users-list.css
     .users-view.grid-view .card {
         display: flex;
         align-items: center;
@@ -352,6 +357,9 @@
 
     .users-view.list-view .card .avatar-container,
     .users-view.grid-view .card .avatar-container {
+=======
+    .users-view.list-view .card .avatar-container {
+>>>>>>> main:styles/components/users-list.css
         width: 60px;
         height: 60px;
         border-radius: 50%;
@@ -365,15 +373,23 @@
         object-fit: cover;
     }
 
+<<<<<<< HEAD:src/styles/pages/users-list.css
     .users-view.list-view .card .name,
     .users-view.grid-view .card .name {
+=======
+    .users-view.list-view .card .name {
+>>>>>>> main:styles/components/users-list.css
         font-weight: bold;
         font-size: 16px;
         margin-bottom: 5px;
     }
 
+<<<<<<< HEAD:src/styles/pages/users-list.css
     .users-view.list-view .card .details,
     .users-view.grid-view .card .details {
+=======
+    .users-view.list-view .card .details {
+>>>>>>> main:styles/components/users-list.css
         display: flex;
         align-items: center;
         gap: 10px;
