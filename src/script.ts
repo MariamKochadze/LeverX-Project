@@ -1,26 +1,49 @@
+import { search } from './helpers/advanced-search.js';
+import { request } from './helpers/fetch-polyfill.js';
+import { User } from './models/user.model.js';
+import { authenticareUser, isAuthenticareUser, logOut } from './shared/authenticate-user.js';
+
+export type UserFormData = Partial<
+    Pick<User, 'first_name' | 'last_name' | 'email' | 'phone' | 'skype' | 'building' | 'room' | 'department'>
+> & {
+    name?: string;
+};
+
+if (!isAuthenticareUser()) {
+    window.location.href = '/src/pages/sign-in/sign-in.html';
+}
+
 document.addEventListener('DOMContentLoaded', () => {
-    const usersView = document.querySelector('.users-body');
-    const viewOptions = document.querySelector('.view-options');
-    const basicSearchInput = document.querySelector('#basic-input');
-    const basicSearchBtn = document.querySelector('#basic-options .search-btn');
-    const advancedSearchForm = document.querySelector('.advanced-search');
-    const infoContainer = document.querySelector('.info-container');
-    let usersData = [];
+    const usersView: HTMLElement = document.querySelector('.users-body')!;
+    const viewOptions: HTMLElement = document.querySelector('.view-options')!;
+    const basicSearchInput: HTMLInputElement = document.querySelector('#basic-input')!;
+    const basicSearchBtn: HTMLElement = document.querySelector('#basic-options .search-btn')!;
+    const advancedSearchForm: HTMLElement = document.querySelector('.advanced-search')!;
+    const infoContainer: HTMLElement = document.querySelector('.info-container')!;
+    const logOutBtn: HTMLButtonElement = document.querySelector('#logout__btn')!;
+    let usersData: User[] = [];
 
     // Check for search params on load
     const urlParams = new URLSearchParams(window.location.search);
     const searchQuery = urlParams.get('search');
 
-    const updateUserCount = (count) => {
+    const updateUserCount = (count: number) => {
         const userCountElement = document.querySelector('.users-count');
         if (userCountElement) {
             userCountElement.textContent = `${count} employees displayed`;
         }
     };
 
+    logOutBtn.addEventListener('click', () => {
+        logOut();
+    });
+
     // View toggle buttons
-    const createViewButton = (type, iconPath) => {
+    type ToggleType = 'grid' | 'list';
+
+    const createViewButton = (type: ToggleType, iconPath: string) => {
         const button = document.createElement('button');
+
         const icon = document.createElement('img');
         icon.src = iconPath;
         icon.alt = `${type} View Icon`;
@@ -39,14 +62,19 @@ document.addEventListener('DOMContentLoaded', () => {
     viewOptions.appendChild(listViewBtn);
 
     // View toggle handlers
-    const toggleView = (activeBtn, inactiveBtn, displayStyle) => {
+    const toggleView = (activeBtn: HTMLButtonElement, inactiveBtn: HTMLButtonElement, displayStyle: string) => {
         activeBtn.classList.add('active');
         inactiveBtn.classList.remove('active');
         infoContainer.style.display = displayStyle;
-        renderUsers(usersData, activeBtn.dataset.view);
-       
+        if (activeBtn.dataset.view) {
+            renderUsers(usersData, activeBtn.dataset.view);
+        }
+
         const searchParams = new URLSearchParams(window.location.search);
-        searchParams.set('view', activeBtn.dataset.view);
+        if (activeBtn.dataset.view) {
+            searchParams.set('view', activeBtn.dataset.view);
+        }
+
         window.history.pushState({}, '', `?${searchParams.toString()}`);
     };
 
@@ -56,27 +84,11 @@ document.addEventListener('DOMContentLoaded', () => {
     // Fetch users with XMLHttpRequest fallback
     const fetchUsers = async () => {
         try {
-            if (!window.fetch) {
-                return new Promise((resolve, reject) => {
-                    const xhr = new XMLHttpRequest();
-                    xhr.open('GET', './users.json', true);
-                    xhr.onload = () => {
-                        if (xhr.status === 200) {
-                            resolve(JSON.parse(xhr.responseText));
-                        } else {
-                            reject(new Error(`Failed to load users: ${xhr.status}`));
-                        }
-                    };
-                    xhr.onerror = () => reject(new Error('Network error'));
-                    xhr.send();
-                });
-            }
-            
-            const response = await fetch('./users.json');
+            const response = await request<User[]>('./users.json', 'GET');
             usersData = await response.json();
             renderUsers(usersData, 'grid');
             updateUserCount(usersData.length);
-            
+
             // Apply search if present in URL
             if (searchQuery) {
                 basicSearchInput.value = searchQuery;
@@ -89,7 +101,7 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     // Enhanced search functionality
-    const basicSearch = (searchTerm) => {
+    const basicSearch = (searchTerm: string) => {
         const term = searchTerm.toLowerCase();
         const filteredUsers = usersData.filter((user) => {
             const fullName = `${user.first_name} ${user.last_name}`.toLowerCase();
@@ -97,8 +109,10 @@ document.addEventListener('DOMContentLoaded', () => {
             return fullName.includes(term) || id === term;
         });
 
-        const currentView = document.querySelector('.view-toggle.active').dataset.view;
-        renderUsers(filteredUsers, currentView);
+        const currentView = (document.querySelector('.view-toggle.active')! as HTMLElement).dataset.view;
+        if (currentView) {
+            renderUsers(filteredUsers, currentView);
+        }
         updateUserCount(filteredUsers.length);
 
         // Update URL with search term
@@ -114,25 +128,15 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // Advanced search with URL params
-    const advancedSearch = (formData) => {
-        const filteredUsers = usersData.filter(user => {
-            return Object.entries(formData).every(([key, value]) => {
-                if (!value || value === 'any') return true;
-                switch(key) {
-                    case 'name':
-                        return `${user.first_name} ${user.last_name}`
-                            .toLowerCase()
-                            .includes(value.toLowerCase());
-                    case 'billing':
-                        return user.building === value;
-                    default:
-                        return user[key]?.toLowerCase().includes(value.toLowerCase());
-                }
-            });
-        });
 
-        const currentView = document.querySelector('.view-toggle.active').dataset.view;
-        renderUsers(filteredUsers, currentView);
+    const advancedSearch = (formData: UserFormData) => {
+        const filteredUsers = search(formData, usersData);
+        console.log(filteredUsers);
+
+        const currentView = (document.querySelector('.view-toggle.active')! as HTMLDivElement).dataset.view;
+        if (currentView) {
+            renderUsers(filteredUsers, currentView);
+        }
         updateUserCount(filteredUsers.length);
 
         const searchParams = new URLSearchParams(window.location.search);
@@ -145,21 +149,21 @@ document.addEventListener('DOMContentLoaded', () => {
     advancedSearchForm.addEventListener('submit', (e) => {
         e.preventDefault();
         const formData = {
-            name: document.querySelector('#name').value,
-            email: document.querySelector('#email').value,
-            phone: document.querySelector('#phone').value,
-            skype: document.querySelector('#skype').value,
-            billing: document.querySelector('#billing').value,
-            room: document.querySelector('#room').value,
-            department: document.querySelector('#department').value,
+            name: (document.querySelector('#name')! as HTMLInputElement).value,
+            email: (document.querySelector('#email')! as HTMLInputElement).value,
+            phone: (document.querySelector('#phone')! as HTMLInputElement).value,
+            skype: (document.querySelector('#skype')! as HTMLInputElement).value,
+            building: (document.querySelector('#building')! as HTMLInputElement).value,
+            room: (document.querySelector('#room')! as HTMLInputElement).value,
+            department: (document.querySelector('#department')! as HTMLInputElement).value,
         };
         advancedSearch(formData);
     });
 
     // Render functions
-    const renderUsers = (users, layout) => {
+    const renderUsers = (users: User[], layout: string) => {
         usersView.innerHTML = '';
-        
+
         if (users.length === 0) {
             renderNotFoundPage();
             return;
@@ -193,7 +197,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 </div>`;
 
             card.addEventListener('click', () => {
-                window.location.href = `userDetails.html?id=${user._id}`;
+                window.location.href = `pages/user-details/user-details.html#/users/${user._id}`;
             });
 
             container.appendChild(card);
@@ -204,8 +208,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const renderNotFoundPage = () => {
         const elementsToHide = ['.header', '.main__search', '.view-options', '.users-count', '.info-container'];
-        elementsToHide.forEach(selector => {
-            const element = document.querySelector(selector);
+        elementsToHide.forEach((selector) => {
+            const element: HTMLElement = document.querySelector(selector)!;
             if (element) element.style.display = 'none';
         });
 
@@ -221,7 +225,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 </div>
             </div>`;
 
-        document.getElementById('go-home-button').addEventListener('click', () => {
+        document.getElementById('go-home-button')!.addEventListener('click', () => {
             window.location.href = 'index.html';
         });
     };

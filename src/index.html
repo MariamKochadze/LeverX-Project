@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>LeverX Employee Services</title>
     <link rel="stylesheet" href="./index.css">
+   
 </head>
 <body>
     <!-- header -->
@@ -29,10 +30,10 @@
                     <a href="#" class="header__button">
                         <img class="header__button--img" src="./assets/question-mark.svg" alt="Support Icon"/>SUPPORT
                     </a>
-                    <a href="/userDetails.html#/users/550e8400-e29b-41d4-a716-446655440000" class="header__button" id="profile__button">
+                    <a href="./pages/user-details/user-details.html#/users/550e8400-e29b-41d4-a716-446655440000" class="header__button" id="profile__button">
                     <img src="./assets//avataaars (1).svg" alt="Avatar icon" class="header__profile--icon"/>
                     LUFFY MONKEY</a>
-                    <a href="#" class="header__button log-out">
+                    <a href="#" class="header__button log-out" id="logout__btn">
                         <img class="header__button--img" src="./assets/power-off-solid.svg" alt="Log out icon"/>
                     </a>
                 </li>
@@ -81,20 +82,20 @@
                             <label for="skype">Skype</label>
                             <input type="text" id="skype" placeholder="SkypeID" />
                         </div>
-                        <div class="input-container billing-room">
-                            <div class="billing">
-                                <label for="billing">Billing</label>
-                                <select id="billing">
+                        <div class="input-container building-room">
+                            <div class="building">
+                                <label for="building">Building</label>
+                                <select id="building">
                                     <option value="any">Any</option>
-                                    <option value="billing1">Pilsudskiego 69 (Poland)</option>
-                                    <option value="billing2">Pilsudskiego 68 (Poland)</option>
-                                    <option value="billing3">Pilsudskiego 67 (Poland)</option>
-                                    <option value="billing4">Pilsudskiego 66 (Poland)</option>
-                                    <option value="billing5">Pilsudskiego 65 (Poland)</option>
-                                    <option value="billing6">Pilsudskiego 64 (Poland)</option>
-                                    <option value="billing7">Pilsudskiego 63 (Poland)</option>
-                                    <option value="billing8">Pilsudskiego 62 (Poland)</option>
-                                    <option value="billing9">Pilsudskiego 61 (Poland)</option>
+                                    <option value="building1">Pilsudskiego 69 (Poland)</option>
+                                    <option value="building2">Pilsudskiego 68 (Poland)</option>
+                                    <option value="building3">Pilsudskiego 67 (Poland)</option>
+                                    <option value="building4">Pilsudskiego 66 (Poland)</option>
+                                    <option value="building5">Pilsudskiego 65 (Poland)</option>
+                                    <option value="building6">Pilsudskiego 64 (Poland)</option>
+                                    <option value="building7">Pilsudskiego 63 (Poland)</option>
+                                    <option value="building8">Pilsudskiego 62 (Poland)</option>
+                                    <option value="building9">Pilsudskiego 61 (Poland)</option>
                                 </select>
                             </div>
                             <div class="room">
@@ -164,6 +165,6 @@
 
     </main>
 
-    <script src="script.js"></script>
+    <script type="module" src="../dist/script.js" src=""></script>
 </body>
 </html>

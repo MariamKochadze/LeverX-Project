@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>LeverX Employee Services</title>
+        <link rel="stylesheet" href="../../index.css" />
+    </head>
+    <body>
+        <main class="main__container">
+            <div class="login__header">
+                <h1>Login</h1>
+                <form id="signin-form">
+                    <div class="input__box">
+                        <label for="email">Email:</label>
+                        <input class="input-field" type="text" id="email" placeholder="Type your Email" required />
+                    </div>
+                    <div class="input__box">
+                        <label for="password">Password</label>
+                        <input
+                            class="input-field"
+                            type="password"
+                            id="password"
+                            placeholder="Type your password"
+                            required
+                        />
+                        <section>
+                            <input type="checkbox" id="checkbox" />
+                            <label for="checkbox">Remember me</label>
+                        </section>
+                    </div>
+                    <div class="input__submit">
+                        <button type="submit" class="submit__btn">Sign In</button>
+                    </div>
+                </form>
+                <p id="error-message">Email or Password is not correct</p>
+            </div>
+            <div class="login__title">
+                <h1>
+                    GIVING YOU CONFIDENCE<br />
+                    IN COMPLEX SAP PROJECTS
+                </h1>
+            </div>
+        </main>
+        <script type="module" src="../../../dist/pages/sign-in/sign-in.js"></script>
+    </body>
+</html>
