@@ -16,5 +16,13 @@
     --text-logo-color: #6f96d6;
     --text-main-color: #4d535d;
     --not-found-text-color:#b6b6b6;
-    --not-found-title-color:#929292
+    --not-found-title-color:#929292;
+
+    --user-detail-copy-img-color:#f0f0f5;
+    --user-detail-copy-img-text:#b4bac4;
+    --user-detail-header-color:#95a0a9;
+
+    --not-found-page-button:#5091ff;
+
+   
 }

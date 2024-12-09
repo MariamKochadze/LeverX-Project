@@ -94,41 +94,80 @@ label {
     padding-left: 40px;
 }
 
+
 .advanced-search {
     display: flex;
     flex-direction: column;
     gap: 16px;
+    padding: 20px;
 }
 
 .advanced-search .input-container {
     width: 100%;
+    margin-bottom: 15px;
 }
 
 .advanced-search .half-width {
     display: inline-block;
-    width: 48%;
+    width: calc(50% - 10px);
+    margin-right: 10px;
+}
+
+.advanced-search .half-width:last-child {
+    margin-right: 0;
 }
 
 .advanced-search .billing-room {
     display: flex;
     justify-content: space-between;
+    gap: 20px;
 }
 
 .billing, .room {
-    width: 48%;
+    flex: 1;
+}
+
+.advanced-search select {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    background-color: var(--white);
 }
 
 .advanced-search .search-btn {
     width: 100%;
-    padding: 10px;
-    background-color: #007bff;
-    color: white;
+    padding: 12px;
+    background-color: var(--search-button-background);
+    color: var(--white);
     border: none;
-    cursor: pointer;
-    font-size: 16px;
     border-radius: 4px;
-    margin-top: 10px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: background-color 0.3s ease;
 }
+
+.advanced-search .search-btn:hover {
+    background-color: var(--search-button-hover);
+}
+
+
+.view-toggle {
+    padding: 8px 16px;
+    margin: 0 5px;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    background-color: var(--white);
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.view-toggle.active {
+    background-color: var(--search-button-background);
+    color: var(--white);
+    border-color: var(--search-button-background);
+}
+
 
 #basic-options {
     display: block;
@@ -138,21 +177,28 @@ label {
     display: none;
 }
 
-#advanced-search:checked ~ .search-body #advanced-options {
-    display: block;
-}
-
 #advanced-search:checked ~ .search-body #basic-options {
     display: none;
 }
 
-#basic-search:checked ~ .search-body #basic-options {
+#advanced-search:checked ~ .search-body #advanced-options {
     display: block;
 }
 
-#basic-search:checked ~ .search-body #advanced-options {
-    display: none;
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .advanced-search .half-width {
+        width: 100%;
+        margin-right: 0;
+    }
+
+    .advanced-search .billing-room {
+        flex-direction: column;
+        gap: 15px;
+    }
 }
+
 
 
 @media (max-width: 768px) {

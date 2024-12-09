@@ -1,8 +1,10 @@
 .header {
     background-color: var(--navigation-background);
     color: var(--white);
-    position: relative;
     padding: 10px 20px;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
   }
   
   .header__nav {
@@ -219,12 +221,6 @@
     .support-btn__icon img {
       width: 20px;
       height: 20px;
-    }
-  
-  
-    .logout-btn:hover,
-    .support-btn__icon:hover {
-      color: #ff6600; 
     }
   
     .header__nav-list {
