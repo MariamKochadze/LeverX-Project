@@ -375,5 +375,94 @@
   .users-view.grid-view .card .details .job-icon {
     width: 24px;
     height: 24px;
+
   }
 }/*# sourceMappingURL=users-list.css.map */
+
+
+
+/* Media Query for Mobile */
+@media screen and (max-width: 768px) {
+    .users-header .view-options {
+        display: none;
+    }
+
+    .detail-item.code {
+        display: none !important;
+    }
+
+    .view-toggle,
+    .info-container {
+        display: none !important;
+    }
+
+    .users-view.list-view,
+    .users-view.grid-view {
+        display: flex !important;
+        flex-direction: column;
+        gap: 16px;
+        width: 100%;
+    }
+
+    .users-view.list-view .card,
+    .users-view.grid-view .card {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        padding: 15px;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        background-color: #fff;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        margin-bottom: 15px;
+        transition: opacity 0.3s ease;
+    }
+
+    .users-view.grid-view .card {
+        display: flex;
+        align-items: center;
+        padding: 15px;
+        gap: 20px;
+        background-color: #fff;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        margin-bottom: 15px;
+    }
+
+    .users-view.list-view .card .avatar-container,
+    .users-view.grid-view .card .avatar-container {
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        overflow: hidden;
+    }
+
+    .users-view.list-view .card .avatar-container img,
+    .users-view.grid-view .card .avatar-container img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    .users-view.list-view .card .name,
+    .users-view.grid-view .card .name {
+        font-weight: bold;
+        font-size: 16px;
+        margin-bottom: 5px;
+    }
+
+    .users-view.list-view .card .details,
+    .users-view.grid-view .card .details {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .users-view.list-view .card .details .job-icon,
+    .users-view.grid-view .card .details .job-icon {
+        width: 24px;
+        height: 24px;
+    }
+}
+
