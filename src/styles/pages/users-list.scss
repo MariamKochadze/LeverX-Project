@@ -1,7 +1,14 @@
+@use '../variables.scss' as vars;
+
+$primaryInfocontainer: 0px 4px 6px rgba(0, 0, 0, 0.1);
+$usersBodyBoxShadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+$cardBoxShadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+$userListCardboxShadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+
 .users-header {
     display: flex;
     flex-direction: column;
-    background-color: var(--main-background);
+    background-color: vars.$main-background;
     padding: 20px;
     gap: 10px;
 }
@@ -23,7 +30,7 @@
     border: 1px solid #ddd;
     border-radius: 8px;
     padding: 15px;
-    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    box-shadow: $primaryInfocontainer;
 }
 
 .info-container p {
@@ -47,10 +54,9 @@
     padding: 10px;
     cursor: pointer;
     transition: transform 0.3s ease;
-}
-
-.view-toggle:hover {
-    transform: scale(1.1);
+    &:hover {
+        transform: scale(1.1);
+    }
 }
 
 .view-icon {
@@ -95,11 +101,11 @@
 
 .users-body {
     position: relative;
-    background-color: var(--white);
+    background-color: vars.$white;
     padding: 20px;
-    border: 1px solid var(--border-color);
+    border: 1px solid vars.$border-color;
     border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    box-shadow: $usersBodyBoxShadow;
 }
 
 .users-view {
@@ -111,10 +117,10 @@
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
     gap: 16px;
-    background-color: var(--white);
+    background-color: vars.$white;
     padding: 20px;
     border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    box-shadow: $usersBodyBoxShadow;
 }
 
 #list-view:checked ~ .users-body #list-view-content {
@@ -122,20 +128,22 @@
     gap: 16px;
 }
 
-.users-view.grid-view {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 20px;
-    padding: 20px;
+.users-view {
+    &.grid-view {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 20px;
+        padding: 20px;
+    }
 }
 
 .card {
-    background-color: #fff;
+    background-color: vars.$white;
     border: 1px solid #ddd;
     border-radius: 10px;
     padding: 20px;
     text-align: center;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    box-shadow: $cardBoxShadow;
 }
 
 .avatar-container {
@@ -176,7 +184,7 @@
     width: 16px;
     height: 16px;
     margin-right: 8px;
-    background-image: url('../../assets/working-icon.svg');
+    background-image: url('~@assets/working-icon.svg');
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
@@ -188,7 +196,7 @@
     width: 16px;
     height: 16px;
     margin-right: 8px;
-    background-image: url('../../assets/note-icon.svg');
+    background-image: url('~@assets/note-icon.svg');
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
@@ -206,18 +214,18 @@
 .view-options label {
     cursor: pointer;
     padding: 5px 10px;
-    color: var(--search-button-color-inactive);
+    color: vars.$search-button-color-inactive;
     border-radius: 5px;
     margin-right: 10px;
     font-size: 14px;
 }
 
 #grid-view:checked ~ .users-header .view-options label[for='grid-view'] {
-    color: var(--text-logo-color);
+    color: vars.$text-logo-color;
 }
 
 #list-view:checked ~ .users-header .view-options label[for='list-view'] {
-    color: var(--text-logo-color);
+    color: vars.$text-logo-color;
 }
 
 #grid-view:checked ~ .users-body .grid-view {
@@ -239,10 +247,10 @@
     align-items: center;
     padding: 15px;
     gap: 20px;
-    background-color: #fff;
+    background-color: vars.$white;
     border: 1px solid #ddd;
     border-radius: 8px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    box-shadow: $userListCardboxShadow;
     margin-bottom: 15px;
 }
 
@@ -316,6 +324,12 @@
         display: none !important;
     }
 
+    .main-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
     .users-view.list-view,
     .users-view.grid-view {
         display: flex !important;
@@ -332,8 +346,8 @@
         padding: 15px;
         border: 1px solid #ddd;
         border-radius: 8px;
-        background-color: #fff;
-        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        background-color: vars.$white;
+        box-shadow: $userListCardboxShadow;
         margin-bottom: 15px;
         transition: opacity 0.3s ease;
     }
@@ -343,10 +357,10 @@
         align-items: center;
         padding: 15px;
         gap: 20px;
-        background-color: #fff;
+        background-color: vars.$white;
         border: 1px solid #ddd;
         border-radius: 8px;
-        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        box-shadow: $userListCardboxShadow;
         margin-bottom: 15px;
     }
 

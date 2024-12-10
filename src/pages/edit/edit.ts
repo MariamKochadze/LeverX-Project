@@ -1,8 +1,15 @@
-import { editUserCard } from '../../components/card/edit-user.card.js';
-import { request } from '../../helpers/fetch-polyfill.js';
-import { User } from '../../models/user.model.js';
+import { editUserCard } from '../../components/card/edit-user.card';
+import { request } from '../../helpers/fetch-polyfill';
+import { Role, User } from '../../models/user.model';
+import { isAuthenticareUser } from '../../shared/authenticate-user';
 
 const user: HTMLElement = document.querySelector('.setting__user-list')!;
+
+const currentUser = isAuthenticareUser();
+
+if (!currentUser || (currentUser.role !== Role.ADMIN && currentUser.role !== Role.HR)) {
+    window.location.href = '/src/pages/sign-in/sign-in.html';
+}
 
 //fetch users
 export const fetchUsers = async () => {

@@ -1,4 +1,4 @@
-import { authenticareUser, registerUser } from '../../shared/authenticate-user.js';
+import { authenticateUser, registerUser } from '../../shared/authenticate-user';
 
 window.addEventListener('load', () => {
     const form: HTMLFormElement = document.querySelector('#signin-form')!;
@@ -9,21 +9,13 @@ window.addEventListener('load', () => {
         const password = (document.getElementById('password') as HTMLInputElement).value;
         const email = (document.getElementById('email') as HTMLInputElement).value;
 
-        console.log(password, email);
-
         errorMessage.style.display = 'none';
-
-        const hash = sessionStorage.getItem('hash');
-        console.log(hash);
 
         let success = false;
 
-        if (hash) {
-            success = await authenticareUser(email, password, hash);
-            console.log(success);
-        } else {
-            success = await registerUser(email, password);
-        }
+        success = await authenticateUser(email, password);
+        console.log(success);
+
         if (success) {
             window.location.replace('/src/index.html');
         } else {

@@ -1,4 +1,4 @@
-import { EditUser, Role } from './../../models/user.model.js';
+import { EditUser, Role } from './../../models/user.model';
 
 const userList = document.querySelector('.setting__user-list');
 

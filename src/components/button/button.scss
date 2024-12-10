@@ -1,8 +1,10 @@
+@use '../../styles/variables.scss' as vars;
+
 .button {
     display: inline-block;
     padding: 10px 20px;
-    background-color: var(--button-background);
-    color: var(--button-text-color);
+    background-color: vars.$search-button-background;
+    color: vars.$search-button-color;
     border: none;
     border-radius: 5px;
     cursor: pointer;
@@ -16,8 +18,8 @@
 .basic-search .search-btn {
     width: 100%;
     padding: 5px 10px;
-    background-color: var(--search-button-background);
-    color: white;
+    background-color: vars.$search-button-background;
+    color: vars.$white;
     border: none;
     cursor: pointer;
     font-size: 16px;

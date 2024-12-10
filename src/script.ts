@@ -1,7 +1,9 @@
-import { search } from './helpers/advanced-search.js';
-import { request } from './helpers/fetch-polyfill.js';
-import { User } from './models/user.model.js';
-import { authenticareUser, isAuthenticareUser, logOut } from './shared/authenticate-user.js';
+import { search } from './helpers/advanced-search';
+import { request } from './helpers/fetch-polyfill';
+import { User } from './models/user.model';
+import { authenticateUser, isAuthenticareUser, logOut } from './shared/authenticate-user';
+import './index.scss';
+import './components/header/header';
 
 export type UserFormData = Partial<
     Pick<User, 'first_name' | 'last_name' | 'email' | 'phone' | 'skype' | 'building' | 'room' | 'department'>

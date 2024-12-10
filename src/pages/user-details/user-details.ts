@@ -1,5 +1,5 @@
 import { User } from '../../models/user.model';
-import { isAuthenticareUser, logOut } from '../../shared/authenticate-user.js';
+import { isAuthenticareUser, logOut } from '../../shared/authenticate-user';
 
 if (!isAuthenticareUser()) {
     window.location.href = '/src/pages/sign-in/sign-in.html';

@@ -39,6 +39,7 @@ export interface User {
     citizenship: string;
     visa: Visa[];
     role: Role;
+    password: string;
 }
 
 export interface EditUser {

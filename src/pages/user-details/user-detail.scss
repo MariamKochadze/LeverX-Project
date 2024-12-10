@@ -1,16 +1,23 @@
+@use '../../styles/variables.scss' as vars;
+
+$userDetailsBoxShadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+
+@mixin mainCont {
+    display: flex;
+    height: 100vh;
+    flex-wrap: wrap;
+}
+
 /* Main container */
 .main-container {
-    display: flex;
+    @include mainCont();
     gap: 20px;
     padding: 20px;
-    height: 100vh;
-    flex-wrap: wrap; 
     background-color: #f5f5fa;
 }
 
 /* First section */
 .user__details-section:first-child {
-    
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
@@ -19,10 +26,10 @@
 /* Second section */
 .user__details-section:last-child {
     flex: 1.3;
-    background-color: var(--white);
+    background-color: vars.$white;
     padding: 30px;
     border-radius: 10px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    box-shadow: $userDetailsBoxShadow;
     height: fit-content;
     max-width: 800px;
     display: flex;
@@ -33,18 +40,16 @@
     display: flex;
     flex-direction: column;
     gap: 10px;
-    margin-bottom: 20px; 
+    margin-bottom: 20px;
 }
 
 .user__details-header {
     font-size: 24px;
     font-weight: bold;
-    color: var(--user-detail-header-color);
+    color: vars.$user-detail-header-color;
     margin-bottom: 10px;
     text-align: left;
 }
-
-
 
 .user__details-container {
     display: flex;
@@ -54,53 +59,47 @@
     gap: 15px;
     padding: 20px;
     border-radius: 10px;
-    background-color: var(--white);
+    background-color: vars.$white;
     width: 300px;
     text-align: center;
     height: 100%;
     min-height: 100%;
 }
 
-
-
 .back-button {
     display: flex;
     align-items: center;
     padding: 10px 10px;
-    background-color: var(--user-detail-copy-img-color);
+    background-color: vars.$user-detail-copy-img-color;
     color: #0000;
     border: none;
     border-radius: 20px;
     cursor: pointer;
     font-size: 16px;
     transition: background-color 0.3s;
-    flex-direction: row; 
-    justify-content: flex-start; 
+    flex-direction: row;
+    justify-content: flex-start;
 }
 
 .back-button:hover {
-    background-color:var(--user-detail-header-color)
+    background-color: vars.$user-detail-header-color;
 }
 
-
 .back-icon {
-    width: 20px; 
+    width: 20px;
     height: 20px;
     border: none;
     cursor: pointer;
-    margin-right: 10px; 
+    margin-right: 10px;
 }
-
 
 .back-button:hover .back-icon {
-    transform: translateX(-5px); 
+    transform: translateX(-5px);
 }
-
 
 .back-button span {
     font-weight: bold;
 }
-
 
 .user__details-top {
     display: flex;
@@ -109,14 +108,12 @@
     gap: 10px;
 }
 
-
 .user__details-avatar {
     width: 120px;
     height: 120px;
     border-radius: 50%;
     object-fit: cover;
 }
-
 
 .full-name {
     font-size: 20px;
@@ -126,9 +123,8 @@
 .native-format {
     font-size: 16px;
     font-style: italic;
-    color: var(--user-detail-copy-img-text);
+    color: vars.$user-detail-copy-img-text;
 }
-
 
 .user__details-buttons {
     display: flex;
@@ -139,8 +135,8 @@
 .user__details-copy-button {
     padding: 5px;
     border: none;
-    background-color: var(--user-detail-copy-img-color);
-    color: var(--user-detail-copy-img-text);
+    background-color: vars.$user-detail-copy-img-color;
+    color: vars.$user-detail-copy-img-text;
     cursor: pointer;
     border-radius: 30px;
     font-size: 14px;
@@ -158,33 +154,31 @@
     border-radius: 10px;
     text-align: center;
     font-size: 16px;
-    background-color: var(--white);
+    background-color: vars.$white;
     display: flex;
     justify-content: center;
     align-items: center;
     gap: 8px;
 }
 
-
-.copy__icon, .edit__icon {
+.copy__icon,
+.edit__icon {
     width: 18px;
     height: 18px;
     object-fit: contain;
     fill: #b2cdff;
 }
 
-
 .user__details-header,
 .user__details-contact,
 .user__details-travel-info {
     font-size: 24px;
     font-weight: bold;
-    color: var(--user-detail-header-color);
+    color: vars.$user-detail-header-color;
     padding-bottom: 15px;
     margin-bottom: 20px;
-    position: relative; 
+    position: relative;
 }
-
 
 .user__details-header::after,
 .user__details-contact::after,
@@ -197,7 +191,6 @@
     height: 2px;
     background-color: #e0e0e0;
 }
-
 
 .user__details-section:last-child p {
     margin-bottom: 15px;
@@ -212,42 +205,34 @@
     margin-right: 8px;
 }
 
-
-
-
 .user__details-section p {
     display: flex;
-    justify-content: flex-start; 
-    margin-bottom: 15px; 
+    justify-content: flex-start;
+    margin-bottom: 15px;
     line-height: 1.6;
     color: #444;
     font-size: 16px;
-    align-items: center; 
+    align-items: center;
 }
-
 
 .user__details-section p strong {
     font-weight: 600;
     color: #666;
-    margin-right: 8px; 
+    margin-right: 8px;
 }
-
 
 .user__details-section p span {
     font-weight: normal;
-    text-align: right; 
-    flex-grow: 1; 
-    
+    text-align: right;
+    flex-grow: 1;
 }
-
 
 .info-icon {
     width: 20px;
-    height: 20px; 
+    height: 20px;
     margin-right: 10px;
 }
 
-
 .user__details-section p.highlight-field span {
     color: #a2c4ff;
-  }
+}

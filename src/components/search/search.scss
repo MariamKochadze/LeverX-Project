@@ -1,3 +1,5 @@
+@use '../../styles/variables.scss' as vars;
+
 input[type='radio'] {
     display: none;
 }
@@ -6,7 +8,7 @@ input[type='radio'] {
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: var(--main-background);
+    background-color: vars.$main-background;
 }
 
 .search-toggle {
@@ -17,7 +19,7 @@ input[type='radio'] {
     font-size: 14px;
     font-weight: 600;
     text-align: center;
-    color: var(--search-button-color-inactive);
+    color: vars.$search-button-color-inactive;
     cursor: pointer;
     padding: 16px;
     border: none;
@@ -30,13 +32,13 @@ input[type='radio'] {
 
 #advanced-search:checked ~ .search-header label[for='advanced-search'] {
     color: var(--text-main-color);
-    border-bottom: 3px solid var(--search-button-background);
+    border-bottom: 3px solid vars.$search-button-background;
 }
 
 .search-body {
-    background-color: var(--white);
+    background-color: vars.$white;
     padding: 20px;
-    border: 1px solid var(--border-color);
+    border: 1px solid vars.$border-color;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
@@ -65,6 +67,12 @@ label {
     align-items: flex-start;
 }
 
+.basic-search .search-btn {
+    &:hover {
+        background-color: vars.$navigation-button-background;
+    }
+}
+
 .basic-search .input-container {
     width: 100%;
 }
@@ -75,7 +83,7 @@ label {
 
 .basic-search input:focus,
 .advanced-search input:focus {
-    outline: 1px solid var(--search-button-background);
+    outline: 1px solid vars.$search-button-background;
 }
 
 .input-container {
@@ -133,41 +141,40 @@ label {
 .advanced-search select {
     width: 100%;
     padding: 8px;
-    border: 1px solid var(--border-color);
+    border: 1px solid vars.$border-color;
     border-radius: 4px;
-    background-color: var(--white);
+    background-color: vars.$white;
 }
 
 .advanced-search .search-btn {
     width: 100%;
     padding: 12px;
-    background-color: var(--search-button-background);
-    color: var(--white);
+    background-color: vars.$search-button-background;
+    color: vars.$white;
     border: none;
     border-radius: 4px;
     cursor: pointer;
     font-weight: 600;
     transition: background-color 0.3s ease;
-}
-
-.advanced-search .search-btn:hover {
-    background-color: var(--search-button-hover);
+    &:hover {
+        background-color: vars.$navigation-button-background;
+    }
 }
 
 .view-toggle {
     padding: 8px 16px;
     margin: 0 5px;
-    border: 1px solid var(--border-color);
+    border: 1px solid vars.$border-color;
     border-radius: 4px;
-    background-color: var(--white);
+    background-color: vars.$white;
     cursor: pointer;
     transition: all 0.3s ease;
 }
 
 .view-toggle.active {
-    background-color: var(--search-button-background);
-    color: var(--white);
-    border-color: var(--search-button-background);
+    background-color: vars.$search-button-background;
+    color: vars.$white;
+    border-color: vars.$search-button-background;
 }
 
 #basic-options {
@@ -209,7 +216,7 @@ label {
         align-items: center;
         gap: 10px;
         padding: 15px 20px;
-        background-color: var(--navigation-button-background);
+        background-color: vars.$navigation-button-background;
         margin-top: 10px;
         cursor: pointer;
     }
@@ -217,7 +224,7 @@ label {
         position: absolute;
         top: 105px;
         z-index: 2;
-        background-color: var(--white);
+        background-color: vars.$white;
     }
 
     .search__icon {

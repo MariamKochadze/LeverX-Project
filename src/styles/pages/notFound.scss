@@ -1,3 +1,5 @@
+@use '../variables' as vars;
+
 $notFoundBoxShdw: 0 6px 12px rgba(0, 0, 0, 0.1);
 $homeBtnShadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 $focusBtn: 0 0 0 3px rgba(53, 53, 211, 0.5);
@@ -15,10 +17,10 @@ $focusBtn: 0 0 0 3px rgba(53, 53, 211, 0.5);
 .not-found {
     @include notFoundFlexContainer();
     padding: 40px;
-    background-color: $main-background;
+    background-color: vars.$main-background;
     box-shadow: $notFoundBoxShdw;
     border-radius: 12px;
-    border: 1px solid $border-color;
+    border: 1px solid vars.$border-color;
     margin: 0 auto;
     position: relative;
     box-sizing: border-box;
@@ -32,46 +34,35 @@ $focusBtn: 0 0 0 3px rgba(53, 53, 211, 0.5);
     .not-found__title {
         font-size: 1.5rem;
         font-weight: bold;
-        color: $not-found-title-color;
+        color: vars.$not-found-title-color;
         margin-bottom: 10px;
     }
 
     .not-found__description {
-        color: $not-found-text-color;
+        color: vars.$not-found-text-color;
     }
 
-    .not-found a {
-        margin-top: 20px;
-        text-decoration: none;
-        font-weight: 600;
-        color: $link-color;
-        font-size: 1.1rem;
-        display: inline-block;
-        padding: 10px 20px;
-        background-color: $button-background;
-        border-radius: 4px;
-        transition: background-color 0.3s ease;
-    }
-
-    .not-found a,
+    a,
     #go-home-button {
         margin-top: 20px;
         text-decoration: none;
         font-weight: 600;
-        color: $not-found-page-button;
+        color: vars.$white;
         font-size: 1.1rem;
         display: inline-block;
         padding: 12px 24px;
-        background-color: $not-found-page-button, #4a60df;
+        background-color: vars.$not-found-page-button;
         border-radius: 8px;
         transition: background-color 0.3s ease, transform 0.3s ease;
         border: none;
         cursor: pointer;
         box-shadow: $homeBtnShadow;
+
         &:hover {
-            background-color: $button-hover-background;
+            background-color: vars.$not-found-page-button;
             transform: scale(1.05);
         }
+
         &:focus {
             outline: none;
             box-shadow: $focusBtn;
