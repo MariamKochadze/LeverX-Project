@@ -1,147 +1,99 @@
-// Create the header element
-const header: HTMLElement = document.createElement('header');
-header.classList.add('header');
-
-// Create the nav element
-const nav: HTMLElement = document.createElement('nav');
-nav.classList.add('header__nav');
-
-// Create the burger input
-const burgerInput: HTMLInputElement = document.createElement('input');
-burgerInput.type = 'checkbox';
-burgerInput.id = 'burger-toggle';
-burgerInput.classList.add('header__burger-input');
-
-// Create the burger label
-const burgerLabel: HTMLElement = document.createElement('label');
-burgerLabel.setAttribute('for', 'burger-toggle');
-burgerLabel.classList.add('header__burger');
-
-// Create burger lines
-for (let i = 0; i < 3; i++) {
-    const burgerLine: HTMLElement = document.createElement('div');
-    burgerLine.classList.add('header__burger-line');
-    burgerLabel.appendChild(burgerLine);
+function getCurrentUserId(): string | undefined {
+    const urlHash = window.location.hash;
+    return urlHash ? urlHash.split('/').pop() : undefined;
 }
 
-// Create the page overlay
-const pageOverlay: HTMLElement = document.createElement('div');
-pageOverlay.classList.add('page-overlay');
+async function fetchUsers() {
+    const response = await fetch('/users.json');
+    return response.json();
+}
 
-// Create the nav list (ul)
-const navList: HTMLElement = document.createElement('ul');
-navList.classList.add('header__nav-list');
+function createHeader(): void {
+    const header = document.createElement('header');
+    header.classList.add('header');
 
-// Create the logo list item (li)
-const logoItem: HTMLElement = document.createElement('li');
-logoItem.classList.add('header__logo');
+    const headerContent = `
+        <nav class="header__nav">
+            <input type="checkbox" id="burger-toggle" class="header__burger-input">
+            <label for="burger-toggle" class="header__burger">
+                <div class="header__burger-line"></div>
+                <div class="header__burger-line"></div>
+                <div class="header__burger-line"></div>
+            </label>
+            <div class="page-overlay"></div>
+            
+            <ul class="header__nav-list">
+                <li class="header__logo">
+                    <a href="#" class="header__title">
+                        <span class="header__title--small">LEVERX</span>
+                        <span class="header__title--large">EMPLOYEE SERVICES</span>
+                    </a>
+                </li>
+                
+                <li class="header__tab header__active-tab" tabindex="0">Address Book</li>
+                
+                <li class="header__actions" id="profile__icon">
+                    <a href="#" class="header__button">
+                        <img src="/src/assets/question-mark.svg" alt="Support Icon" class="header__button--img">
+                        SUPPORT
+                    </a>
+                    
+                    <a href="/src/pages/user-details/user-details.html#/users/550e8400-e29b-41d4-a716-446655440000" 
+                       class="header__button" 
+                       id="profile__button">
+                        <img src="/src/assets/avataaars (1).svg" alt="Avatar icon" class="header__profile--icon">
+                        <span class="profile-name">LUFFY MONKEY</span>
+                    </a>
+                    
+                    <a href="#" class="header__button log-out" id="logout__btn">
+                        <img src="/src/assets/power-off-solid.svg" alt="Log out icon" class="header__button--img">
+                    </a>
+                </li>
+            </ul>
+        </nav>
+        
+        <div class="header__mobile-search">
+            <img src="/src/assets/search-icon.svg" alt="Search icon" class="search__icon">
+            <span>Open search panel</span>
+        </div>
+    `;
 
-const logoLink: HTMLAnchorElement = document.createElement('a');
-logoLink.href = '#';
-logoLink.classList.add('header__title');
+    header.innerHTML = headerContent;
 
-// Create logo title spans
-const titleSmall: HTMLElement = document.createElement('span');
-titleSmall.classList.add('header__title--small');
-titleSmall.textContent = 'LEVERX';
+    const updateProfileAvatar = async () => {
+        const userId = getCurrentUserId();
+        const profileButton = header.querySelector('#profile__button') as HTMLAnchorElement;
+        const avatarIcon = header.querySelector('.header__profile--icon') as HTMLImageElement;
+        const profileName = header.querySelector('.profile-name') as HTMLElement;
 
-const titleLarge: HTMLElement = document.createElement('span');
-titleLarge.classList.add('header__title--large');
-titleLarge.textContent = 'EMPLOYEE SERVICES';
+        if (userId) {
+            try {
+                const users = await fetchUsers();
+                const currentUser = users.find((user: any) => user._id === userId);
 
-// Append title spans to the logo link
-logoLink.appendChild(titleSmall);
-logoLink.appendChild(titleLarge);
+                if (currentUser) {
+                    avatarIcon.src = currentUser.user_avatar.replace('./', '/src/');
+                    profileName.textContent = `${currentUser.first_name} ${currentUser.last_name}`;
+                    profileButton.href = `/src/pages/user-details/user-details.html#/users/${currentUser._id}`;
+                }
+            } catch (error) {
+                console.error('Error updating profile:', error);
+                avatarIcon.src = '/src/assets/avataaars (1).svg';
+                profileName.textContent = 'LUFFY MONKEY';
+            }
+        }
+    };
 
-// Append the logo link to the logo list item
-logoItem.appendChild(logoLink);
+    window.addEventListener('hashchange', updateProfileAvatar);
+    updateProfileAvatar();
 
-// Create the Address Book tab list item
-const addressBookTab: HTMLElement = document.createElement('li');
-addressBookTab.classList.add('header__tab', 'header__active-tab');
-addressBookTab.tabIndex = 0;
-addressBookTab.textContent = 'Address Book';
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', () => {
+            document.body.insertBefore(header, document.body.firstChild);
+        });
+    } else {
+        document.body.insertBefore(header, document.body.firstChild);
+    }
+}
 
-// Create the profile actions list item
-const profileActionsItem: HTMLElement = document.createElement('li');
-profileActionsItem.classList.add('header__actions');
-profileActionsItem.id = 'profile__icon';
-
-// Create the support button
-const supportButton: HTMLAnchorElement = document.createElement('a');
-supportButton.href = '#';
-supportButton.classList.add('header__button');
-
-const supportIcon: HTMLImageElement = document.createElement('img');
-supportIcon.classList.add('header__button--img');
-supportIcon.src = './assets/question-mark.svg';
-supportIcon.alt = 'Support Icon';
-
-supportButton.appendChild(supportIcon);
-supportButton.appendChild(document.createTextNode('SUPPORT'));
-
-// Create the profile button
-const profileButton: HTMLAnchorElement = document.createElement('a');
-profileButton.href = './pages/user-details/user-details.html#/users/550e8400-e29b-41d4-a716-446655440000';
-profileButton.classList.add('header__button');
-profileButton.id = 'profile__button';
-
-const avatarIcon: HTMLImageElement = document.createElement('img');
-avatarIcon.src = './assets/avataaars (1).svg';
-avatarIcon.alt = 'Avatar icon';
-avatarIcon.classList.add('header__profile--icon');
-
-profileButton.appendChild(avatarIcon);
-profileButton.appendChild(document.createTextNode('LUFFY MONKEY'));
-
-// Create the logout button
-const logoutButton: HTMLAnchorElement = document.createElement('a');
-logoutButton.href = '#';
-logoutButton.classList.add('header__button', 'log-out');
-logoutButton.id = 'logout__btn';
-
-const logoutIcon: HTMLImageElement = document.createElement('img');
-logoutIcon.classList.add('header__button--img');
-logoutIcon.src = './assets/power-off-solid.svg';
-logoutIcon.alt = 'Log out icon';
-
-logoutButton.appendChild(logoutIcon);
-
-// Append items to the profile actions list item
-profileActionsItem.appendChild(supportButton);
-profileActionsItem.appendChild(profileButton);
-profileActionsItem.appendChild(logoutButton);
-
-// Append the elements to the nav list
-navList.appendChild(logoItem);
-navList.appendChild(addressBookTab);
-navList.appendChild(profileActionsItem);
-
-// Append nav elements to the nav
-nav.appendChild(burgerInput);
-nav.appendChild(burgerLabel);
-nav.appendChild(pageOverlay);
-nav.appendChild(navList);
-
-// Create the mobile search container
-const mobileSearch: HTMLElement = document.createElement('div');
-mobileSearch.classList.add('header__mobile-search');
-
-const searchIcon: HTMLImageElement = document.createElement('img');
-searchIcon.src = './assets/search-icon.svg';
-searchIcon.alt = 'Search icon';
-searchIcon.classList.add('search__icon');
-
-const searchText: HTMLElement = document.createElement('span');
-searchText.textContent = 'Open search panel';
-
-// Append search icon and text to the mobile search container
-mobileSearch.appendChild(searchIcon);
-mobileSearch.appendChild(searchText);
-
-// Append everything to the header
-header.appendChild(nav);
-header.appendChild(mobileSearch);
-
-// Append header to the body (or any other container)
-document.body.appendChild(header);
+createHeader();

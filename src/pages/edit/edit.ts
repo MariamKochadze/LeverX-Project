@@ -2,6 +2,7 @@ import { editUserCard } from '../../components/card/edit-user.card';
 import { request } from '../../helpers/fetch-polyfill';
 import { Role, User } from '../../models/user.model';
 import { isAuthenticareUser } from '../../shared/authenticate-user';
+import '../../components/header/header';
 
 const user: HTMLElement = document.querySelector('.setting__user-list')!;
 
