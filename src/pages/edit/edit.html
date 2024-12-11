@@ -6,70 +6,20 @@
         <title>LeverX Employee Services</title>
         <link rel="stylesheet" href="../../../dist/main.css" />
     </head>
-    <body>
-
-            <nav class="header__nav">
-                <input type="checkbox" id="burger-toggle" class="header__burger-input" />
-                <label for="burger-toggle" class="header__burger">
-                    <div class="header__burger-line"></div>
-                    <div class="header__burger-line"></div>
-                    <div class="header__burger-line"></div>
-                </label>
-                <div class="page-overlay"></div>
-                <ul class="header__nav-list">
-                    <li class="header__logo">
-                        <a href="#" class="header__title">
-                            <span class="header__title--small">LEVERX</span>
-                            <span class="header__title--large">EMPLOYEE SERVICES</span>
-                        </a>
-                    </li>
-                    <li class="header__tab header__active-tab" tabindex="0">Address Book</li>
-                    <li class="header__actions" id="profile__icon">
-                        <a href="#" class="header__button">
-                            <img
-                                class="header__button--img"
-                                src="../../assets/question-mark.svg"
-                                alt="Support Icon"
-                            />SUPPORT
-                        </a>
-                        <a
-                            href="./pages/user-details/user-details.html#/users/550e8400-e29b-41d4-a716-446655440000"
-                            class="header__button"
-                            id="profile__button"
-                        >
-                            <img src="../../assets/avataaars (1).svg" alt="Avatar icon" class="header__profile--icon" />
-                            LUFFY MONKEY</a
-                        >
-                        <a href="#" class="header__button log-out" id="logout__btn">
-                            <img
-                                class="header__button--img"
-                                src="../../assets/power-off-solid.svg"
-                                alt="Log out icon"
-                            />
-                        </a>
-                    </li>
-                </ul>
-            </nav>
-            <div class="header__mobile-search">
-                <img src="../../assets/search-icon.svg" alt="Search icon" class="search__icon" />
-                <span>Open search panel</span>
-            </div>
-        </header> -->
-        <main>
+    <body class="edit__body">
+        <main class="edit__main-container">
             <div class="setting__header">
-                <h1>ROLES & PERMISSION</h1>
+                <h1 class="setting__header-desc">ROLES & PERMISSION</h1>
             </div>
-            <div>
-                <div class="setting__search">
-                    <input type="text" placeholder="type to search" />
+            <div class="edit__desc">
+                <div class="input-container">
+                    <img class="search-icon" src="../../assets/search-icon.svg" alt="Search icon" />
+                    <input type="text" id="input__search" placeholder="Type to Search" />
                 </div>
-                <div class="setting-description">
-                    <p>Address book role</p>
-                    <p>Admin</p>
-                </div>
+
+                <div class="setting__user-list"></div>
             </div>
-            <div class="setting__user-list"></div>
         </main>
-        <script type="module" src="../../../dist/edit.bundle.js" ></script>
+        <script type="module" src="../../../dist/edit.bundle.js"></script>
     </body>
 </html>

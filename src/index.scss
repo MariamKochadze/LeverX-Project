@@ -7,6 +7,7 @@
 @use './styles/pages/users-list';
 @use './styles/pages/sign-in';
 @use './pages/user-details/user-detail';
+@use './pages/edit/edit.scss';
 
 // Layout
 @use './styles/layout/header';
@@ -16,3 +17,4 @@
 // Components
 @use './components/button/button';
 @use './components/search/search';
+@use './components/card/edit-user.card.scss';

@@ -73,7 +73,7 @@ export function createHeader(): void {
                 const user = await fetchUser(currentUser?.userId as string);
 
                 if (user) {
-                    avatarIcon.src = user.user_avatar.replace('./', '/src/assets');
+                    avatarIcon.src = user.user_avatar.replace('./assets/', '/src/assets/');
                     profileName.textContent = `${user.first_name} ${user.last_name}`;
                     profileButton.href = `/src/pages/user-details/user-details.html#/users/${user.id}`;
                 }
