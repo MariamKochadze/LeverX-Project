@@ -15,8 +15,9 @@ if (!currentUser || (currentUser.userRole !== Role.ADMIN && currentUser.userRole
 
 //fetch users
 export const fetchUsers = async (hrId?: string) => {
+    const url = hrId ? `http://localhost:3000/users/?manager.id=${hrId}` : `http://localhost:3000/users/`;
     try {
-        const response = await request<User[]>(`http://localhost:3000/users/?manager.id=${hrId}`, 'GET');
+        const response = await request<User[]>(url, 'GET');
         const userData = await response.json();
         console.log(userData);
         userData.forEach((user) => {
