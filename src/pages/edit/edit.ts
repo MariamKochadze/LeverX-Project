@@ -3,19 +3,20 @@ import { request } from '../../helpers/fetch-polyfill';
 import { Role, User } from '../../models/user.model';
 import { isAuthenticareUser } from '../../shared/authenticate-user';
 import '../../components/header/header';
+import { createHeader } from '../../components/header/header';
 
 const user: HTMLElement = document.querySelector('.setting__user-list')!;
 
 const currentUser = isAuthenticareUser();
 
-if (!currentUser || (currentUser.role !== Role.ADMIN && currentUser.role !== Role.HR)) {
+if (!currentUser || (currentUser.userRole !== Role.ADMIN && currentUser.userRole !== Role.HR)) {
     window.location.href = '/src/pages/sign-in/sign-in.html';
 }
 
 //fetch users
-export const fetchUsers = async () => {
+export const fetchUsers = async (hrId?: string) => {
     try {
-        const response = await request<User[]>('../../../users.json', 'GET');
+        const response = await request<User[]>(`http://localhost:3000/users/?manager.id=${hrId}`, 'GET');
         const userData = await response.json();
         console.log(userData);
         userData.forEach((user) => {
@@ -30,5 +31,11 @@ export const fetchUsers = async () => {
 };
 
 window.addEventListener('load', () => {
-    fetchUsers();
+    if (currentUser?.userRole === Role.ADMIN) {
+        fetchUsers();
+    } else if (currentUser?.userRole === Role.HR) {
+        fetchUsers(currentUser.userId);
+    }
+
+    createHeader();
 });

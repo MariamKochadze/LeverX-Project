@@ -4,9 +4,11 @@ import { User } from '../models/user.model';
 const API = 'https://www.toptal.com/developers/bcrypt/api';
 
 const findUser = async (email: string) => {
-    const response = await fetch('../../../users.json');
+    console.log(email);
+    const response = await fetch(`http://localhost:3000/users/?email=${email}`);
     const users = await response.json();
-    return users.find((user: User) => email.toLocaleLowerCase().trim() === user.email.toLocaleLowerCase());
+    console.log(users);
+    return users[0];
 };
 
 export const authenticateUser = async (email: string, password: string): Promise<boolean> => {
@@ -28,7 +30,7 @@ export const authenticateUser = async (email: string, password: string): Promise
 
         if (data.ok) {
             sessionStorage.setItem('authenticated', 'true');
-            sessionStorage.setItem('currentUser', JSON.stringify({ userRole: foundUser.role }));
+            sessionStorage.setItem('currentUser', JSON.stringify({ userRole: foundUser.role, userId: foundUser.id }));
             return true;
         }
 
@@ -74,7 +76,7 @@ export const registerUser = async (email: string, password: string): Promise<boo
     }
 };
 
-export const isAuthenticareUser = (): { role: Role } | undefined => {
+export const isAuthenticareUser = (): { userRole: Role; userId: string } | undefined => {
     const currentUser: string | null = sessionStorage.getItem('currentUser');
     try {
         return currentUser ? JSON.parse(currentUser) : undefined;

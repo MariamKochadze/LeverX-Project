@@ -4,6 +4,7 @@ import { User } from './models/user.model';
 import { authenticateUser, isAuthenticareUser, logOut } from './shared/authenticate-user';
 import './index.scss';
 import './components/header/header';
+import { createHeader } from './components/header/header';
 
 export type UserFormData = Partial<
     Pick<User, 'first_name' | 'last_name' | 'email' | 'phone' | 'skype' | 'building' | 'room' | 'department'>
@@ -22,7 +23,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const basicSearchBtn: HTMLElement = document.querySelector('#basic-options .search-btn')!;
     const advancedSearchForm: HTMLElement = document.querySelector('.advanced-search')!;
     const infoContainer: HTMLElement = document.querySelector('.info-container')!;
-    const logOutBtn: HTMLButtonElement = document.querySelector('#logout__btn')!;
     let usersData: User[] = [];
 
     // Check for search params on load
@@ -36,9 +36,10 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     };
 
-    logOutBtn.addEventListener('click', () => {
-        logOut();
-    });
+    //logOut btn
+    // logOutBtn.addEventListener('click', () => {
+    //     logOut();
+    // });
 
     // View toggle buttons
     type ToggleType = 'grid' | 'list';
@@ -86,8 +87,10 @@ document.addEventListener('DOMContentLoaded', () => {
     // Fetch users with XMLHttpRequest fallback
     const fetchUsers = async () => {
         try {
-            const response = await request<User[]>('../users.json', 'GET');
+            const response = await fetch(`http://localhost:3000/users`);
+
             usersData = await response.json();
+
             renderUsers(usersData, 'grid');
             updateUserCount(usersData.length);
 
@@ -107,7 +110,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const term = searchTerm.toLowerCase();
         const filteredUsers = usersData.filter((user) => {
             const fullName = `${user.first_name} ${user.last_name}`.toLowerCase();
-            const id = user._id.toLowerCase();
+            const id = user.id.toLowerCase();
             return fullName.includes(term) || id === term;
         });
 
@@ -199,7 +202,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 </div>`;
 
             card.addEventListener('click', () => {
-                window.location.href = `pages/user-details/user-details.html#/users/${user._id}`;
+                window.location.href = `pages/user-details/user-details.html#/users/${user.id}`;
             });
 
             container.appendChild(card);
@@ -233,5 +236,6 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     // Initialize
+    createHeader();
     fetchUsers();
 });

@@ -1,14 +1,19 @@
+import { Role } from '../../models/user.model';
+import { isAuthenticareUser, logOut } from '../../shared/authenticate-user';
+
 function getCurrentUserId(): string | undefined {
     const urlHash = window.location.hash;
     return urlHash ? urlHash.split('/').pop() : undefined;
 }
 
-async function fetchUsers() {
-    const response = await fetch('/users.json');
-    return response.json();
+async function fetchUser(id: string) {
+    const response = await fetch(`http://localhost:3000/users/${id}`);
+    return await response.json();
 }
 
-function createHeader(): void {
+const currentUser: { userRole: Role; userId: string } | undefined = isAuthenticareUser();
+
+export function createHeader(): void {
     const header = document.createElement('header');
     header.classList.add('header');
 
@@ -31,6 +36,8 @@ function createHeader(): void {
                 </li>
                 
                 <li class="header__tab header__active-tab" tabindex="0">Address Book</li>
+                <li class="header__tab header__active-tab edit-setting" id="edit-setting-id">
+                </li>
                 
                 <li class="header__actions" id="profile__icon">
                     <a href="#" class="header__button">
@@ -43,10 +50,6 @@ function createHeader(): void {
                        id="profile__button">
                         <img src="/src/assets/avataaars (1).svg" alt="Avatar icon" class="header__profile--icon">
                         <span class="profile-name">LUFFY MONKEY</span>
-                    </a>
-                    
-                    <a href="#" class="header__button log-out" id="logout__btn">
-                        <img src="/src/assets/power-off-solid.svg" alt="Log out icon" class="header__button--img">
                     </a>
                 </li>
             </ul>
@@ -61,20 +64,18 @@ function createHeader(): void {
     header.innerHTML = headerContent;
 
     const updateProfileAvatar = async () => {
-        const userId = getCurrentUserId();
         const profileButton = header.querySelector('#profile__button') as HTMLAnchorElement;
         const avatarIcon = header.querySelector('.header__profile--icon') as HTMLImageElement;
         const profileName = header.querySelector('.profile-name') as HTMLElement;
 
-        if (userId) {
+        if (currentUser?.userId) {
             try {
-                const users = await fetchUsers();
-                const currentUser = users.find((user: any) => user._id === userId);
+                const user = await fetchUser(currentUser?.userId as string);
 
-                if (currentUser) {
-                    avatarIcon.src = currentUser.user_avatar.replace('./', '/src/');
-                    profileName.textContent = `${currentUser.first_name} ${currentUser.last_name}`;
-                    profileButton.href = `/src/pages/user-details/user-details.html#/users/${currentUser._id}`;
+                if (user) {
+                    avatarIcon.src = user.user_avatar.replace('./', '/src/assets');
+                    profileName.textContent = `${user.first_name} ${user.last_name}`;
+                    profileButton.href = `/src/pages/user-details/user-details.html#/users/${user.id}`;
                 }
             } catch (error) {
                 console.error('Error updating profile:', error);
@@ -87,13 +88,39 @@ function createHeader(): void {
     window.addEventListener('hashchange', updateProfileAvatar);
     updateProfileAvatar();
 
-    if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', () => {
-            document.body.insertBefore(header, document.body.firstChild);
-        });
-    } else {
+    document.addEventListener('DOMContentLoaded', () => {
         document.body.insertBefore(header, document.body.firstChild);
-    }
-}
+    });
 
+    // settings
+    const aElement = document.createElement('a')!;
+    aElement.innerText = 'Settings';
+    aElement.href = '/src/pages/edit/edit.html';
+    const settingList = document.getElementById('edit-setting-id')!;
+
+    if (currentUser?.userRole === Role.ADMIN || currentUser?.userRole === Role.HR) {
+        settingList?.appendChild(aElement);
+    }
+
+    //logOut btn
+    const logOutLiEl = document.getElementById('profile__icon');
+
+    const logOutBtn: HTMLAnchorElement = document.createElement('a')!;
+    logOutBtn.href = '#';
+    logOutBtn.className = 'header__button log-out';
+    logOutBtn.id = 'logout__btn';
+
+    const logOutImg: HTMLImageElement = document.createElement('img')!;
+    logOutImg.classList.add('header__button--img');
+    logOutImg.alt = 'Log out icon';
+    logOutImg.src = '/src/assets/power-off-solid.svg';
+
+    logOutBtn.appendChild(logOutImg);
+
+    logOutBtn.addEventListener('click', () => {
+        logOut();
+    });
+
+    logOutLiEl?.appendChild(logOutBtn);
+}
 createHeader();

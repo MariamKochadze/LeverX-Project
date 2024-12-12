@@ -96,6 +96,11 @@ $headerOverlyBackgroundClr: rgba(0, 0, 0, 0.5);
         color: vars.$white;
     }
 
+    .edit-setting-id {
+        text-decoration: none;
+        color: vars.$white;
+    }
+
     .header__button.log-out {
         border-radius: 50%;
         padding: 10px;

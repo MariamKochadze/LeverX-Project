@@ -67,7 +67,7 @@
             }
         ],
         "role": 2,
-        "password": "$2b$06$0/KUv91wikR7DHUptDxDJOgHwsp3ozhUFy2WIiJY0yzGHuYnCA.l."
+        "password": "$2b$05$ghQd2vSs1eWEQmgHMRSwwO/rWvOHMVNwKTUgjTzxlm9/uM2aIjUOO"
     },
     {
         "_id": "750e8400-e29b-41d4-a716-446655440002",
@@ -102,7 +102,7 @@
             }
         ],
         "role": 1,
-        "password": "$2b$05$YLr7XUu6eKSOuwqkOEsXNe/lFPdGjeQaQa521XR2r42kANAnqUTJS"
+        "password": "$2b$05$ghQd2vSs1eWEQmgHMRSwwO/rWvOHMVNwKTUgjTzxlm9/uM2aIjUOO"
     },
     {
         "_id": "850e8400-e29b-41d4-a716-446655440003",
@@ -137,7 +137,7 @@
             }
         ],
         "role": 3,
-        "password": "$2b$08$tD6QjRicaAJ8cFeRQtnyFuh7ydevRvmN.jy4suXVJi5ulaAtWw.xS"
+        "password": "$2b$05$ghQd2vSs1eWEQmgHMRSwwO/rWvOHMVNwKTUgjTzxlm9/uM2aIjUOO"
     },
     {
         "_id": "950e8400-e29b-41d4-a716-446655440004",
@@ -172,7 +172,7 @@
             }
         ],
         "role": 2,
-        "password": "$2b$09$LWjdm2FIs0dG22pTHxEm5OL2NhIji5Kkv.rHgtgtFW7HP6XvWvmFC"
+        "password": "$2b$05$ghQd2vSs1eWEQmgHMRSwwO/rWvOHMVNwKTUgjTzxlm9/uM2aIjUOO"
     },
     {
         "_id": "a50e8400-e29b-41d4-a716-446655440005",
@@ -207,7 +207,7 @@
             }
         ],
         "role": 1,
-        "password": "$2b$07$laN7B6.YXwpWwuDgi4T/Oeu.bugEI8xe15OE0wV9x7Jc9mSGlOxSu"
+        "password": "$2b$05$ghQd2vSs1eWEQmgHMRSwwO/rWvOHMVNwKTUgjTzxlm9/uM2aIjUOO"
     },
     {
         "_id": "b50e8400-e29b-41d4-a716-446655440006",
@@ -242,7 +242,7 @@
             }
         ],
         "role": 1,
-        "password": "$2b$05$Nat01v78poH9hy/KF.D62e/Au5kb/wrkonQ2RuMZ0VKwbr1X4r2BG"
+        "password": "$2b$05$ghQd2vSs1eWEQmgHMRSwwO/rWvOHMVNwKTUgjTzxlm9/uM2aIjUOO"
     },
     {
         "_id": "c50e8400-e29b-41d4-a716-446655440007",
@@ -277,7 +277,7 @@
             }
         ],
         "role": 2,
-        "password": "$2b$06$W7vXjZHEnZiRDkeETSnsvOe/AhhODgCjY0yLZuIzukfGc1zfjhBAu"
+        "password": "$2b$05$ghQd2vSs1eWEQmgHMRSwwO/rWvOHMVNwKTUgjTzxlm9/uM2aIjUOO"
     },
     {
         "_id": "d50e8400-e29b-41d4-a716-446655440008",
@@ -312,6 +312,6 @@
             }
         ],
         "role": 3,
-        "password": "$2b$08$tkUM7eYcLRLO38gyHYY9Kewavo9L6kEXUx2pDIiV7V6Klg/mnM3Ym"
+        "password": "$2b$05$ghQd2vSs1eWEQmgHMRSwwO/rWvOHMVNwKTUgjTzxlm9/uM2aIjUOO"
     }
 ]
