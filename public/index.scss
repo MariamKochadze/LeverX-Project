@@ -1,0 +1,20 @@
+// Variables and Base
+@use '../src/styles/variables.scss';
+@use '../src/styles/base.scss';
+
+// Pages
+@use '../src/styles/pages/notFound.scss';
+@use '../src/styles/pages/users-list';
+@use '../src/pages/signIn/signIn.scss';
+@use '../src/pages/userDetails/userDetails.scss';
+@use '../src/pages/edit/edit.scss';
+
+// Layout
+@use '../src/styles/layout/header.scss';
+@use '../src/styles/layout/main.scss';
+@use '../src/styles/layout/footer.scss';
+
+// Components
+@use '../src/components/button/button.scss';
+@use '../src/styles/search.scss';
+@use '../src/components/card/editUserCard.scss';

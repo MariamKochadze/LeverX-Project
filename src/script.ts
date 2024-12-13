@@ -2,7 +2,7 @@ import { search } from './helpers/advanced-search';
 import { request } from './helpers/fetch-polyfill';
 import { User } from './models/user.model';
 import { authenticateUser, isAuthenticareUser, logOut } from './shared/authenticate-user';
-import './index.scss';
+import '../public/index.scss';
 import './components/header/header';
 import { createHeader } from './components/header/header';
 
