@@ -5,9 +5,9 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 module.exports = {
     mode: 'development',
     entry: {
-        main: './src/pages/users/usersPage.tsx', // Change this back to your main TSX entry
+        main: './src/index.tsx',
         userDetails: './src/pages/userDetails/userDetails.tsx',
-        signIn: './src/pages/signIn/signIn.tsx',
+        signIn: './src/pages/signIn/signInPage.tsx',
         edit: './src/pages/edit/edit.tsx',
     },
     output: {
@@ -52,14 +52,11 @@ module.exports = {
             {
                 test: /\.(png|jpe?g|gif|svg)$/i,
                 type: 'asset/resource',
-                generator: {
-                    filename: 'assets/[name][ext]',
-                },
             },
         ],
     },
     resolve: {
-        extensions: ['.tsx', '.ts', '.js', '.jsx', '.scss'],
+        extensions: ['.tsx', '.ts', '.js', '.jsx', '.scss', '.svg'],
         alias: {
             '@assets': path.resolve(__dirname, 'src/assets'),
             '@components': path.resolve(__dirname, 'src/components'),
@@ -68,8 +65,10 @@ module.exports = {
     },
     plugins: [
         new HtmlWebpackPlugin({
-            template: './src/index.html',
+            template: 'public/index.html',
             filename: 'index.html',
+            chunks: ['main', 'userDetails', 'signIn', 'edit'],
+            inject: true,
         }),
         new MiniCssExtractPlugin({
             filename: '[name].css',
@@ -81,6 +80,6 @@ module.exports = {
         },
         hot: true,
         historyApiFallback: true,
-        port: 3000,
+        port: 3001,
     },
 };

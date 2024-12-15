@@ -1,22 +1,28 @@
 import React, { useEffect, useState } from 'react';
-
-import { isAuthenticareUser } from '../../shared/authenticate-user';
-import { createHeader } from '../../components/header/header';
 import './userDetails.scss';
 import { Role, User } from '../../models/user.model';
+import { Header } from '../../components/header/header';
+import { isAuthenticatedUser } from '../../shared/authenticateUser';
+import { useNavigate, useParams } from 'react-router-dom';
 
 const UserDetails: React.FC = () => {
     const [userData, setUserData] = useState<User>();
     const [isEditMode, setIsEditMode] = useState(false);
-    const currentUser = isAuthenticareUser();
+    const [currentUser, setCurrentUser] = useState<{ userRole: Role; userId: string } | undefined>(undefined);
+    const navigate = useNavigate();
+    const params = useParams();
 
-    if (!currentUser) {
-        window.location.href = '/src/pages/sign-in/sign-in.html';
-    }
+    useEffect(() => {
+        setCurrentUser(isAuthenticatedUser());
+        if (!currentUser) {
+            navigate('/signin');
+            return;
+        }
+    }, [navigate, currentUser]);
 
     const getUserId = (): string | undefined => {
-        const urlHash = window.location.hash;
-        return urlHash.split('/').pop();
+        console.log(params.id);
+        return params.id;
     };
 
     const fetchUserById = async (userId: string): Promise<User | undefined> => {
@@ -109,7 +115,6 @@ const UserDetails: React.FC = () => {
         };
 
         loadUserData();
-        createHeader();
     }, []);
 
     if (!userData) {
@@ -118,6 +123,7 @@ const UserDetails: React.FC = () => {
 
     return (
         <div className="main-container">
+            <Header currentUser={currentUser} />
             {/* User Details Section */}
             <section className="user__details-section">
                 <div className="user__details-container">

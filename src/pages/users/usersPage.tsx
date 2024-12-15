@@ -1,8 +1,109 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import { useNavigate, useSearchParams } from 'react-router-dom';
+import '../../../public/index.scss';
+import { User, UserFormData } from '../../models/user.model';
+import { isAuthenticatedUser } from '../../shared/authenticateUser';
+import { search } from '../../helpers/advanced-search';
+import { Header } from '../../components/header/header';
 
-const UsersPage = () => {
+const UsersPage: React.FC = () => {
+    const navigate = useNavigate();
+    const [searchParams, setSearchParams] = useSearchParams();
+    const [usersData, setUsersData] = useState<User[]>([]);
+    const [filteredUsers, setFilteredUsers] = useState<User[]>([]);
+    const [viewType, setViewType] = useState<'grid' | 'list'>('grid');
+
+    useEffect(() => {
+        if (!isAuthenticatedUser()) {
+            navigate('/signin');
+            return;
+        }
+        fetchUsers();
+    }, [navigate]);
+
+    const fetchUsers = async () => {
+        try {
+            const response = await fetch('http://localhost:3000/users');
+            const data = await response.json();
+            setUsersData(data);
+            console.log(data);
+            setFilteredUsers(data);
+
+            const searchQuery = searchParams.get('search');
+            if (searchQuery) {
+                basicSearch(searchQuery);
+            }
+        } catch (error) {
+            console.error('Error fetching users:', error);
+        }
+    };
+
+    const basicSearch = (searchTerm: string) => {
+        const term = searchTerm.toLowerCase();
+        const filtered = usersData.filter((user) => {
+            const fullName = `${user.first_name} ${user.last_name}`.toLowerCase();
+            const id = user.id.toLowerCase();
+            return fullName.includes(term) || id === term;
+        });
+        setFilteredUsers(filtered);
+        setSearchParams({ search: searchTerm });
+    };
+
+    const advancedSearch = (formData: UserFormData) => {
+        const filtered = search(formData, usersData);
+        setFilteredUsers(filtered);
+
+        const params = new URLSearchParams(searchParams);
+        Object.entries(formData).forEach(([key, value]) => {
+            if (value) params.set(key, value);
+        });
+        setSearchParams(params);
+    };
+
+    const UserCard: React.FC<{ user: User }> = ({ user }) => (
+        <div className="card" onClick={() => navigate(`/users/${user.id}`)}>
+            <div className="card-header">
+                <div className="avatar-container">
+                    <img src={user.user_avatar || '../../assets/avataars(1).svg'} alt={`${user.first_name}'s Avatar`} className="avatar" />
+                </div>
+                <div className="user-info">
+                    <h3 className="name">{`${user.first_name} ${user.last_name}`}</h3>
+                </div>
+            </div>
+            <hr className="divider" />
+            <div className="details">
+                <div className="detail-row">
+                    <img src="../../assets/working-icon.svg" alt="Department Icon" className="info-icon" />
+                    <span className="detail-text">{user.department}</span>
+                </div>
+                <div className="detail-row">
+                    <img src="../../assets/note-icon.svg" alt="Room Icon" className="info-icon" />
+                    <span className="detail-text">{user.room}</span>
+                </div>
+            </div>
+        </div>
+    );
+
+    const ViewToggle: React.FC = () => (
+        <div className="view-options">
+            <button
+                className={`view-toggle ${viewType === 'grid' ? 'active' : ''}`}
+                onClick={() => setViewType('grid')}
+            >
+                <img src="/assets/grid-icon.svg" alt="Grid View Icon" className="view-icon" />
+            </button>
+            <button
+                className={`view-toggle ${viewType === 'list' ? 'active' : ''}`}
+                onClick={() => setViewType('list')}
+            >
+                <img src="/assets/list-icon.svg" alt="List View Icon" className="view-icon" />
+            </button>
+        </div>
+    );
+
     return (
         <div>
+            <Header />
             <main className="main">
                 <aside className="main__search">
                     <input type="radio" id="basic-search" name="search-type" defaultChecked />
@@ -16,42 +117,51 @@ const UsersPage = () => {
                         </label>
                     </div>
                     <div className="search-body">
-                        {/* Basic Search */}
                         <div className="search-options" id="basic-options">
                             <div className="basic-search">
                                 <div className="input-container">
-                                    <img className="search-icon" src="./assets/search-icon.svg" alt="Search icon" />
-                                    <input type="text" id="basic-input" placeholder="John Smith" />
+                                    <img className="search-icon" src="../../assets/search-icon.svg" alt="Search icon" />
+                                    <input
+                                        type="text"
+                                        id="basic-input"
+                                        placeholder="John Smith"
+                                        onChange={(e) => basicSearch(e.target.value)}
+                                    />
                                     <button type="button" className="search-btn">
                                         SEARCH
                                     </button>
                                 </div>
                             </div>
                         </div>
-
-                        {/* Advanced Search */}
                         <div className="search-options" id="advanced-options">
-                            <form className="advanced-search">
+                            <form
+                                className="advanced-search"
+                                onSubmit={(e) => {
+                                    e.preventDefault();
+                                    const formData = new FormData(e.currentTarget);
+                                    advancedSearch(Object.fromEntries(formData));
+                                }}
+                            >
                                 <div className="input-container">
                                     <label htmlFor="name">Name</label>
-                                    <input type="text" id="name" placeholder="John Smith" />
+                                    <input type="text" id="name" name="name" placeholder="John Smith" />
                                 </div>
                                 <div className="input-container">
                                     <label htmlFor="email">Email</label>
-                                    <input type="email" id="email" placeholder="john.smith@leverex.com" />
+                                    <input type="email" id="email" name="email" placeholder="john.smith@leverex.com" />
                                 </div>
                                 <div className="input-container half-width">
                                     <label htmlFor="phone">Phone</label>
-                                    <input type="text" id="phone" placeholder="Phone number" />
+                                    <input type="text" id="phone" name="phone" placeholder="Phone number" />
                                 </div>
                                 <div className="input-container half-width">
                                     <label htmlFor="skype">Skype</label>
-                                    <input type="text" id="skype" placeholder="SkypeID" />
+                                    <input type="text" id="skype" name="skype" placeholder="SkypeID" />
                                 </div>
                                 <div className="input-container building-room">
                                     <div className="building">
                                         <label htmlFor="building">Building</label>
-                                        <select id="building">
+                                        <select id="building" name="building">
                                             <option value="any">Any</option>
                                             <option value="building1">Pilsudskiego 69 (Poland)</option>
                                             <option value="building2">Pilsudskiego 68 (Poland)</option>
@@ -66,7 +176,7 @@ const UsersPage = () => {
                                     </div>
                                     <div className="room">
                                         <label htmlFor="room">Room</label>
-                                        <select id="room">
+                                        <select id="room" name="room">
                                             <option value="any">Any</option>
                                             <option value="room1">1404</option>
                                             <option value="room2">1405</option>
@@ -82,7 +192,7 @@ const UsersPage = () => {
                                 </div>
                                 <div className="input-container">
                                     <label htmlFor="department">Department</label>
-                                    <select id="department">
+                                    <select id="department" name="department">
                                         <option value="any">Any</option>
                                         <option value="dept">Web & Mobile</option>
                                     </select>
@@ -99,29 +209,35 @@ const UsersPage = () => {
                 <section className="main__users">
                     <div className="users--header">
                         <div className="users-count-container">
-                            <span className="users-count">0 employees displayed</span>
-                            <div className="view-options"></div>
+                            <span className="users-count">{filteredUsers.length} employees displayed</span>
+                            <ViewToggle />
                         </div>
                         <div className="info-container">
                             <p>
-                                <img src="./assets/photo-icon.svg" alt="photo icon" />
+                                <img src="../../assets/photo-icon.svg" alt="photo icon" />
                                 Photo
                             </p>
                             <p>
-                                <img src="./assets/name-icon.svg" alt="name icon" />
+                                <img src="../../assets/name-icon.svg" alt="name icon" />
                                 Name
                             </p>
                             <p>
-                                <img src="./assets/working-icon.svg" alt="working icon" />
+                                <img src="../../assets/working-icon.svg" alt="working icon" />
                                 Department
                             </p>
                             <p>
-                                <img src="./assets/note-icon.svg" alt="room icon" />
+                                <img src="../../assets/note-icon.svg" alt="room icon" />
                                 Room
                             </p>
                         </div>
                     </div>
-                    <div className="users-body"></div>
+                    <div className="users-body">
+                        <div className={`users-view ${viewType}-view`}>
+                            {filteredUsers.map((user) => (
+                                <UserCard key={user.id} user={user} />
+                            ))}
+                        </div>
+                    </div>
                 </section>
             </main>
         </div>

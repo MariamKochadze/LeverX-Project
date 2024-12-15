@@ -82,3 +82,13 @@ export interface EditableData {
     skype: string;
     cnumber: string;
 }
+
+export interface UserFormData {
+    name?: string;
+    email?: string;
+    phone?: string;
+    skype?: string;
+    building?: string;
+    room?: string;
+    department?: string;
+}

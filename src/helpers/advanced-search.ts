@@ -1,5 +1,4 @@
-import { User } from '../models/user.model';
-import { UserFormData } from '../script';
+import { User, UserFormData } from '../models/user.model';
 
 export const search = (formData: UserFormData, users: User[]) => {
     const filledFields = Object.entries(formData);
