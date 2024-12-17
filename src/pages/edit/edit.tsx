@@ -1,15 +1,20 @@
-import React, { useEffect } from 'react';
-import { editUserCard } from '../../components/card/editUserCard';
+import React, { useEffect, useState } from 'react';
+
 import { Role, User } from '../../models/user.model';
 import { Header } from '../../components/header/header';
 import { isAuthenticatedUser } from '../../shared/authenticateUser';
 import { request } from '../../helpers/fetch-polyfill';
+import searchIcon from '@assets/search-icon.svg';
+import { useNavigate } from 'react-router-dom';
+import { EditUserCard } from '../../components/card/editUserCard';
 
 const Edit: React.FC = () => {
     const currentUser = isAuthenticatedUser();
+    const navigate = useNavigate();
+    const [users, setUsers] = useState<User[]>([]);
 
     if (!currentUser || (currentUser.userRole !== Role.ADMIN && currentUser.userRole !== Role.HR)) {
-        window.location.href = '/src/pages/sign-in/sign-in.html';
+        navigate('/signin');
     }
 
     const fetchUsers = async (hrId?: string) => {
@@ -17,16 +22,7 @@ const Edit: React.FC = () => {
 
         try {
             const userData = await request<User[]>(url, 'GET');
-            console.log(userData);
-
-            userData.forEach((user) => {
-                editUserCard({
-                    name: user.first_name,
-                    surname: user.last_name,
-                    img: { src: user.user_avatar, alt: 'user avatar' },
-                    role: user.role,
-                });
-            });
+            setUsers(userData);
         } catch (error) {
             console.error('Error fetching users:', (error as Error).message);
         }
@@ -50,15 +46,26 @@ const Edit: React.FC = () => {
                     </div>
                     <div className="edit__desc">
                         <div className="input-container">
-                            <img className="search-icon" src="../../assets/search-icon.svg" alt="Search icon" />
+                            <img className="search-icon" src={searchIcon} alt="Search icon" />
                             <input type="text" id="input__search" placeholder="Type to Search" />
                         </div>
-                        <div className="setting__user-list"></div>
+                        <div className="setting__user-list">
+                            {users.map((user) => (
+                                <EditUserCard
+                                    key={user.id}
+                                    first_name={user.first_name}
+                                    last_name={user.last_name}
+                                    user_avatar={user.user_avatar}
+                                    role={user.role}
+                                />
+                            ))}
+                        </div>
                     </div>
                 </main>
             </div>
         </>
     );
 };
+
 
 export default Edit;

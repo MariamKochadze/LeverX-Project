@@ -5,6 +5,13 @@ import { User, UserFormData } from '../../models/user.model';
 import { isAuthenticatedUser } from '../../shared/authenticateUser';
 import { search } from '../../helpers/advanced-search';
 import { Header } from '../../components/header/header';
+import workingIcon from '@assets/working-icon.svg';
+import noteIcon from '@assets/note-icon.svg';
+import gridIcon from '@assets/grid-icon.svg';
+import listIcon from '@assets/list-icon.svg';
+import serachicon from '@assets/search-icon.svg';
+import nameIcon from '@assets/name-icon.svg';
+import photoIcon from '@assets/photo-icon.svg';
 
 const UsersPage: React.FC = () => {
     const navigate = useNavigate();
@@ -12,6 +19,7 @@ const UsersPage: React.FC = () => {
     const [usersData, setUsersData] = useState<User[]>([]);
     const [filteredUsers, setFilteredUsers] = useState<User[]>([]);
     const [viewType, setViewType] = useState<'grid' | 'list'>('grid');
+    const [searchInputValue, setSearchInputValue] = useState('');
 
     useEffect(() => {
         if (!isAuthenticatedUser()) {
@@ -38,6 +46,27 @@ const UsersPage: React.FC = () => {
         }
     };
 
+    //search
+    const handleBasicSearch = () => {
+        const term = searchInputValue.toLowerCase();
+        const filtered = usersData.filter((user) => {
+            const fullName = `${user.first_name} ${user.last_name}`.toLowerCase();
+            const id = user.id.toLowerCase();
+            return fullName.includes(term) || id === term;
+        });
+
+        setFilteredUsers(filtered);
+        setSearchParams({ search: searchInputValue });
+
+        if (filtered.length === 0) {
+            navigate('/notFound', {
+                state: {
+                    reason: `No users found matching "${searchInputValue}"`,
+                },
+            });
+        }
+    };
+
     const basicSearch = (searchTerm: string) => {
         const term = searchTerm.toLowerCase();
         const filtered = usersData.filter((user) => {
@@ -58,31 +87,47 @@ const UsersPage: React.FC = () => {
             if (value) params.set(key, value);
         });
         setSearchParams(params);
+        if (filtered.length === 0) {
+            navigate('/notFound', {
+                state: {
+                    reason: `No users found `,
+                },
+            });
+        }
     };
 
-    const UserCard: React.FC<{ user: User }> = ({ user }) => (
-        <div className="card" onClick={() => navigate(`/users/${user.id}`)}>
-            <div className="card-header">
-                <div className="avatar-container">
-                    <img src={user.user_avatar || '../../assets/avataars(1).svg'} alt={`${user.first_name}'s Avatar`} className="avatar" />
+    const UserCard: React.FC<{ user: User }> = ({ user }) => {
+        const navigate = useNavigate();
+        const avatarSrc = require(`@assets/${user.user_avatar.split('/').pop()}`);
+
+        const handleCardClick = (userId: string) => {
+            navigate(`/user-details/${userId}`);
+        };
+
+        return (
+            <div className="card" onClick={() => handleCardClick(user.id)}>
+                <div className="card-header">
+                    <div className="avatar-container">
+                        <img src={avatarSrc} alt={`${user.first_name}'s Avatar`} className="avatar" />
+                    </div>
+                    <div className="user-info">
+                        <h3 className="name">{`${user.first_name} ${user.last_name}`}</h3>
+                    </div>
                 </div>
-                <div className="user-info">
-                    <h3 className="name">{`${user.first_name} ${user.last_name}`}</h3>
+                <hr className="divider" />
+                <div className="details">
+                    <div className="detail-row">
+                        <img src={workingIcon} alt="Department Icon" className="info-icon" />
+                        <span className="detail-text">{user.department}</span>
+                    </div>
+                    <div className="detail-row">
+                        <img src={noteIcon} alt="Room Icon" className="info-icon" />
+                        <span className="detail-text">{user.room}</span>
+                    </div>
                 </div>
             </div>
-            <hr className="divider" />
-            <div className="details">
-                <div className="detail-row">
-                    <img src="../../assets/working-icon.svg" alt="Department Icon" className="info-icon" />
-                    <span className="detail-text">{user.department}</span>
-                </div>
-                <div className="detail-row">
-                    <img src="../../assets/note-icon.svg" alt="Room Icon" className="info-icon" />
-                    <span className="detail-text">{user.room}</span>
-                </div>
-            </div>
-        </div>
-    );
+        );
+    };
 
     const ViewToggle: React.FC = () => (
         <div className="view-options">
@@ -90,13 +135,13 @@ const UsersPage: React.FC = () => {
                 className={`view-toggle ${viewType === 'grid' ? 'active' : ''}`}
                 onClick={() => setViewType('grid')}
             >
-                <img src="/assets/grid-icon.svg" alt="Grid View Icon" className="view-icon" />
+                <img src={gridIcon} alt="Grid View Icon" className="view-icon" />
             </button>
             <button
                 className={`view-toggle ${viewType === 'list' ? 'active' : ''}`}
                 onClick={() => setViewType('list')}
             >
-                <img src="/assets/list-icon.svg" alt="List View Icon" className="view-icon" />
+                <img src={listIcon} alt="List View Icon" className="view-icon" />
             </button>
         </div>
     );
@@ -120,14 +165,15 @@ const UsersPage: React.FC = () => {
                         <div className="search-options" id="basic-options">
                             <div className="basic-search">
                                 <div className="input-container">
-                                    <img className="search-icon" src="../../assets/search-icon.svg" alt="Search icon" />
+                                    <img className="search-icon" src={serachicon} alt="Search icon" />
                                     <input
                                         type="text"
                                         id="basic-input"
                                         placeholder="John Smith"
-                                        onChange={(e) => basicSearch(e.target.value)}
+                                        value={searchInputValue}
+                                        onChange={(e) => setSearchInputValue(e.target.value)}
                                     />
-                                    <button type="button" className="search-btn">
+                                    <button type="button" className="search-btn" onClick={handleBasicSearch}>
                                         SEARCH
                                     </button>
                                 </div>
@@ -214,19 +260,19 @@ const UsersPage: React.FC = () => {
                         </div>
                         <div className="info-container">
                             <p>
-                                <img src="../../assets/photo-icon.svg" alt="photo icon" />
+                                <img src={photoIcon} alt="photo icon" />
                                 Photo
                             </p>
                             <p>
-                                <img src="../../assets/name-icon.svg" alt="name icon" />
+                                <img src={nameIcon} alt="name icon" />
                                 Name
                             </p>
                             <p>
-                                <img src="../../assets/working-icon.svg" alt="working icon" />
+                                <img src={workingIcon} alt="working icon" />
                                 Department
                             </p>
                             <p>
-                                <img src="../../assets/note-icon.svg" alt="room icon" />
+                                <img src={noteIcon} alt="room icon" />
                                 Room
                             </p>
                         </div>

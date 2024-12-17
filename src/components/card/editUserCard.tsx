@@ -1,31 +1,25 @@
-import { EditUser, Role } from './../../models/user.model';
+import React from 'react';
+import { Role } from '../../models/user.model';
 
-const userList = document.querySelector('.setting__user-list');
 
-export const editUserCard = (userData: EditUser) => {
-    const card = document.createElement('div');
-    card.classList.add('edit-user-card');
+interface EditUserCardProps {
+    first_name: string;
+    last_name: string;
+    user_avatar: string;
+    role: Role;
+}
 
-    const image = document.createElement('img');
-    image.classList.add('edit-user-img');
-    image.src = userData.img.src.replace('./assets/', '/src/assets/');
-    image.alt = userData.img.alt;
+export const EditUserCard: React.FC<EditUserCardProps> = ({ first_name, last_name, user_avatar, role }) => {
 
-    const userInfo = document.createElement('div');
-    userInfo.classList.add('user-info');
-
-    const fullName = document.createElement('span');
-    fullName.textContent = `${userData.name} ${userData.surname}`;
-    fullName.classList.add('user-fullname');
-
-    const role = document.createElement('span');
-    role.classList.add('edit-user-role');
-    role.classList.add(`role-${Role[userData.role].toLowerCase()}`);
-    role.textContent = Role[userData.role];
-    userInfo.appendChild(fullName);
-    card.appendChild(image);
-    card.appendChild(userInfo);
-    card.appendChild(role);
-
-    userList?.appendChild(card);
+    const avatarSrc = require(`@assets/${user_avatar.split('/').pop()}`);
+    
+    return (
+        <div className="edit-user-card">
+            <img className="edit-user-img" src={avatarSrc} alt="user avatar" />
+            <div className="user-info">
+                <span className="user-fullname">{`${first_name} ${last_name}`}</span>
+            </div>
+            <span className={`edit-user-role role-${Role[role].toLowerCase()}`}>{Role[role]}</span>
+        </div>
+    );
 };

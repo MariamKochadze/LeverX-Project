@@ -2,7 +2,7 @@
     {
         "_id": "550e8400-e29b-41d4-a716-446655440000",
         "isRemoteWork": true,
-        "user_avatar": "./assets/avataaars (1).svg",
+        "user_avatar": "src/assets/avataaars (1).svg",
         "first_name": "Luffy",
         "last_name": "Monkey",
         "first_native_name": "Luffy",
@@ -37,7 +37,7 @@
     {
         "_id": "650e8400-e29b-41d4-a716-446655440001",
         "isRemoteWork": false,
-        "user_avatar": "./assets/avataaars (2).svg",
+        "user_avatar": "src/assets/avataaars (2).svg",
         "first_name": "Andrew",
         "last_name": "Savage",
         "first_native_name": "Andrew",
@@ -72,7 +72,7 @@
     {
         "_id": "750e8400-e29b-41d4-a716-446655440002",
         "isRemoteWork": true,
-        "user_avatar": "./assets/avataaars (3).svg",
+        "user_avatar": "src/assets/avataaars (3).svg",
         "first_name": "Lula",
         "last_name": "Aguilar",
         "first_native_name": "Lula",
@@ -107,7 +107,7 @@
     {
         "_id": "850e8400-e29b-41d4-a716-446655440003",
         "isRemoteWork": true,
-        "user_avatar": "./assets/avataaars (4).svg",
+        "user_avatar": "src/assets/avataaars (4).svg",
         "first_name": "Fintan",
         "last_name": "Cruz",
         "first_native_name": "Fintan",
@@ -142,7 +142,7 @@
     {
         "_id": "950e8400-e29b-41d4-a716-446655440004",
         "isRemoteWork": false,
-        "user_avatar": "./assets/avataaars (5).svg",
+        "user_avatar": "src/assets/avataaars (5).svg",
         "first_name": "Suzanne",
         "last_name": "Taylor",
         "first_native_name": "Suzanne",
@@ -177,7 +177,7 @@
     {
         "_id": "a50e8400-e29b-41d4-a716-446655440005",
         "isRemoteWork": true,
-        "user_avatar": "./assets/avataaars (6).svg",
+        "user_avatar": "src/assets/avataaars (6).svg",
         "first_name": "Francesco",
         "last_name": "Reed",
         "first_native_name": "Francesco",
@@ -212,7 +212,7 @@
     {
         "_id": "b50e8400-e29b-41d4-a716-446655440006",
         "isRemoteWork": false,
-        "user_avatar": "./assets/avataaars (7).svg",
+        "user_avatar": "src/assets/avataaars (7).svg",
         "first_name": "Arman",
         "last_name": "Eaton",
         "first_native_name": "Arman",
@@ -247,7 +247,7 @@
     {
         "_id": "c50e8400-e29b-41d4-a716-446655440007",
         "isRemoteWork": true,
-        "user_avatar": "./assets/avataaars (8).svg",
+        "user_avatar": "src/assets/avataaars (8).svg",
         "first_name": "Valeria",
         "last_name": "Wells",
         "first_native_name": "Valeria",
@@ -282,7 +282,7 @@
     {
         "_id": "d50e8400-e29b-41d4-a716-446655440008",
         "isRemoteWork": false,
-        "user_avatar": "./assets/avataaars (9).svg",
+        "user_avatar": "src/assets/avataaars (9).svg",
         "first_name": "Denis",
         "last_name": "Clark",
         "first_native_name": "Denis",

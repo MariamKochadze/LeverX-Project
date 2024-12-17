@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { Role, User } from '../../models/user.model';
 import { isAuthenticatedUser, logOut } from '../../shared/authenticateUser';
 import '../../../public/index.scss';
-import questionMarkIcon from '../../assets/question-mark.svg';
-import avatarIcon from '../../assets/avataaars (1).svg';
-import powerOffIcon from '../../assets/power-off-solid.svg';
-import searchIcon from '../../assets/search-icon.svg';
+import questionMarkIcon from '@assets/question-mark.svg';
+import powerOffIcon from '@assets/power-off-solid.svg';
+import searchIcon from '@assets/search-icon.svg';
+
+const defaultAvatar = require('@assets/avataaars (1).svg');
 
 interface HeaderProps {
     currentUser?: {
@@ -18,6 +19,10 @@ interface HeaderProps {
 export const Header: React.FC<HeaderProps> = () => {
     const [userData, setUserData] = useState<User | null>(null);
     const currentUser = isAuthenticatedUser();
+    const navigate = useNavigate();
+    const userAvatar = userData?.user_avatar
+        ? require(`@assets/${userData.user_avatar.split('/').pop()}`)
+        : defaultAvatar;
 
     const fetchUser = async (id: string) => {
         try {
@@ -34,6 +39,10 @@ export const Header: React.FC<HeaderProps> = () => {
             fetchUser(currentUser.userId);
         }
     }, [currentUser]);
+
+    const handleCardClick = (userId: string) => {
+        navigate(`/user-details/${userId}`);
+    };
 
     return (
         <header className="header">
@@ -68,14 +77,10 @@ export const Header: React.FC<HeaderProps> = () => {
                         </Link>
 
                         <Link
-                            to={`/users/${userData?.id || '550e8400-e29b-41d4-a716-446655440000'}`}
+                            to={`/user-details/${userData?.id || '550e8400-e29b-41d4-a716-446655440000'}`}
                             className="header__button"
                         >
-                            <img
-                                src={userData?.user_avatar || avatarIcon}
-                                alt="Avatar icon"
-                                className="header__profile--icon"
-                            />
+                            <img src={userAvatar} alt="Avatar icon" className="header__profile--icon" />
                             <span className="profile-name">
                                 {userData ? `${userData.first_name} ${userData.last_name}` : 'LUFFY MONKEY'}
                             </span>

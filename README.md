@@ -6,7 +6,7 @@
 
 3. npm run build
 
-4. open HTML
+4. npm start
 
 5. HR user credendtial: email: lula.aguilar@leverx.com, password: secret
 

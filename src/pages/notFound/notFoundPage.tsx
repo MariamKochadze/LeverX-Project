@@ -1,15 +1,18 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 
 interface NotFoundPageProps {
     home?: () => void;
 }
 
 const NotFoundPage: React.FC<NotFoundPageProps> = ({ home }) => {
+    const navigate= useNavigate();
+
     const handleHome = () => {
         if (home) {
             home();
         } else {
-            window.location.href = 'index.html';
+            navigate('/')
         }
     };
 
