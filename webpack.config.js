@@ -81,8 +81,17 @@ module.exports = {
         static: {
             directory: path.join(__dirname, 'dist'),
         },
-        hot: true,
+        client: {
+            logging: 'error',
+            overlay: false,
+            progress: false,
+        },
         historyApiFallback: true,
         port: 3001,
+        hot: false,
+        liveReload: false,
+        devMiddleware: {
+            stats: 'errors-only',
+        },
     },
 };

@@ -4,6 +4,7 @@ import SignInPage from './pages/signIn/signInPage';
 import NotFoundPage from './pages/notFound/notFoundPage';
 import Edit from './pages/edit/edit';
 import UserDetails from './pages/userDetails/userDetails';
+import { EditProvider } from './context/editContext';
 
 const App = () => {
     return (
@@ -11,7 +12,14 @@ const App = () => {
             <Route path="/" element={<UsersPage />} />
             <Route path="/edit" element={<Edit />} />
             <Route path="/signin" element={<SignInPage />} />
-            <Route path="/user-details/:id" element={<UserDetails />} />
+            <Route
+                path="/user-details/:id"
+                element={
+                    <EditProvider>
+                        <UserDetails />
+                    </EditProvider>
+                }
+            />
             <Route path="/notFound" element={<NotFoundPage />} />
         </Routes>
     );

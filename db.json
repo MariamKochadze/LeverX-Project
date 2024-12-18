@@ -1,359 +1,359 @@
 {
-    "users": [
+  "users": [
+    {
+      "id": "550e8400-e29b-41d4-a716-446655440000",
+      "isRemoteWork": true,
+      "user_avatar": "src/assets/avataaars (1).svg",
+      "first_name": "Luffy",
+      "last_name": "Monkey",
+      "first_native_name": "Luffy",
+      "last_native_name": "Monkey",
+      "middle_native_name": "D.",
+      "department": "Web & Mobile",
+      "building": "Pilsudskiego 69 (Poland)",
+      "room": "1404",
+      "date_birth": {
+        "year": 1995,
+        "month": 5,
+        "day": 15
+      },
+      "desk_number": "1",
+      "manager": {
+        "id": "987ff8cb-b506-4d5e-9166-ab8c644bb891",
+        "first_name": "John",
+        "last_name": "Snow"
+      },
+      "phone": "+1111223212",
+      "email": "luffy.monkey@leverx.com",
+      "skype": "live:luffy.monkey",
+      "cnumber": "C123456",
+      "citizenship": "Georgia",
+      "visa": [
         {
-            "id": "550e8400-e29b-41d4-a716-446655440000",
-            "isRemoteWork": true,
-            "user_avatar": "src/assets/avataaars (1).svg",
-            "first_name": "Luffy",
-            "last_name": "Monkey",
-            "first_native_name": "Luffy",
-            "last_native_name": "Monkey",
-            "middle_native_name": "D.",
-            "department": "Web & Mobile",
-            "building": "Pilsudskiego 69 (Poland)",
-            "room": "1404",
-            "date_birth": {
-                "year": 1995,
-                "month": 5,
-                "day": 15
-            },
-            "desk_number": "1",
-            "manager": {
-                "id": "987ff8cb-b506-4d5e-9166-ab8c644bb891",
-                "first_name": "John",
-                "last_name": "Snow"
-            },
-            "phone": "+1111223212",
-            "email": "luffy.monkey@leverx.com",
-            "skype": "live:luffy.monkey",
-            "cnumber": "C123456",
-            "citizenship": "Georgia",
-            "visa": [
-                {
-                    "issuing_country": "Poland",
-                    "type": "National visa type D",
-                    "start_date": 1672531200000,
-                    "end_date": 1704067200000
-                }
-            ],
-            "role": 3,
-            "password": "$2b$05$ghQd2vSs1eWEQmgHMRSwwO/rWvOHMVNwKTUgjTzxlm9/uM2aIjUOO",
-            "first_name-last_name": "John Snow",
-            "date_birth.year": "15/5/1995",
-            "issuing_country": "National visa type D (Poland)",
-            "start_date": "1/1/2023"
-        },
-        {
-            "id": "650e8400-e29b-41d4-a716-446655440001",
-            "isRemoteWork": false,
-            "user_avatar": "src/assets/avataaars (2).svg",
-            "first_name": "Andrew",
-            "last_name": "Savage",
-            "first_native_name": "Andrew",
-            "last_native_name": "Savage",
-            "middle_native_name": "M.",
-            "department": "Web & Mobile",
-            "building": "Pilsudskiego 68 (Poland)",
-            "room": "1405",
-            "date_birth": {
-                "year": 1990,
-                "month": 3,
-                "day": 22
-            },
-            "desk_number": 2,
-            "manager": {
-                "id": "987ff8cb-b506-4d5e-9166-ab8c644bb891",
-                "first_name": "John",
-                "last_name": "Snow"
-            },
-            "phone": "+1133423135",
-            "email": "andrew.savage@leverx.com",
-            "skype": "live:andrew.savage",
-            "cnumber": "C123457",
-            "citizenship": "Germany",
-            "visa": [
-                {
-                    "issuing_country": "Germany",
-                    "type": "National visa type D",
-                    "start_date": 1672531200000,
-                    "end_date": 1704067200000
-                }
-            ],
-            "role": 2,
-            "password": "$2b$05$ghQd2vSs1eWEQmgHMRSwwO/rWvOHMVNwKTUgjTzxlm9/uM2aIjUOO"
-        },
-        {
-            "id": "750e8400-e29b-41d4-a716-446655440002",
-            "isRemoteWork": true,
-            "user_avatar": "src/assets/avataaars (3).svg",
-            "first_name": "Luli",
-            "last_name": "Aguilar",
-            "first_native_name": "Lula",
-            "last_native_name": "Aguilar",
-            "middle_native_name": "T.",
-            "department": "Web & Mobile",
-            "building": "Pilsudskiego 67 (Poland)",
-            "room": "1406",
-            "date_birth": {
-                "year": 1992,
-                "month": 7,
-                "day": 8
-            },
-            "desk_number": 3,
-            "manager": {
-                "id": "987ff8cb-b506-4d5e-9166-ab8c644bb891",
-                "first_name": "John",
-                "last_name": "Snow"
-            },
-            "phone": "+4432521345",
-            "email": "lula.aguilar@leverx.com",
-            "skype": "live:lula.aguilar",
-            "cnumber": "C123458",
-            "citizenship": "France",
-            "visa": [
-                {
-                    "issuing_country": "France",
-                    "type": "National visa type D",
-                    "start_date": 1672531200000,
-                    "end_date": 1704067200000
-                }
-            ],
-            "role": 2,
-            "password": "$2b$05$ghQd2vSs1eWEQmgHMRSwwO/rWvOHMVNwKTUgjTzxlm9/uM2aIjUOO"
-        },
-        {
-            "id": "850e8400-e29b-41d4-a716-446655440003",
-            "isRemoteWork": true,
-            "user_avatar": "src/assets/avataaars (4).svg",
-            "first_name": "Fintan",
-            "last_name": "Cruz",
-            "first_native_name": "Fintan",
-            "last_native_name": "Cruz",
-            "middle_native_name": "L.",
-            "department": "Web & Mobile",
-            "building": "Pilsudskiego 66 (Poland)",
-            "room": "1407",
-            "date_birth": {
-                "year": 1993,
-                "month": 11,
-                "day": 30
-            },
-            "desk_number": 4,
-            "manager": {
-                "id": "750e8400-e29b-41d4-a716-446655440002",
-                "first_name": "Luli",
-                "last_name": "Aguilar"
-            },
-            "phone": "+2234214580",
-            "email": "fintan.cruz@leverx.com",
-            "skype": "live:fintan.cruz",
-            "cnumber": "C123459",
-            "citizenship": "Italy",
-            "visa": [
-                {
-                    "issuing_country": "Italy",
-                    "type": "National visa type D",
-                    "start_date": 1672531200000,
-                    "end_date": 1704067200000
-                }
-            ],
-            "role": 1,
-            "password": "$2b$05$ghQd2vSs1eWEQmgHMRSwwO/rWvOHMVNwKTUgjTzxlm9/uM2aIjUOO"
-        },
-        {
-            "id": "950e8400-e29b-41d4-a716-446655440004",
-            "isRemoteWork": false,
-            "user_avatar": "src/assets/avataaars (5).svg",
-            "first_name": "Suzanne",
-            "last_name": "Taylor",
-            "first_native_name": "Suzanne",
-            "last_native_name": "Taylor",
-            "middle_native_name": "K.",
-            "department": "Web & Mobile",
-            "building": "Pilsudskiego 65 (Poland)",
-            "room": "1408",
-            "date_birth": {
-                "year": 1989,
-                "month": 10,
-                "day": 2
-            },
-            "desk_number": 5,
-            "manager": {
-                "id": "750e8400-e29b-41d4-a716-446655440002",
-                "first_name": "Luli",
-                "last_name": "Aguilar"
-            },
-            "phone": "+2134115609",
-            "email": "suzanne.taylor@leverx.com",
-            "skype": "live:suzanne.taylor",
-            "cnumber": "C123460",
-            "citizenship": "Canada",
-            "visa": [
-                {
-                    "issuing_country": "Canada",
-                    "type": "National visa type D",
-                    "start_date": 1672531200000,
-                    "end_date": 1704067200000
-                }
-            ],
-            "role": 1,
-            "password": "$2b$05$ghQd2vSs1eWEQmgHMRSwwO/rWvOHMVNwKTUgjTzxlm9/uM2aIjUOO"
-        },
-        {
-            "id": "a50e8400-e29b-41d4-a716-446655440005",
-            "isRemoteWork": true,
-            "user_avatar": "src/assets/avataaars (6).svg",
-            "first_name": "Francesco",
-            "last_name": "Reed",
-            "first_native_name": "Francesco",
-            "last_native_name": "Reed",
-            "middle_native_name": "P.",
-            "department": "Web & Mobile",
-            "building": "Pilsudskiego 64 (Poland)",
-            "room": "1409",
-            "date_birth": {
-                "year": 1994,
-                "month": 6,
-                "day": 5
-            },
-            "desk_number": 6,
-            "manager": {
-                "id": "987ff8cb-b506-4d5e-9166-ab8c644bb891",
-                "first_name": "John",
-                "last_name": "Snow"
-            },
-            "phone": "+5564321234",
-            "email": "francesco.reed@leverx.com",
-            "skype": "live:francesco.reed",
-            "cnumber": "C123461",
-            "citizenship": "Australia",
-            "visa": [
-                {
-                    "issuing_country": "Australia",
-                    "type": "National visa type D",
-                    "start_date": 1672531200000,
-                    "end_date": 1704067200000
-                }
-            ],
-            "role": 1,
-            "password": "$2b$05$ghQd2vSs1eWEQmgHMRSwwO/rWvOHMVNwKTUgjTzxlm9/uM2aIjUOO"
-        },
-        {
-            "id": "b50e8400-e29b-41d4-a716-446655440006",
-            "isRemoteWork": false,
-            "user_avatar": "src/assets/avataaars (7).svg",
-            "first_name": "Arman",
-            "last_name": "Eaton",
-            "first_native_name": "Arman",
-            "last_native_name": "Eaton",
-            "middle_native_name": "Q.",
-            "department": "Web & Mobile",
-            "building": "Pilsudskiego 63 (Poland)",
-            "room": "1410",
-            "date_birth": {
-                "year": 1996,
-                "month": 4,
-                "day": 18
-            },
-            "desk_number": 7,
-            "manager": {
-                "id": "987ff8cb-b506-4d5e-9166-ab8c644bb891",
-                "first_name": "John",
-                "last_name": "Snow"
-            },
-            "phone": "+4323567098",
-            "email": "arman.eaton@leverx.com",
-            "skype": "live:arman.eaton",
-            "cnumber": "C123462",
-            "citizenship": "Spain",
-            "visa": [
-                {
-                    "issuing_country": "Spain",
-                    "type": "National visa type D",
-                    "start_date": 1672531200000,
-                    "end_date": 1704067200000
-                }
-            ],
-            "role": 1,
-            "password": "$2b$05$ghQd2vSs1eWEQmgHMRSwwO/rWvOHMVNwKTUgjTzxlm9/uM2aIjUOO"
-        },
-        {
-            "id": "c50e8400-e29b-41d4-a716-446655440007",
-            "isRemoteWork": true,
-            "user_avatar": "src/assets/avataaars (8).svg",
-            "first_name": "Valeria",
-            "last_name": "Wells",
-            "first_native_name": "Valeria",
-            "last_native_name": "Wells",
-            "middle_native_name": "S.",
-            "department": "Web & Mobile",
-            "building": "Pilsudskiego 62 (Poland)",
-            "room": "1411",
-            "date_birth": {
-                "year": 1991,
-                "month": 12,
-                "day": 25
-            },
-            "desk_number": 8,
-            "manager": {
-                "id": "987ff8cb-b506-4d5e-9166-ab8c644bb891",
-                "first_name": "John",
-                "last_name": "Snow"
-            },
-            "phone": "+5665433222",
-            "email": "valeria.wells@leverx.com",
-            "skype": "live:valeria.wells",
-            "cnumber": "C123463",
-            "citizenship": "USA",
-            "visa": [
-                {
-                    "issuing_country": "USA",
-                    "type": "National visa type D",
-                    "start_date": 1672531200000,
-                    "end_date": 1704067200000
-                }
-            ],
-            "role": 2,
-            "password": "$2b$05$ghQd2vSs1eWEQmgHMRSwwO/rWvOHMVNwKTUgjTzxlm9/uM2aIjUOO"
-        },
-        {
-            "id": "d50e8400-e29b-41d4-a716-446655440008",
-            "isRemoteWork": false,
-            "user_avatar": "src/assets/avataaars (9).svg",
-            "first_name": "Denis",
-            "last_name": "Clark",
-            "first_native_name": "Denis",
-            "last_native_name": "Clark",
-            "middle_native_name": "H.",
-            "department": "Web & Mobile",
-            "building": "Pilsudskiego 61 (Poland)",
-            "room": "1412",
-            "date_birth": {
-                "year": 1997,
-                "month": 1,
-                "day": 19
-            },
-            "desk_number": 9,
-            "manager": {
-                "id": "987ff8cb-b506-4d5e-9166-ab8c644bb891",
-                "first_name": "John",
-                "last_name": "Snow"
-            },
-            "phone": "+0991234563",
-            "email": "denis.clark@leverx.com",
-            "skype": "live:denis.clark",
-            "cnumber": "C123464",
-            "citizenship": "Netherlands",
-            "visa": [
-                {
-                    "issuing_country": "Netherlands",
-                    "type": "National visa type D",
-                    "start_date": 1672531200000,
-                    "end_date": 1704067200000
-                }
-            ],
-            "role": 3,
-            "password": "$2b$05$ghQd2vSs1eWEQmgHMRSwwO/rWvOHMVNwKTUgjTzxlm9/uM2aIjUOO"
+          "issuing_country": "Poland",
+          "type": "National visa type D",
+          "start_date": 1672531200000,
+          "end_date": 1704067200000
         }
-    ]
+      ],
+      "role": 3,
+      "password": "$2b$05$ghQd2vSs1eWEQmgHMRSwwO/rWvOHMVNwKTUgjTzxlm9/uM2aIjUOO",
+      "first_name-last_name": "John Snow",
+      "date_birth.year": "15/5/1995",
+      "issuing_country": "National visa type D (Poland)",
+      "start_date": "1/1/2023"
+    },
+    {
+      "id": "650e8400-e29b-41d4-a716-446655440001",
+      "isRemoteWork": false,
+      "user_avatar": "src/assets/avataaars (2).svg",
+      "first_name": "Andrew",
+      "last_name": "Savage",
+      "first_native_name": "Andrew",
+      "last_native_name": "Savage",
+      "middle_native_name": "M.",
+      "department": "Web & Mobile",
+      "building": "Pilsudskiego 68 (Poland)",
+      "room": "1405",
+      "date_birth": {
+        "year": 1990,
+        "month": 3,
+        "day": 22
+      },
+      "desk_number": 2,
+      "manager": {
+        "id": "987ff8cb-b506-4d5e-9166-ab8c644bb891",
+        "first_name": "John",
+        "last_name": "Snow"
+      },
+      "phone": "+1133423135",
+      "email": "andrew.savage@leverx.com",
+      "skype": "live:andrew.savage",
+      "cnumber": "C123457",
+      "citizenship": "Germany",
+      "visa": [
+        {
+          "issuing_country": "Germany",
+          "type": "National visa type D",
+          "start_date": 1672531200000,
+          "end_date": 1704067200000
+        }
+      ],
+      "role": 2,
+      "password": "$2b$05$ghQd2vSs1eWEQmgHMRSwwO/rWvOHMVNwKTUgjTzxlm9/uM2aIjUOO"
+    },
+    {
+      "id": "750e8400-e29b-41d4-a716-446655440002",
+      "isRemoteWork": true,
+      "user_avatar": "src/assets/avataaars (3).svg",
+      "first_name": "Luli",
+      "last_name": "Aguilar",
+      "first_native_name": "Lula",
+      "last_native_name": "Aguilar",
+      "middle_native_name": "T.",
+      "department": "Web & Mobile",
+      "building": "Pilsudskiego 67 (Poland)",
+      "room": "1406",
+      "date_birth": {
+        "year": 1992,
+        "month": 7,
+        "day": 8
+      },
+      "desk_number": 3,
+      "manager": {
+        "id": "987ff8cb-b506-4d5e-9166-ab8c644bb891",
+        "first_name": "John",
+        "last_name": "Snow"
+      },
+      "phone": "+4432521345",
+      "email": "lula.aguilar@leverx.com",
+      "skype": "live:lula.aguilar",
+      "cnumber": "C123458",
+      "citizenship": "France",
+      "visa": [
+        {
+          "issuing_country": "France",
+          "type": "National visa type D",
+          "start_date": 1672531200000,
+          "end_date": 1704067200000
+        }
+      ],
+      "role": 2,
+      "password": "$2b$05$ghQd2vSs1eWEQmgHMRSwwO/rWvOHMVNwKTUgjTzxlm9/uM2aIjUOO"
+    },
+    {
+      "id": "850e8400-e29b-41d4-a716-446655440003",
+      "isRemoteWork": true,
+      "user_avatar": "src/assets/avataaars (4).svg",
+      "first_name": "Fintan",
+      "last_name": "Cruz",
+      "first_native_name": "Fintan",
+      "last_native_name": "Cruz",
+      "middle_native_name": "L.",
+      "department": "Web & Mobile",
+      "building": "Pilsudskiego 66 (Poland)",
+      "room": "1407",
+      "date_birth": {
+        "year": 1993,
+        "month": 11,
+        "day": 30
+      },
+      "desk_number": 4,
+      "manager": {
+        "id": "750e8400-e29b-41d4-a716-446655440002",
+        "first_name": "Luli",
+        "last_name": "Aguilar"
+      },
+      "phone": "+2234214580",
+      "email": "fintan.cruz@leverx.com",
+      "skype": "live:fintan.cruz",
+      "cnumber": "C123459",
+      "citizenship": "Italy",
+      "visa": [
+        {
+          "issuing_country": "Italy",
+          "type": "National visa type D",
+          "start_date": 1672531200000,
+          "end_date": 1704067200000
+        }
+      ],
+      "role": 1,
+      "password": "$2b$05$ghQd2vSs1eWEQmgHMRSwwO/rWvOHMVNwKTUgjTzxlm9/uM2aIjUOO"
+    },
+    {
+      "id": "950e8400-e29b-41d4-a716-446655440004",
+      "isRemoteWork": false,
+      "user_avatar": "src/assets/avataaars (5).svg",
+      "first_name": "Suzanne",
+      "last_name": "Taylor",
+      "first_native_name": "Suzanne",
+      "last_native_name": "Taylor",
+      "middle_native_name": "K.",
+      "department": "Web & Mobile",
+      "building": "Pilsudskiego 65 (Poland)",
+      "room": "1408",
+      "date_birth": {
+        "year": 1989,
+        "month": 10,
+        "day": 2
+      },
+      "desk_number": 5,
+      "manager": {
+        "id": "750e8400-e29b-41d4-a716-446655440002",
+        "first_name": "Luli",
+        "last_name": "Aguilar"
+      },
+      "phone": "+2134115609",
+      "email": "suzanne.taylor@leverx.com",
+      "skype": "live:suzanne.taylor",
+      "cnumber": "C123460",
+      "citizenship": "Canada",
+      "visa": [
+        {
+          "issuing_country": "Canada",
+          "type": "National visa type D",
+          "start_date": 1672531200000,
+          "end_date": 1704067200000
+        }
+      ],
+      "role": 1,
+      "password": "$2b$05$ghQd2vSs1eWEQmgHMRSwwO/rWvOHMVNwKTUgjTzxlm9/uM2aIjUOO"
+    },
+    {
+      "id": "a50e8400-e29b-41d4-a716-446655440005",
+      "isRemoteWork": true,
+      "user_avatar": "src/assets/avataaars (6).svg",
+      "first_name": "Francesco",
+      "last_name": "Reed",
+      "first_native_name": "Francesco",
+      "last_native_name": "Reed",
+      "middle_native_name": "P.",
+      "department": "Web & Mobile",
+      "building": "Pilsudskiego 64 (Poland)",
+      "room": "1409",
+      "date_birth": {
+        "year": 1994,
+        "month": 6,
+        "day": 5
+      },
+      "desk_number": 6,
+      "manager": {
+        "id": "987ff8cb-b506-4d5e-9166-ab8c644bb891",
+        "first_name": "John",
+        "last_name": "Snow"
+      },
+      "phone": "+5564321234",
+      "email": "francesco.reed@leverx.com",
+      "skype": "live:francesco.reed",
+      "cnumber": "C123461",
+      "citizenship": "Australia",
+      "visa": [
+        {
+          "issuing_country": "Australia",
+          "type": "National visa type D",
+          "start_date": 1672531200000,
+          "end_date": 1704067200000
+        }
+      ],
+      "role": 1,
+      "password": "$2b$05$ghQd2vSs1eWEQmgHMRSwwO/rWvOHMVNwKTUgjTzxlm9/uM2aIjUOO"
+    },
+    {
+      "id": "b50e8400-e29b-41d4-a716-446655440006",
+      "isRemoteWork": false,
+      "user_avatar": "src/assets/avataaars (7).svg",
+      "first_name": "Arman",
+      "last_name": "Eaton",
+      "first_native_name": "Arman",
+      "last_native_name": "Eaton",
+      "middle_native_name": "Q.",
+      "department": "Web & Mobile",
+      "building": "Pilsudskiego 63 (Poland)",
+      "room": "1410",
+      "date_birth": {
+        "year": 1996,
+        "month": 4,
+        "day": 18
+      },
+      "desk_number": 7,
+      "manager": {
+        "id": "987ff8cb-b506-4d5e-9166-ab8c644bb891",
+        "first_name": "John",
+        "last_name": "Snow"
+      },
+      "phone": "+4323567098",
+      "email": "arman.eaton@leverx.com",
+      "skype": "live:arman.eaton",
+      "cnumber": "C123462",
+      "citizenship": "Spain",
+      "visa": [
+        {
+          "issuing_country": "Spain",
+          "type": "National visa type D",
+          "start_date": 1672531200000,
+          "end_date": 1704067200000
+        }
+      ],
+      "role": 1,
+      "password": "$2b$05$ghQd2vSs1eWEQmgHMRSwwO/rWvOHMVNwKTUgjTzxlm9/uM2aIjUOO"
+    },
+    {
+      "id": "c50e8400-e29b-41d4-a716-446655440007",
+      "isRemoteWork": true,
+      "user_avatar": "src/assets/avataaars (8).svg",
+      "first_name": "Valeria",
+      "last_name": "Wells",
+      "first_native_name": "Valeria",
+      "last_native_name": "Wells",
+      "middle_native_name": "S.",
+      "department": "Web & Mobile",
+      "building": "Pilsudskiego 62 (Poland)",
+      "room": "1411",
+      "date_birth": {
+        "year": 1991,
+        "month": 12,
+        "day": 25
+      },
+      "desk_number": 8,
+      "manager": {
+        "id": "987ff8cb-b506-4d5e-9166-ab8c644bb891",
+        "first_name": "John",
+        "last_name": "Snow"
+      },
+      "phone": "+5665433222",
+      "email": "valeria.wells@leverx.com",
+      "skype": "live:valeria.wells",
+      "cnumber": "C123463",
+      "citizenship": "USA",
+      "visa": [
+        {
+          "issuing_country": "USA",
+          "type": "National visa type D",
+          "start_date": 1672531200000,
+          "end_date": 1704067200000
+        }
+      ],
+      "role": 2,
+      "password": "$2b$05$ghQd2vSs1eWEQmgHMRSwwO/rWvOHMVNwKTUgjTzxlm9/uM2aIjUOO"
+    },
+    {
+      "id": "d50e8400-e29b-41d4-a716-446655440008",
+      "isRemoteWork": false,
+      "user_avatar": "src/assets/avataaars (9).svg",
+      "first_name": "Denis",
+      "last_name": "Clark",
+      "first_native_name": "Denis",
+      "last_native_name": "Clark",
+      "middle_native_name": "H.",
+      "department": "Web & Mobile",
+      "building": "Pilsudskiego 61 (Poland)",
+      "room": "1412",
+      "date_birth": {
+        "year": 1997,
+        "month": 1,
+        "day": 19
+      },
+      "desk_number": 9,
+      "manager": {
+        "id": "987ff8cb-b506-4d5e-9166-ab8c644bb891",
+        "first_name": "John",
+        "last_name": "Snow"
+      },
+      "phone": "+0991234563",
+      "email": "denis.clark@leverx.com",
+      "skype": "live:denis.clark",
+      "cnumber": "C123464",
+      "citizenship": "Netherlands",
+      "visa": [
+        {
+          "issuing_country": "Netherlands",
+          "type": "National visa type D",
+          "start_date": 1672531200000,
+          "end_date": 1704067200000
+        }
+      ],
+      "role": 3,
+      "password": "$2b$05$ghQd2vSs1eWEQmgHMRSwwO/rWvOHMVNwKTUgjTzxlm9/uM2aIjUOO"
+    }
+  ]
 }

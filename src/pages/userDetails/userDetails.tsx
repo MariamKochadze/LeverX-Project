@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { Role, User } from '../../models/user.model';
 import { Header } from '../../components/header/header';
-
 import backIcon from '@assets/back-icon.svg';
 import copyIcon from '@assets/copy-icon.svg';
 import editIcon from '@assets/edit-icon.svg';
@@ -17,63 +16,15 @@ import skypeIcon from '@assets/skype-icon.svg';
 import citizenshipIcon from '@assets/citizenship-icon.svg';
 import visaIcon from '@assets/visa-icon.svg';
 import { isAuthenticatedUser } from '../../shared/authenticateUser';
-
-interface EditableFieldProps {
-    icon?: string;
-    label: string;
-    value: string | number;
-    editable: boolean;
-    id: string;
-    onChange?: (value: string) => void;
-}
-
-const EditableField: React.FC<EditableFieldProps> = ({ icon, label, value, editable, id, onChange }) => {
-    if (!icon) {
-        return (
-            <p className="editable-field" id={id}>
-                <strong>{label}</strong>
-                {editable ? (
-                    <input
-                        type="text"
-                        value={value}
-                        className="editable-input"
-                        id={id}
-                        onChange={(e) => onChange?.(e.target.value)}
-                    />
-                ) : (
-                    <span>{value}</span>
-                )}
-            </p>
-        );
-    }
-
-    return (
-        <p className="editable-field" id={id}>
-            <img src={icon} alt={`${label} Icon`} className="info-icon" />
-            <strong>{label}</strong>
-            {editable ? (
-                <input
-                    type="text"
-                    value={value}
-                    className="editable-input"
-                    id={id}
-                    onChange={(e) => onChange?.(e.target.value)}
-                />
-            ) : (
-                <span>{value}</span>
-            )}
-        </p>
-    );
-};
+import { EditProvider, useEditContext } from '../../context/editContext';
+import { EditableField } from '../../components/editableFieldList/editableFieldList';
 
 const UserDetails: React.FC = () => {
     const navigate = useNavigate();
-    const { id } = useParams<{ id: string }>();
-    const [userData, setUserData] = useState<User>();
-    const [isEditMode, setIsEditMode] = useState(false);
+    const { isEditMode, userData, toggleEditMode, updateUserData } = useEditContext();
     const currentUser = isAuthenticatedUser();
-
-    const avatarSrc = userData ? require(`@assets/${userData.user_avatar.split('/').pop()}`) : '';
+    const avatarSrc = userData?.user_avatar ? require(`@assets/${userData.user_avatar.split('/').pop()}`) : '';
+    const { id } = useParams<{ id: string }>();
 
     useEffect(() => {
         if (!currentUser) {
@@ -83,68 +34,31 @@ const UserDetails: React.FC = () => {
 
         const loadUserData = async () => {
             try {
-                const response = await fetch('http://localhost:3000/users');
-                const users = await response.json();
-                console.log('Users:', users);
-                console.log('Current ID:', id);
-                const user = users.find((u: User) => u.id === id);
-
-                if (user) {
-                    console.log('Found user:', user);
-                    setUserData(user);
-                } else {
-                    console.log('User not found');
-                    navigate('/notFound');
+                const response = await fetch(`http://localhost:3000/users/${id}`);
+                if (!response.ok) {
+                    throw new Error(`Error fetching user with id ${id}`);
                 }
+                const user = await response.json();
+                updateUserData(user);
             } catch (error) {
                 console.error('Error:', error);
                 navigate('/notFound');
             }
         };
 
-        loadUserData();
-    }, [id, currentUser, navigate]);
-
-    const handleEdit = async () => {
-        if (isEditMode && userData && id) {
-            const updateUser: Record<string, string> = {};
-
-            document.querySelectorAll('.editable-field').forEach((field) => {
-                const input = field.querySelector('input');
-                if (input instanceof HTMLInputElement && input.value) {
-                    updateUser[input.id] = input.value;
-                }
-            });
-
-            try {
-                const response = await fetch(`http://localhost:3000/users/${id}`, {
-                    method: 'PATCH',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify(updateUser),
-                });
-
-                if (!response.ok) {
-                    throw new Error('Failed to update user');
-                }
-
-                const updatedUser = await response.json();
-                setUserData(updatedUser);
-                console.log('User updated successfully');
-            } catch (error) {
-                console.error('Error updating user:', error);
-            }
+        if (id) {
+            loadUserData();
         }
-
-        setIsEditMode(!isEditMode);
-    };
-
-    const handleFieldChange = (field: string, value: string) => {
-        setUserData((prev) => (prev ? { ...prev, [field]: value } : prev));
-    };
+    }, [id, navigate, updateUserData, currentUser]);
 
     if (!userData) return <div>Loading...</div>;
+
+    const formatDateBirth = (dateBirth: any): string => {
+        if (!dateBirth?.day || !dateBirth?.month || !dateBirth?.year) {
+            return 'Not specified';
+        }
+        return `${dateBirth.day}/${dateBirth.month}/${dateBirth.year}`;
+    };
 
     const generalInfo = [
         { icon: workingIcon, label: 'Department', value: userData.department, id: 'department' },
@@ -154,13 +68,13 @@ const UserDetails: React.FC = () => {
         {
             icon: idIcon,
             label: 'Date of Birth',
-            value: `${userData.date_birth.day}/${userData.date_birth.month}/${userData.date_birth.year}`,
+            value: formatDateBirth(userData.date_birth),
             id: 'date_birth',
         },
         {
             icon: nameIcon,
             label: 'Manager',
-            value: `${userData.manager.first_name} ${userData.manager.last_name}`,
+            value: userData.manager ? `${userData.manager.first_name} ${userData.manager.last_name}` : 'Not assigned',
             id: 'manager',
         },
     ];
@@ -172,31 +86,52 @@ const UserDetails: React.FC = () => {
         { icon: idIcon, label: 'C-Number', value: userData.cnumber, id: 'cnumber' },
     ];
 
+    const formatVisaInfo = (visa: any) => {
+        if (!visa?.[0]) {
+            return {
+                type: 'Not specified',
+                startDate: 'Not specified',
+                endDate: 'Not specified',
+            };
+        }
+        return {
+            type: `${visa[0].type} (${visa[0].issuing_country})`,
+            startDate: new Date(visa[0].start_date).toLocaleDateString(),
+            endDate: new Date(visa[0].end_date).toLocaleDateString(),
+        };
+    };
+
     const travelInfo = [
-        { icon: citizenshipIcon, label: 'Citizenship', value: userData.citizenship, id: 'citizenship' },
+        {
+            icon: citizenshipIcon,
+            label: 'Citizenship',
+            value: userData.citizenship || 'Not specified',
+            id: 'citizenship',
+        },
         {
             icon: visaIcon,
             label: 'Visa Type',
-            value: `${userData.visa[0].type} (${userData.visa[0].issuing_country})`,
+            value: formatVisaInfo(userData.visa).type,
             id: 'visa_type',
         },
         {
             icon: visaIcon,
             label: 'Visa Start Date',
-            value: new Date(userData.visa[0].start_date).toLocaleDateString(),
+            value: formatVisaInfo(userData.visa).startDate,
             id: 'visa_start',
         },
         {
             icon: visaIcon,
             label: 'Visa End Date',
-            value: new Date(userData.visa[0].end_date).toLocaleDateString(),
+            value: formatVisaInfo(userData.visa).endDate,
             id: 'visa_end',
         },
     ];
 
     return (
-        <>
+        <React.Fragment>
             <Header />
+
             <div className="main-container">
                 <section className="user__details-section">
                     <div className="user__details-container">
@@ -210,20 +145,8 @@ const UserDetails: React.FC = () => {
                                 src={avatarSrc}
                                 alt={userData ? `${userData.first_name} ${userData.last_name}` : 'User Avatar'}
                             />
-                            <EditableField
-                                value={userData.first_name}
-                                editable={isEditMode}
-                                id="first_name"
-                                label=""
-                                onChange={(value) => handleFieldChange('first_name', value)}
-                            />
-                            <EditableField
-                                value={userData.last_name}
-                                editable={isEditMode}
-                                id="last_name"
-                                label=""
-                                onChange={(value) => handleFieldChange('last_name', value)}
-                            />
+                            <EditableField value={userData.first_name} editable={isEditMode} id="first_name" label="" />
+                            <EditableField value={userData.last_name} editable={isEditMode} id="last_name" label="" />
                             <p className="native-format">
                                 {`${userData.last_native_name} ${userData.middle_native_name} ${userData.first_native_name}`}
                             </p>
@@ -235,7 +158,7 @@ const UserDetails: React.FC = () => {
                                 Copy link
                             </button>
                             {(currentUser?.userRole === Role.ADMIN || currentUser?.userRole === Role.HR) && (
-                                <button className="user__details-edit-button" onClick={handleEdit}>
+                                <button className="user__details-edit-button">
                                     <img src={editIcon} alt="edit icon" className="edit__icon" />
                                     {isEditMode ? 'SAVE' : 'EDIT'}
                                 </button>
@@ -255,7 +178,6 @@ const UserDetails: React.FC = () => {
                                 value={field.value}
                                 editable={isEditMode}
                                 id={field.id}
-                                onChange={(value) => handleFieldChange(field.id, value)}
                             />
                         ))}
                     </div>
@@ -270,7 +192,6 @@ const UserDetails: React.FC = () => {
                                 value={field.value}
                                 editable={isEditMode}
                                 id={field.id}
-                                onChange={(value) => handleFieldChange(field.id, value)}
                             />
                         ))}
                     </div>
@@ -285,13 +206,12 @@ const UserDetails: React.FC = () => {
                                 value={field.value}
                                 editable={isEditMode}
                                 id={field.id}
-                                onChange={(value) => handleFieldChange(field.id, value)}
                             />
                         ))}
                     </div>
                 </section>
             </div>
-        </>
+        </React.Fragment>
     );
 };
 
