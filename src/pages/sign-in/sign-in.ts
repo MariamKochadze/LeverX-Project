@@ -1,6 +1,5 @@
 import '../../styles/pages/sign-in.scss';
 
-
 import { authenticateUser, registerUser } from '../../shared/authenticate-user';
 
 window.addEventListener('load', () => {

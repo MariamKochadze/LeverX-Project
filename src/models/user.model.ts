@@ -46,7 +46,7 @@ export interface EditUser {
   img: { src: string; alt: string };
   name: string;
   surname: string;
-  id:string,
+  id: string;
   role: ROLE;
 }
 
