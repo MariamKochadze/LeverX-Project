@@ -9,7 +9,7 @@
       "first_native_name": "Luffy",
       "last_native_name": "Monkey",
       "middle_native_name": "D.",
-      "department": "Luffy",
+      "department": "web developer",
       "building": "Pilsudskiego 69 (Poland)",
       "room": "1404",
       "date_birth": {
@@ -41,7 +41,8 @@
       "first_name-last_name": "John Snow",
       "date_birth.year": "15/5/1995",
       "issuing_country": "National visa type D (Poland)",
-      "start_date": "1/1/2023"
+      "start_date": "1/1/2023",
+      "end_date": "1/1/2024"
     },
     {
       "id": "650e8400-e29b-41d4-a716-446655440001",

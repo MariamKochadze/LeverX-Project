@@ -6,8 +6,12 @@
 
 3. npm run build
 
-4. open HTML
+4. npm start
+
+## Users
 
 5. HR user credendtial: email: lula.aguilar@leverx.com, password: secret
 
 6. ADMIN user credentials: email: luffy.monkey@leverx.com, password: secret
+
+7. Employee user credentials: email: fintan.cruz@leverx.com, password: secret
