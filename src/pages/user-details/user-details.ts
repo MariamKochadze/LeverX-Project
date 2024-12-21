@@ -1,219 +1,400 @@
-import { User } from '../../models/user.model';
-import { isAuthenticareUser } from '../../shared/authenticate-user.js';
+import { ROLE, User } from '../../models/user.model';
+import { isAuthenticareUser } from '../../shared/authenticate-user';
+import '../../components/header/header';
+import { createHeader } from '../../components/header/header';
 
-if (!isAuthenticareUser()) {
-    window.location.href = '/src/pages/sign-in/sign-in.html';
+import backIcon from '../../assets/back-icon.svg';
+import copyIcon from '../../assets/copy-icon.svg';
+import editIcon from '../../assets/edit-icon.svg';
+import workingIcon from '../../assets/working-icon.svg';
+import buildingIcon from '../../assets/building-icon.svg';
+import idIcon from '../../assets/id-icon.svg';
+import photoIcon from '../../assets/photo-icon.svg';
+import nameIcon from '../../assets/name-icon.svg';
+import phoneIcon from '../../assets/phone-icon.svg';
+import emailIcon from '../../assets/email-icon.svg';
+import skypeIcon from '../../assets/skype-icon.svg';
+import citizenshipIcon from '../../assets/citizenship-icon.svg';
+
+const iconMap: { [key: string]: string } = {
+  'working-icon.svg': workingIcon,
+  'building-icon.svg': buildingIcon,
+  'id-icon.svg': idIcon,
+  'photo-icon.svg': photoIcon,
+  'name-icon.svg': nameIcon,
+  'phone-icon.svg': phoneIcon,
+  'email-icon.svg': emailIcon,
+  'skype-icon.svg': skypeIcon,
+  'citizenship-icon.svg': citizenshipIcon,
+  'visa-icon.svg': visaIcon,
+};
+import visaIcon from '../../assets/visa-icon.svg';
+
+const currentUser: { userRole: ROLE; userId: string } | undefined =
+  isAuthenticareUser();
+
+if (!currentUser) {
+  window.location.href = '/sign-in.html';
 }
 
-function getUserIdFromURL(): string | undefined {
-    const urlHash = window.location.hash;
-    const id = urlHash.split('/').pop();
-    return id;
+function getUserId(): string | undefined {
+  const urlHash = window.location.hash;
+  const id = urlHash.split('/').pop();
+  return id;
 }
 
-// Main container
 const mainContainer = document.createElement('div');
 mainContainer.classList.add('main-container');
 document.body.appendChild(mainContainer);
 
-// Fetch user
 async function fetchUserById(userId: string): Promise<User | undefined> {
-    try {
-        const response = await fetch('../../users.json');
-        if (!response.ok) {
-            throw new Error(`Failed to fetch user data. Status: ${response.status}`);
-        }
-        const users: User[] = await response.json();
-        return users.find((user) => user._id === userId);
-    } catch (error: unknown) {
-        if (error instanceof Error) {
-            console.error('Error:', error.message);
-        }
+  try {
+    const response = await fetch(`http://localhost:3000/users/${userId}`);
+    if (!response.ok) {
+      throw new Error(`Failed to fetch user data. Status: ${response.status}`);
     }
+    const user: User = await response.json();
+    return user;
+  } catch (error: unknown) {
+    if (error instanceof Error) {
+      console.error('Error:', error.message);
+    }
+  }
 }
 
-function createField(icon: string, label: string, value: string | number) {
-    const p = document.createElement('p');
-    p.innerHTML = `
-        <img src="../../assets/${icon}" alt="${label} Icon" class="info-icon">
-        <strong>${label}:</strong>
-        <span>${value}</span>
-    `;
-    return p;
+function createEditableField(
+  icon: string,
+  label: string,
+  value: string | number,
+  editable: boolean,
+  id: string
+): HTMLElement {
+  const container = document.createElement('p');
+  container.classList.add('editable-field');
+  container.id = id;
+  if (!icon) {
+    container.innerHTML = editable
+      ? `<strong>${label}</strong>
+           <input type='text' value='${value}' class='editable-input' id='${id}'>`
+      : `<strong>${label}</strong>
+           <span>${value}</span>`;
+    return container;
+  }
+
+  if (!icon) {
+    container.innerHTML = editable
+      ? `<strong>${label}</strong>
+         <input type='text' value='${value}' class='editable-input' id='${id}'>`
+      : `<strong>${label}</strong>
+         <span>${value}</span>`;
+    return container;
+  }
+
+  container.innerHTML = editable
+    ? `<img src="../../assets/${icon}" alt="${label} Icon" class="info-icon">
+           <strong>${label}</strong>
+           <input type='text' value='${value}' class='editable-input' id='${id}'>`
+    : `<img src="../../assets/${icon}" alt="${label} Icon" class="info-icon">
+           <strong>${label}</strong>
+           <span>${value}</span>`;
+  return container;
 }
 
 document.addEventListener('DOMContentLoaded', async () => {
-    // First section  User Details
-    async function showUserDetails() {
-        try {
-            const userId = getUserIdFromURL();
-            if (!userId) {
-                return;
-            }
+  let userData: User | undefined;
+  let isEditMode = false;
 
-            const user = await fetchUserById(userId);
-            if (!user) {
-                return;
-            }
+  async function showUserDetails() {
+    try {
+      const userId = getUserId();
+      if (!userId) {
+        return;
+      }
 
-            const section = document.createElement('section');
-            section.classList.add('user__details-section');
+      userData = await fetchUserById(userId);
+      if (!userData) {
+        return;
+      }
 
-            const container = document.createElement('div');
-            container.classList.add('user__details-container');
+      const section = document.createElement('section');
+      section.classList.add('user__details-section');
 
-            //  back button
-            const backButton = document.createElement('button');
-            backButton.classList.add('back-button');
-            backButton.innerHTML = `
-                <img src="../../assets/back-icon.svg" alt="Back" class="back-icon">
-                
+      const container = document.createElement('div');
+      container.classList.add('user__details-container');
+
+      const backButton = document.createElement('button');
+      backButton.classList.add('back-button');
+      backButton.innerHTML = `
+                <img src="${backIcon}" alt="Back" class="back-icon">
             `;
-            backButton.addEventListener('click', () => {
-                window.location.href = '../../index.html';
-            });
-            container.appendChild(backButton);
+      backButton.addEventListener('click', () => {
+        window.location.href = '/index.html';
+      });
+      container.appendChild(backButton);
 
-            const topSection = document.createElement('div');
-            topSection.classList.add('user__details-top');
+      const topSection = document.createElement('div');
+      topSection.classList.add('user__details-top');
 
-            const avatar = document.createElement('img');
-            avatar.classList.add('user__details-avatar');
-            avatar.src = `../../` + user.user_avatar;
-            avatar.alt = `${user.first_name} ${user.last_name}`;
+      const avatar = document.createElement('img');
+      avatar.classList.add('user__details-avatar');
+      avatar.src = userData.user_avatar.replace('./assets/', '/src/assets/');
+      avatar.alt = `${userData.first_name} ${userData.last_name}`;
 
-            const fullName = document.createElement('p');
-            fullName.classList.add('full-name');
-            fullName.textContent = `${user.first_name} ${user.last_name}`;
+      const firstNameField = createEditableField(
+        '',
+        '',
+        userData.first_name,
+        false,
+        'first_name'
+      );
 
-            const nativeFormat = document.createElement('p');
-            nativeFormat.classList.add('native-format');
-            nativeFormat.textContent = `${user.last_native_name} ${user.middle_native_name} ${user.first_native_name}`;
+      const lastNameField = createEditableField(
+        '',
+        '',
+        userData.last_name,
+        false,
+        'last_name'
+      );
+      const fullName = createEditableField(
+        '',
+        '',
+        `${userData.first_name} ${userData.last_name}`,
+        false,
+        'first_name-last_name'
+      );
 
-            const buttonsContainer = document.createElement('div');
-            buttonsContainer.classList.add('user__details-buttons');
+      const nativeFormat = document.createElement('p');
+      nativeFormat.classList.add('native-format');
+      nativeFormat.textContent = `${userData.last_native_name} ${userData.middle_native_name} ${userData.first_native_name}`;
 
-            const copyButton = document.createElement('button');
-            copyButton.classList.add('user__details-copy-button');
-            copyButton.innerHTML = `<img src="../../assets/copy-icon.svg" alt="copy icon" class="copy__icon">Copy link`;
+      const buttonsContainer = document.createElement('div');
+      buttonsContainer.classList.add('user__details-buttons');
 
-            const editButton = document.createElement('button');
-            editButton.classList.add('user__details-edit-button');
-            editButton.innerHTML = `<img src="../../assets/edit-icon.svg" alt="edit icon" class="edit__icon">EDIT`;
+      const copyButton = document.createElement('button');
+      copyButton.classList.add('user__details-copy-button');
+      copyButton.innerHTML = `<img src="${copyIcon}" alt="copy icon" class="copy__icon">Copy link`;
 
-            topSection.appendChild(avatar);
-            topSection.appendChild(fullName);
-            topSection.appendChild(nativeFormat);
+      const editButton = document.createElement('button');
+      editButton.classList.add('user__details-edit-button');
+      editButton.innerHTML = `<img src="${editIcon}" alt="edit icon" class="edit__icon">EDIT`;
 
-            buttonsContainer.appendChild(copyButton);
-            buttonsContainer.appendChild(editButton);
+      if (
+        currentUser?.userRole === ROLE.ADMIN ||
+        (currentUser?.userRole === ROLE.HR &&
+          currentUser?.userId === userData.manager.id)
+      ) {
+        editButton.addEventListener('click', () => {
+          isEditMode = !isEditMode;
 
-            container.appendChild(topSection);
-            container.appendChild(buttonsContainer);
-            section.appendChild(container);
+          const updateUser: any = {};
 
-            mainContainer.appendChild(section);
-        } catch (error) {
-            if (error instanceof Error) {
-                console.error('Error:', error.message);
+          document.querySelectorAll('.editable-field').forEach((field) => {
+            const span = field.querySelector('span');
+            const input = field.querySelector('input');
+
+            if (isEditMode && span) {
+              const value = span.textContent || '';
+              const parent = span.parentElement;
+
+              if (parent) {
+                parent.replaceWith(
+                  createEditableField(
+                    parent.querySelector('img')?.src.split('/').pop() || '',
+                    parent.querySelector('strong')?.textContent || '',
+                    value,
+                    true,
+                    field.id
+                  )
+                );
+              }
+            } else if (!isEditMode && input) {
+              const value = (input as HTMLInputElement).value;
+              const parent = input.parentElement;
+              updateUser[input.id] = input.value;
+              if (parent) {
+                parent.replaceWith(
+                  createEditableField(
+                    parent.querySelector('img')?.src.split('/').pop() || '',
+                    parent.querySelector('strong')?.textContent || '',
+                    value,
+                    false,
+                    field.id
+                  )
+                );
+              }
+              fetch(`http://localhost:3000/users/${userId}`, {
+                method: 'PATCH',
+                body: JSON.stringify(updateUser),
+              })
+                .then((response) => response.json())
+                .then((data) => {
+                  console.log('updated');
+                })
+                .catch((error) => console.log(error, 'ERROR'));
             }
-        }
+          });
+
+          editButton.textContent = isEditMode ? 'SAVE' : 'EDIT';
+        });
+      }
+
+      topSection.appendChild(avatar);
+      topSection.appendChild(firstNameField);
+      topSection.appendChild(lastNameField);
+      topSection.appendChild(fullName);
+      topSection.appendChild(nativeFormat);
+
+      buttonsContainer.appendChild(copyButton);
+      buttonsContainer.appendChild(editButton);
+
+      container.appendChild(topSection);
+      container.appendChild(buttonsContainer);
+      section.appendChild(container);
+
+      mainContainer.appendChild(section);
+    } catch (error) {
+      if (error instanceof Error) {
+        console.error('Error:', error.message);
+      }
     }
+  }
+  async function showCombinedInfo() {
+    try {
+      if (!userData) {
+        return;
+      }
 
-    // Second section Details Info
-    async function showCombinedInfo() {
-        try {
-            const userId = getUserIdFromURL();
-            if (!userId) {
-                return;
-            }
+      const section = document.createElement('section');
+      section.classList.add('user__details-section', 'second-section');
 
-            const user = await fetchUserById(userId);
-            if (!user) {
-                return;
-            }
+      const data = [
+        {
+          header: 'GENERAL INFO',
+          fields: [
+            {
+              icon: 'working-icon.svg',
+              label: 'Department',
+              value: userData.department,
+              id: 'department',
+            },
+            {
+              icon: 'building-icon.svg',
+              label: 'Building',
+              value: userData.building,
+              id: 'building',
+            },
+            {
+              icon: 'id-icon.svg',
+              label: 'Room',
+              value: userData.room,
+              id: 'room',
+            },
+            {
+              icon: 'photo-icon.svg',
+              label: 'Desk number',
+              value: userData.desk_number,
+              id: 'desk_number',
+            },
+            {
+              icon: 'id-icon.svg',
+              label: 'Date of Birth',
+              value: `${userData.date_birth.day}/${userData.date_birth.month}/${userData.date_birth.year}`,
+              id: 'date_birth.year',
+            },
+            {
+              icon: 'name-icon.svg',
+              label: 'Manager',
+              value: `${userData.manager.first_name} ${userData.manager.last_name}`,
+              id: 'first_name-last_name',
+            },
+          ],
+        },
+        {
+          header: 'CONTACTS',
+          fields: [
+            {
+              icon: 'phone-icon.svg',
+              label: 'Phone',
+              value: userData.phone,
+              id: 'phone',
+            },
+            {
+              icon: 'email-icon.svg',
+              label: 'Email',
+              value: userData.email,
+              id: 'email',
+            },
+            {
+              icon: 'skype-icon.svg',
+              label: 'Skype',
+              value: userData.skype,
+              id: 'skype',
+            },
+            {
+              icon: 'id-icon.svg',
+              label: 'C-Number',
+              value: userData.cnumber,
+              id: 'cnumber',
+            },
+          ],
+        },
+        {
+          header: 'TRAVEL INFO',
+          fields: [
+            {
+              icon: 'citizenship-icon.svg',
+              label: 'Citizenship',
+              value: userData.citizenship,
+              id: 'citizenship',
+            },
+            {
+              icon: 'visa-icon.svg',
+              label: 'Visa Type',
+              value: `${userData.visa[0].type} (${userData.visa[0].issuing_country})`,
+              id: 'issuing_country',
+            },
+            {
+              icon: 'visa-icon.svg',
+              label: 'Visa Start Date',
+              value: new Date(userData.visa[0].start_date).toLocaleDateString(),
+              id: 'start_date',
+            },
+            {
+              icon: 'visa-icon.svg',
+              label: 'Visa End Date',
+              value: new Date(userData.visa[0].end_date).toLocaleDateString(),
+              id: 'end_date',
+            },
+          ],
+        },
+      ];
 
-            const section = document.createElement('section');
-            section.classList.add('user__details-section', 'second-section');
+      data.forEach(({ header, fields }) => {
+        const headerElement = document.createElement('h1');
+        headerElement.textContent = header;
+        headerElement.classList.add('user__details-header');
 
-            // Data mapping for each header
-            const data = [
-                {
-                    header: 'GENERAL INFO',
-                    fields: [
-                        { icon: 'working-icon.svg', label: 'Department', value: user.department },
-                        { icon: 'building-icon.svg', label: 'Building', value: user.building },
-                        { icon: 'id-icon.svg', label: 'Room', value: user.room },
-                        { icon: 'photo-icon.svg', label: 'Desk number', value: user.desk_number },
-                        {
-                            icon: 'id-icon.svg',
-                            label: 'Date of Birth',
-                            value: `${user.date_birth.day}/${user.date_birth.month}/${user.date_birth.year}`,
-                        },
-                        {
-                            icon: 'name-icon.svg',
-                            label: 'Manager',
-                            value: `${user.manager.first_name} ${user.manager.last_name}`,
-                        },
-                    ],
-                },
-                {
-                    header: 'CONTACTS',
-                    fields: [
-                        { icon: 'phone-icon.svg', label: 'Phone', value: user.phone },
-                        { icon: 'email-icon.svg', label: 'Email', value: user.email },
-                        { icon: 'skype-icon.svg', label: 'Skype', value: user.skype },
-                        { icon: 'id-icon.svg', label: 'C-Number', value: user.cnumber },
-                    ],
-                },
-                {
-                    header: 'TRAVEL INFO',
-                    fields: [
-                        { icon: 'citizenship-icon.svg', label: 'Citizenship', value: user.citizenship },
-                        {
-                            icon: 'visa-icon.svg',
-                            label: 'Visa Type',
-                            value: `${user.visa[0].type} (${user.visa[0].issuing_country})`,
-                        },
-                        {
-                            icon: 'visa-icon.svg',
-                            label: 'Visa Start Date',
-                            value: new Date(user.visa[0].start_date).toLocaleDateString(),
-                        },
-                        {
-                            icon: 'visa-icon.svg',
-                            label: 'Visa End Date',
-                            value: new Date(user.visa[0].end_date).toLocaleDateString(),
-                        },
-                    ],
-                },
-            ];
+        const container = document.createElement('div');
+        container.classList.add('infoo-container');
 
-            data.forEach(({ header, fields }) => {
-                const headerElement = document.createElement('h1');
-                headerElement.textContent = header;
-                headerElement.classList.add('user__details-header');
+        fields.forEach(({ icon, label, value, id }) => {
+          const field = createEditableField(icon, label, value, false, id);
+          container.appendChild(field);
+        });
 
-                const container = document.createElement('div');
-                container.classList.add('infoo-container');
+        section.appendChild(headerElement);
+        section.appendChild(container);
+      });
 
-                fields.forEach(({ icon, label, value }) => {
-                    const field = createField(icon, label, value);
-                    container.appendChild(field);
-                });
-
-                section.appendChild(headerElement);
-                section.appendChild(container);
-            });
-
-            mainContainer.appendChild(section);
-        } catch (error) {
-            if (error instanceof Error) {
-                console.error('Error:', error.message);
-            }
-        }
+      mainContainer.appendChild(section);
+    } catch (error) {
+      if (error instanceof Error) {
+        console.error('Error:', error.message);
+      }
     }
+  }
 
-    await showUserDetails();
-    await showCombinedInfo();
+  await showUserDetails();
+  await showCombinedInfo();
+  createHeader();
 });

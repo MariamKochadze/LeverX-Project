@@ -1,0 +1,234 @@
+@use '../../styles/variables.scss' as vars;
+
+input[type='radio'] {
+  display: none;
+}
+
+.search-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: vars.$main-background;
+}
+
+.search-toggle {
+  display: inline-block;
+  flex: 1;
+  margin: 0;
+  margin-right: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  text-align: center;
+  color: vars.$search-button-color-inactive;
+  cursor: pointer;
+  padding: 16px;
+  border: none;
+}
+
+#basic-search:checked ~ .search-header label[for='basic-search'] {
+  color: var(--text-main-color);
+  border-bottom: 3px solid var(--search-button-background);
+}
+
+#advanced-search:checked ~ .search-header label[for='advanced-search'] {
+  color: var(--text-main-color);
+  border-bottom: 3px solid vars.$search-button-background;
+}
+
+.search-body {
+  background-color: vars.$white;
+  padding: 20px;
+  border: 1px solid vars.$border-color;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+input[type='text'],
+input[type='email'],
+select {
+  width: 100%;
+  padding: 8px;
+  margin: 8px 0;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+label {
+  display: block;
+  font-size: 14px;
+  font-weight: bold;
+  margin-bottom: 4px;
+}
+
+.basic-search {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.basic-search .search-btn {
+  &:hover {
+    background-color: vars.$search-button-background;
+  }
+}
+
+.basic-search .input-container {
+  width: 100%;
+}
+
+.basic-search .input-container input {
+  width: 100%;
+}
+
+.basic-search input:focus,
+.advanced-search input:focus {
+  outline: 1px solid vars.$search-button-background;
+}
+
+.input-container {
+  position: relative;
+}
+
+.search-icon {
+  position: absolute;
+  left: 12px;
+  top: 30%;
+  transform: translateY(-50%);
+  color: #666;
+  z-index: 1;
+  width: 20px;
+  height: 20px;
+}
+
+.basic-search .input-container input {
+  padding-left: 40px;
+}
+
+.advanced-search {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 20px;
+}
+
+.advanced-search .input-container {
+  width: 100%;
+  margin-bottom: 15px;
+}
+
+.advanced-search .half-width {
+  display: inline-block;
+  width: calc(50% - 10px);
+  margin-right: 10px;
+}
+
+.advanced-search .half-width:last-child {
+  margin-right: 0;
+}
+
+.advanced-search .building-room {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.building,
+.room {
+  flex: 1;
+}
+
+.advanced-search select {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid vars.$border-color;
+  border-radius: 4px;
+  background-color: vars.$white;
+}
+
+.advanced-search .search-btn {
+  width: 100%;
+  padding: 12px;
+  background-color: vars.$search-button-background;
+  color: vars.$white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: background-color 0.3s ease;
+  &:hover {
+    background-color: vars.$navigation-button-background;
+  }
+}
+
+.view-toggle {
+  padding: 8px 16px;
+  margin: 0 5px;
+  border: 1px solid vars.$border-color;
+  border-radius: 4px;
+  background-color: vars.$white;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.view-toggle.active {
+  background-color: vars.$search-button-background;
+  color: vars.$white;
+  border-color: vars.$search-button-background;
+}
+
+#basic-options {
+  display: block;
+}
+
+#advanced-options {
+  display: none;
+}
+
+#advanced-search:checked ~ .search-body #basic-options {
+  display: none;
+}
+
+#advanced-search:checked ~ .search-body #advanced-options {
+  display: block;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .advanced-search .half-width {
+    width: 100%;
+    margin-right: 0;
+  }
+
+  .advanced-search .building-room {
+    flex-direction: column;
+    gap: 15px;
+  }
+}
+
+@media (max-width: 768px) {
+  .main__search {
+    display: none;
+  }
+
+  .header__mobile-search {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 15px 20px;
+    background-color: vars.$navigation-button-background;
+    margin-top: 10px;
+    cursor: pointer;
+  }
+  .header__nav-list {
+    position: absolute;
+    top: 105px;
+    z-index: 2;
+    background-color: vars.$white;
+  }
+
+  .search__icon {
+    width: 20px;
+    height: 20px;
+  }
+}

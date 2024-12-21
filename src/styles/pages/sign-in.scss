@@ -1,0 +1,175 @@
+@use '../variables.scss' as vars;
+
+$headerbackground: rgb(17, 17, 85);
+$headerBackgroundBoxShadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+$headerBackgroundBorder: 1px solid rgba(0, 0, 0, 0.1);
+$inputFieldBorder: 1px solid #ccc;
+
+@mixin flexContainer {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  min-height: 100vh;
+  box-sizing: border-box;
+  margin: 0;
+}
+
+.main__container {
+  @include flexContainer();
+  background: url(https://leverx.com/hs-fs/hubfs/main-bg.webp?width=767&name=main-bg.webp);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  overflow: hidden;
+  padding-left: 80px;
+}
+.login__header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 400px;
+  max-width: 90%;
+  height: auto;
+  padding: 20px;
+  background-color: $headerbackground;
+  box-shadow: $headerBackgroundBoxShadow;
+  border: $headerBackgroundBorder;
+  border-radius: 10px;
+  box-sizing: border-box;
+}
+
+.login__header h1 {
+  margin-bottom: 20px;
+  font-size: 2rem;
+  font-weight: bold;
+  text-align: center;
+  color: var(--white);
+}
+
+.input__box {
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.input__box label {
+  display: block;
+  margin-bottom: 5px;
+  font-size: 1rem;
+  font-weight: bold;
+  color: vars.$white;
+}
+
+.input-field {
+  width: 100%;
+  padding: 10px;
+  font-size: 1rem;
+  border: $inputFieldBorder;
+  border-radius: 5px;
+  box-sizing: border-box;
+}
+
+.input__box section {
+  display: flex;
+  align-items: center;
+  margin-top: 10px;
+}
+
+.input__box section label {
+  margin-left: 5px;
+  font-size: 0.9rem;
+  color: vars.$white;
+}
+
+.input__submit {
+  margin-top: 20px;
+  width: 100%;
+}
+
+.submit__btn {
+  width: 100%;
+  padding: 12px 20px;
+  font-size: 1rem;
+  font-weight: bold;
+  color: vars.$white;
+  background-color: vars.$navigation-background;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  &:hover {
+    background-color: vars.$search-button-background;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .main__container {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    height: 100vh;
+    overflow: auto;
+    box-sizing: border-box;
+  }
+
+  .login__header {
+    width: 100%;
+    max-width: 90%;
+    padding: 20px;
+    box-shadow: $headerBackgroundBoxShadow;
+    border: $headerBackgroundBorder;
+    border-radius: 5px;
+
+    .login__header h1 {
+      font-size: 1.5rem;
+      margin-bottom: 15px;
+    }
+
+    .input__box {
+      margin-bottom: 15px;
+    }
+
+    .input-field {
+      font-size: 0.9rem;
+      padding: 8px;
+    }
+
+    .submit__btn {
+      font-size: 0.9rem;
+      padding: 10px;
+    }
+
+    .login__title {
+      text-align: center;
+      padding-right: 0;
+    }
+
+    .login__title h1 {
+      font-size: 1.5rem;
+    }
+  }
+}
+
+.login__title {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  flex: 1;
+  padding-right: 80px;
+  text-align: center;
+}
+
+.login__title h1 {
+  font-size: 3rem;
+  font-weight: bold;
+  color: vars.$white;
+  line-height: 1.2;
+}
+
+#error-message {
+  display: none;
+  margin: 10px 0;
+  color: red;
+  font-size: 20px;
+}

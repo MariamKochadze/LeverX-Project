@@ -1,0 +1,28 @@
+@use '../../styles/variables.scss' as vars;
+
+.button {
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: vars.$search-button-background;
+  color: vars.$search-button-color;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  text-align: center;
+  text-decoration: none;
+  transition: background-color 0.3s ease;
+}
+
+/* Search Button */
+.basic-search .search-btn {
+  width: 100%;
+  padding: 5px 10px;
+  background-color: vars.$search-button-background;
+  color: vars.$white;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  border-radius: 4px;
+  margin-top: 10px;
+}
