@@ -15,7 +15,7 @@ const SignInPage: React.FC = () => {
         setErrorVisible(false);
 
         const success = await authenticateUser(email, password);
-        console.log(success);
+        
 
         if (success) {
             window.location.replace('/');

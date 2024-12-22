@@ -34,7 +34,7 @@ const UsersPage: React.FC = () => {
             const response = await fetch('http://localhost:3000/users');
             const data = await response.json();
             setUsersData(data);
-            console.log(data);
+            
             setFilteredUsers(data);
 
             const searchQuery = searchParams.get('search');
@@ -47,6 +47,7 @@ const UsersPage: React.FC = () => {
     };
 
     //search
+    
     const handleBasicSearch = () => {
         const term = searchInputValue.toLowerCase();
         const filtered = usersData.filter((user) => {

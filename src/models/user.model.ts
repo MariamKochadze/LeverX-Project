@@ -43,6 +43,7 @@ export interface User {
 }
 
 export interface EditUser {
+    id: string;
     img: { src: string; alt: string };
     name: string;
     surname: string;

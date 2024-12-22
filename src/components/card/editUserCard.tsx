@@ -1,25 +1,34 @@
 import React from 'react';
-import { Role } from '../../models/user.model';
-
+import { useNavigate } from 'react-router-dom';
+import { EditUser, Role } from './../../models/user.model';
 
 interface EditUserCardProps {
-    first_name: string;
-    last_name: string;
-    user_avatar: string;
-    role: Role;
+    userData: EditUser;
 }
 
-export const EditUserCard: React.FC<EditUserCardProps> = ({ first_name, last_name, user_avatar, role }) => {
+export const EditUserCard: React.FC<EditUserCardProps> = ({ userData }) => {
+    const navigate = useNavigate();
 
-    const avatarSrc = require(`@assets/${user_avatar.split('/').pop()}`);
-    
+    const handleCardClick = () => {
+        console.log('Navigating to:', `/user-details/${userData.id}`);
+        navigate(`/user-details/${userData.id}`);
+    };
+
     return (
-        <div className="edit-user-card">
-            <img className="edit-user-img" src={avatarSrc} alt="user avatar" />
+        <div className="edit-user-card" onClick={handleCardClick}>
+            <img
+                className="edit-user-img"
+                src={`/assets/${userData.img.src.split('/').pop()}`}
+                alt={userData.img.alt || 'User Avatar'}
+            />
             <div className="user-info">
-                <span className="user-fullname">{`${first_name} ${last_name}`}</span>
+                <span className="user-fullname">{`${userData.name} ${userData.surname}`}</span>
             </div>
-            <span className={`edit-user-role role-${Role[role].toLowerCase()}`}>{Role[role]}</span>
+            <span className={`edit-user-role role-${String(userData.role).toLowerCase()}`}>
+                {String(userData.role)}
+            </span>
         </div>
     );
 };
+
+export default EditUserCard;

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { Role, User } from '../../models/user.model';
 import { isAuthenticatedUser, logOut } from '../../shared/authenticateUser';
@@ -6,6 +6,7 @@ import '../../../public/index.scss';
 import questionMarkIcon from '@assets/question-mark.svg';
 import powerOffIcon from '@assets/power-off-solid.svg';
 import searchIcon from '@assets/search-icon.svg';
+import { FaBars, FaTimes } from 'react-icons/fa';
 
 const defaultAvatar = require('@assets/avataaars (1).svg');
 
@@ -20,6 +21,7 @@ export const Header: React.FC<HeaderProps> = () => {
     const [userData, setUserData] = useState<User | null>(null);
     const currentUser = isAuthenticatedUser();
     const navigate = useNavigate();
+    const navRef = useRef<HTMLElement | null>(null);
     const userAvatar = userData?.user_avatar
         ? require(`@assets/${userData.user_avatar.split('/').pop()}`)
         : defaultAvatar;
@@ -44,17 +46,15 @@ export const Header: React.FC<HeaderProps> = () => {
         navigate(`/user-details/${userId}`);
     };
 
+    const showNavBar = () => {
+        if (navRef.current) {
+            navRef.current.classList.toggle('responsive_nav');
+        }
+    };
+
     return (
         <header className="header">
-            <nav className="header__nav">
-                <input type="checkbox" id="burger-toggle" className="header__burger-input" />
-                <label htmlFor="burger-toggle" className="header__burger">
-                    <div className="header__burger-line"></div>
-                    <div className="header__burger-line"></div>
-                    <div className="header__burger-line"></div>
-                </label>
-                <div className="page-overlay"></div>
-
+            <nav className="header__nav" ref={navRef}>
                 <ul className="header__nav-list">
                     <li className="header__logo">
                         <Link to="/" className="header__title">
@@ -66,7 +66,7 @@ export const Header: React.FC<HeaderProps> = () => {
                     <li className="header__tab header__active-tab">Address Book</li>
                     <li className="header__tab header__active-tab edit-setting">
                         {(currentUser?.userRole === Role.ADMIN || currentUser?.userRole === Role.HR) && (
-                            <Link to="/edit">Settings</Link>
+                            <Link to="/permission">Settings</Link>
                         )}
                     </li>
 
@@ -93,10 +93,13 @@ export const Header: React.FC<HeaderProps> = () => {
                 </ul>
             </nav>
 
-            <div className="header__mobile-search">
-                <img src={searchIcon} alt="Search icon" className="search__icon" />
-                <span>Open search panel</span>
-            </div>
+            <button className="nav-btn nav-close-btn" onClick={showNavBar}>
+                <FaTimes />
+            </button>
+
+            <button className="nav-btn" onClick={showNavBar}>
+                <FaBars />
+            </button>
         </header>
     );
 };

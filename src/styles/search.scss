@@ -1,6 +1,5 @@
 @use '../styles/variables.scss' as vars;
 
-
 input[type='radio'] {
     display: none;
 }
@@ -66,6 +65,14 @@ label {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
+}
+
+#edit__search {
+    padding-left: 40px;
+}
+
+.input-container #edit__search-icon {
+    top: 50%;
 }
 
 .basic-search .search-btn {

@@ -3,7 +3,6 @@ import { Role, User } from '../models/user.model';
 const API = 'https://www.toptal.com/developers/bcrypt/api';
 
 const findUser = async (email: string) => {
-    console.log(email);
     try {
         const response = await fetch(`http://localhost:3000/users?email=${email}`, {
             headers: {

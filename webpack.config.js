@@ -8,7 +8,7 @@ module.exports = {
         main: './src/index.tsx',
         userDetails: './src/pages/userDetails/userDetails.tsx',
         signIn: './src/pages/signIn/signInPage.tsx',
-        edit: './src/pages/edit/edit.tsx',
+        edit: './src/pages/permission/permission.tsx',
     },
     output: {
         path: path.resolve(__dirname, 'dist'),

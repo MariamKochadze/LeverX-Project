@@ -1,8 +1,7 @@
 @use '../../styles/variables.scss' as vars;
 
-
 $edit-list-background-color: #fafafa;
-$active-user:#3498db;
+$active-user: #3498db;
 
 .setting__user-list {
     display: flex;
@@ -20,8 +19,14 @@ $active-user:#3498db;
     padding: 16px 24px;
     background-color: vars.$white;
     border-radius: 12px;
+    cursor: pointer;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
-    transition: transform 0.2s ease;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+    &:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+    }
 }
 
 .edit-user-img {
@@ -66,6 +71,5 @@ $active-user:#3498db;
     &.role-employee {
         background-color: #f7f2f2;
         color: vars.$white;
-
     }
 }
