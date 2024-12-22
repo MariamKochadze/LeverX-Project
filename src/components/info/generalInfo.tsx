@@ -9,19 +9,22 @@ import nameIcon from '@assets/name-icon.svg';
 interface GeneralInfoProps {
     userData: User;
     isEditMode: boolean;
+    setEditForm: (value: string, id: string) => void;
+
 }
 
-export const GeneralInfo: React.FC<GeneralInfoProps> = ({ userData, isEditMode }) => {
+export const GeneralInfo: React.FC<GeneralInfoProps> = ({ userData, isEditMode,setEditForm }) => {
     return (
-        <section className="user__details-section">
+        <>
             <h1 className="user__details-header">GENERAL INFO</h1>
-            <div className="info-container">
+            <div className="infoo-container">
                 <InfoField
                     icon={workingIcon}
                     label="Department"
                     value={userData.department}
                     isEditable={isEditMode}
                     id="department"
+                    onChange={setEditForm}
                 />
                 <InfoField
                     icon={buildingIcon}
@@ -29,6 +32,8 @@ export const GeneralInfo: React.FC<GeneralInfoProps> = ({ userData, isEditMode }
                     value={userData.building}
                     isEditable={isEditMode}
                     id="building"
+                    onChange={setEditForm}
+
                 />
                 <InfoField icon={idIcon} label="Room" value={userData.room} isEditable={isEditMode} id="room" />
                 <InfoField
@@ -37,6 +42,8 @@ export const GeneralInfo: React.FC<GeneralInfoProps> = ({ userData, isEditMode }
                     value={userData.desk_number}
                     isEditable={isEditMode}
                     id="desk_number"
+                    onChange={setEditForm}
+
                 />
                 <InfoField
                     icon={idIcon}
@@ -44,6 +51,8 @@ export const GeneralInfo: React.FC<GeneralInfoProps> = ({ userData, isEditMode }
                     value={`${userData.date_birth.day}/${userData.date_birth.month}/${userData.date_birth.year}`}
                     isEditable={isEditMode}
                     id="date_birth.year"
+                    onChange={setEditForm}
+
                 />
                 <InfoField
                     icon={nameIcon}
@@ -51,8 +60,10 @@ export const GeneralInfo: React.FC<GeneralInfoProps> = ({ userData, isEditMode }
                     value={`${userData.manager.first_name} ${userData.manager.last_name}`}
                     isEditable={isEditMode}
                     id="first_name-last_name"
+                    onChange={setEditForm}
+
                 />
             </div>
-        </section>
+        </>
     );
 };

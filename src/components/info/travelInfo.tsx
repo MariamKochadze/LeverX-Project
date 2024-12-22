@@ -6,19 +6,21 @@ import visaIcon from '@assets/visa-icon.svg';
 interface TravelInfoProps {
     userData: User;
     isEditMode: boolean;
+    setEditForm: (value: string, id: string) => void;
 }
 
-export const TravelInfo: React.FC<TravelInfoProps> = ({ userData, isEditMode }) => {
+export const TravelInfo: React.FC<TravelInfoProps> = ({ userData, isEditMode, setEditForm }) => {
     return (
-        <section className="user__details-section">
+        <>
             <h1 className="user__details-header">TRAVEL INFO</h1>
-            <div className="info-container">
+            <div className="infoo-container">
                 <InfoField
                     icon={citizenshipIcon}
                     label="Citizenship"
                     value={userData.citizenship}
                     isEditable={isEditMode}
                     id="citizenship"
+                    onChange={(value: string, id) => setEditForm(value, id)}
                 />
                 <InfoField
                     icon={visaIcon}
@@ -42,6 +44,6 @@ export const TravelInfo: React.FC<TravelInfoProps> = ({ userData, isEditMode }) 
                     id="end_date"
                 />
             </div>
-        </section>
+        </>
     );
 };

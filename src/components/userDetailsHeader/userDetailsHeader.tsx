@@ -4,12 +4,14 @@ import backIcon from '@assets/back-icon.svg';
 import copyIcon from '@assets/copy-icon.svg';
 import editIcon from '@assets/edit-icon.svg';
 import { useNavigate } from 'react-router-dom';
+import { useState } from 'react';
 
 interface UserDetailsHeaderProps {
     userData: User;
     isEditMode: boolean;
-    setIsEditMode: (mode: boolean) => void;
+    setIsEditMode: () => void;
     currentUser: any;
+    setEditForm: (value: string, id: string) => void;
 }
 
 export const UserDetailsHeader: React.FC<UserDetailsHeaderProps> = ({
@@ -19,6 +21,7 @@ export const UserDetailsHeader: React.FC<UserDetailsHeaderProps> = ({
     currentUser,
 }) => {
     const navigate = useNavigate();
+
     const avatarSrc = require(`@assets/${userData.user_avatar.split('/').pop()}`);
 
     return (
@@ -44,7 +47,7 @@ export const UserDetailsHeader: React.FC<UserDetailsHeaderProps> = ({
                     <img src={copyIcon} alt="copy icon" className="copy__icon" />
                     Copy link
                 </button>
-                <button className="user__details-edit-button" onClick={() => setIsEditMode(!isEditMode)}>
+                <button className="user__details-edit-button" onClick={() => setIsEditMode()}>
                     <img src={editIcon} alt="edit icon" className="edit__icon" />
                     {isEditMode ? 'SAVE' : 'EDIT'}
                 </button>

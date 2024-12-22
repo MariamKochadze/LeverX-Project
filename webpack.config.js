@@ -87,11 +87,12 @@ module.exports = {
             progress: false,
         },
         historyApiFallback: true,
-        port: 3001,
+        port: 8080,
         hot: false,
         liveReload: false,
         devMiddleware: {
             stats: 'errors-only',
         },
     },
+    open: true,
 };

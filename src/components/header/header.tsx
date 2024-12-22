@@ -22,6 +22,7 @@ export const Header: React.FC<HeaderProps> = () => {
     const currentUser = isAuthenticatedUser();
     const navigate = useNavigate();
     const navRef = useRef<HTMLElement | null>(null);
+    const [activeTab, setActiveTab] = useState<string>('');
     const userAvatar = userData?.user_avatar
         ? require(`@assets/${userData.user_avatar.split('/').pop()}`)
         : defaultAvatar;
@@ -35,6 +36,26 @@ export const Header: React.FC<HeaderProps> = () => {
             console.error('Error fetching user:', error);
         }
     };
+
+    useEffect(() => {
+        if (currentUser?.userId) {
+            fetchUser(currentUser.userId);
+        }
+    }, [currentUser]);
+
+    useEffect(() => {
+        switch (location.pathname) {
+            case '/permission':
+                setActiveTab('edit-setting');
+                break;
+            case '/':
+                setActiveTab('address-book');
+                break;
+            default:
+                setActiveTab('');
+                break;
+        }
+    }, [location.pathname]);
 
     useEffect(() => {
         if (currentUser?.userId) {
@@ -63,8 +84,10 @@ export const Header: React.FC<HeaderProps> = () => {
                         </Link>
                     </li>
 
-                    <li className="header__tab header__active-tab">Address Book</li>
-                    <li className="header__tab header__active-tab edit-setting">
+                    <li className={`header__tab ${activeTab === 'address-book' ? 'header__active-tab' : ''}`}>
+                        <Link to="/">Address Book</Link>
+                    </li>
+                    <li className={`header__tab ${activeTab === 'edit-setting' ? 'header__active-tab' : ''}`}>
                         {(currentUser?.userRole === Role.ADMIN || currentUser?.userRole === Role.HR) && (
                             <Link to="/permission">Settings</Link>
                         )}

@@ -12,6 +12,7 @@ import listIcon from '@assets/list-icon.svg';
 import serachicon from '@assets/search-icon.svg';
 import nameIcon from '@assets/name-icon.svg';
 import photoIcon from '@assets/photo-icon.svg';
+import { UserNotFound } from '../../components/userNotFound/userNotFound';
 
 const UsersPage: React.FC = () => {
     const navigate = useNavigate();
@@ -34,49 +35,23 @@ const UsersPage: React.FC = () => {
             const response = await fetch('http://localhost:3000/users');
             const data = await response.json();
             setUsersData(data);
-            
-            setFilteredUsers(data);
 
-            const searchQuery = searchParams.get('search');
-            if (searchQuery) {
-                basicSearch(searchQuery);
-            }
+            setFilteredUsers(data);
         } catch (error) {
             console.error('Error fetching users:', error);
         }
     };
 
     //search
-    
+
     const handleBasicSearch = () => {
         const term = searchInputValue.toLowerCase();
         const filtered = usersData.filter((user) => {
             const fullName = `${user.first_name} ${user.last_name}`.toLowerCase();
-            const id = user.id.toLowerCase();
-            return fullName.includes(term) || id === term;
+            return fullName.includes(term);
         });
 
         setFilteredUsers(filtered);
-        setSearchParams({ search: searchInputValue });
-
-        if (filtered.length === 0) {
-            navigate('/notFound', {
-                state: {
-                    reason: `No users found matching "${searchInputValue}"`,
-                },
-            });
-        }
-    };
-
-    const basicSearch = (searchTerm: string) => {
-        const term = searchTerm.toLowerCase();
-        const filtered = usersData.filter((user) => {
-            const fullName = `${user.first_name} ${user.last_name}`.toLowerCase();
-            const id = user.id.toLowerCase();
-            return fullName.includes(term) || id === term;
-        });
-        setFilteredUsers(filtered);
-        setSearchParams({ search: searchTerm });
     };
 
     const advancedSearch = (formData: UserFormData) => {
@@ -279,11 +254,15 @@ const UsersPage: React.FC = () => {
                         </div>
                     </div>
                     <div className="users-body">
-                        <div className={`users-view ${viewType}-view`}>
-                            {filteredUsers.map((user) => (
-                                <UserCard key={user.id} user={user} />
-                            ))}
-                        </div>
+                        {filteredUsers.length === 0 ? (
+                            <UserNotFound />
+                        ) : (
+                            <div className={`users-view ${viewType}-view`}>
+                                {filteredUsers.map((user) => (
+                                    <UserCard key={user.id} user={user} />
+                                ))}
+                            </div>
+                        )}
                     </div>
                 </section>
             </main>

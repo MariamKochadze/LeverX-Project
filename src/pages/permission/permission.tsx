@@ -9,9 +9,11 @@ import { useNavigate } from 'react-router-dom';
 
 const Permission: React.FC = () => {
     const userListRef = useRef<HTMLDivElement>(null);
-    const currentUser = isAuthenticatedUser();
     const [users, setUsers] = useState<User[]>([]);
     const navigate = useNavigate();
+    const [searchInputValue, setSearchInputValue] = useState('');
+    const [filteredUsers, setFilteredUsers] = useState<User[]>([]);
+    const [currentUser, setCurrentUser] = useState<{ userRole: Role; userId: string } | undefined>(undefined);
 
     const fetchUsers = async (hrId?: string) => {
         const url = hrId ? `http://localhost:3000/users/?manager.id=${hrId}` : `http://localhost:3000/users/`;
@@ -19,6 +21,7 @@ const Permission: React.FC = () => {
         try {
             const response = await request<User[]>(url, 'GET');
             setUsers(response);
+            setFilteredUsers(response);
         } catch (error) {
             console.error('Error fetching users:', error);
         }
@@ -26,20 +29,38 @@ const Permission: React.FC = () => {
 
     useEffect(() => {
         const initializeUsers = async () => {
-            if (!currentUser || (currentUser.userRole !== Role.ADMIN && currentUser.userRole !== Role.HR)) {
-                navigate('/sign-in.html');
+            const user = isAuthenticatedUser();
+            if (!user) {
+                navigate('/signIn');
+                return;
+            } else if (user.userRole !== Role.ADMIN && user.userRole !== Role.HR) {
+                navigate('/');
                 return;
             }
-
-            if (currentUser.userRole === Role.ADMIN) {
+            setCurrentUser(user);
+            if (user.userRole === Role.ADMIN) {
                 await fetchUsers();
-            } else if (currentUser.userRole === Role.HR) {
-                await fetchUsers(currentUser.userId);
+            } else if (user.userRole === Role.HR) {
+                await fetchUsers(user.userId);
             }
         };
 
         initializeUsers();
-    }, [currentUser, navigate]);
+    }, []);
+
+    const handleBasicSearch = () => {
+        const term = searchInputValue.toLowerCase().trim();
+        const filtered = users.filter((user) => {
+            const fullName = `${user.first_name} ${user.last_name}`.toLowerCase();
+            return fullName.includes(term);
+        });
+
+        setFilteredUsers(filtered);
+    };
+
+    useEffect(() => {
+        handleBasicSearch();
+    }, [searchInputValue]);
 
     return (
         <>
@@ -51,10 +72,16 @@ const Permission: React.FC = () => {
                     src="../../assets/search-icon.svg"
                     alt="Search icon"
                 />
-                <input type="text" id="edit__search" placeholder="Type to Search" />
+                <input
+                    type="text"
+                    id="edit__search"
+                    placeholder="Type to Search"
+                    onChange={(e) => setSearchInputValue(e.target.value)}
+                    value={searchInputValue}
+                />
             </div>
             <div className="setting__user-list" ref={userListRef}>
-                {users.map((user) => {
+                {filteredUsers.map((user) => {
                     const avatarSrc = require(`@assets/${user.user_avatar.split('/').pop()}`);
                     return (
                         <EditUserCard

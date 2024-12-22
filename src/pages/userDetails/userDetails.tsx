@@ -7,11 +7,12 @@ import { TravelInfo } from '../../components/info/travelInfo';
 import { UserDetailsHeader } from '../../components/userDetailsHeader/userDetailsHeader';
 import { useNavigate, useParams } from 'react-router-dom';
 import { isAuthenticatedUser } from '../../shared/authenticateUser';
-import { User } from '../../models/user.model';
+import { Role, User } from '../../models/user.model';
 
 export const UserDetails: React.FC = () => {
     const [userData, setUserData] = useState<User | null>(null);
     const [isEditMode, setIsEditMode] = useState(false);
+    const [editForm, setEditForm] = useState<User | null>(null);
     const { id } = useParams();
     const navigate = useNavigate();
     const currentUser = isAuthenticatedUser();
@@ -44,21 +45,67 @@ export const UserDetails: React.FC = () => {
         }
     };
 
+    useEffect(() => {
+        if (userData) {
+            Object.keys(userData).forEach((key) => {
+                updateForm(userData[key as keyof typeof userData], key);
+            });
+        }
+    }, [userData]);
+
+    const updateForm = (value: any, id: string) => {
+        setEditForm((editForm) => {
+            if (!editForm) {
+                editForm = {} as User;
+            }
+            return { ...editForm, [id]: value };
+        });
+    };
+
+    const updateMode = () => {
+        if (
+            currentUser?.userRole === Role.ADMIN ||
+            (currentUser?.userRole === Role.HR && currentUser.userId === userData?.manager.id)
+        ) {
+            setIsEditMode((prev) => !prev);
+        }
+    };
+
+    useEffect(() => {
+        if (!isEditMode) {
+            fetch(`http://localhost:3000/users/${id}`, {
+                method: 'PATCH',
+                body: JSON.stringify(editForm),
+            })
+                .then((response) => response.json())
+                .then((data) => {
+                    setUserData(data);
+                })
+                .catch((error) => console.log(error, 'ERROR'));
+        }
+    }, [isEditMode]);
+
     return (
         <>
             <Header />
+
             <div className="main-container">
-                {userData && (
+                {editForm && (
                     <>
-                        <UserDetailsHeader
-                            userData={userData}
-                            isEditMode={isEditMode}
-                            setIsEditMode={setIsEditMode}
-                            currentUser={currentUser}
-                        />
-                        <GeneralInfo userData={userData} isEditMode={isEditMode} />
-                        <ContactInfo userData={userData} isEditMode={isEditMode} />
-                        <TravelInfo userData={userData} isEditMode={isEditMode} />
+                        <section className="user__details-section">
+                            <UserDetailsHeader
+                                setEditForm={updateForm}
+                                userData={editForm}
+                                isEditMode={isEditMode}
+                                setIsEditMode={updateMode}
+                                currentUser={currentUser}
+                            />
+                        </section>
+                        <section className="user__details-section second-section">
+                            <GeneralInfo userData={editForm} isEditMode={isEditMode} setEditForm={updateForm} />
+                            <ContactInfo userData={editForm} isEditMode={isEditMode} setEditForm={updateForm} />
+                            <TravelInfo userData={editForm} isEditMode={isEditMode} setEditForm={updateForm} />
+                        </section>
                     </>
                 )}
             </div>

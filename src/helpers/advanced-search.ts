@@ -1,23 +1,23 @@
 import { User, UserFormData } from '../models/user.model';
 
 export const search = (formData: UserFormData, users: User[]) => {
-    const filledFields = Object.entries(formData);
+  const filledFields = Object.entries(formData);
 
-    let filteredUsers: User[] = [];
+  let filteredUsers: User[] = [];
 
-    filledFields.forEach((field) => {
-        filteredUsers = users.filter((user) => {
-            if (field[0] === 'name') {
-                field[0] = 'first_name';
-            }
+  filledFields.forEach((field) => {
+    filteredUsers = users.filter((user) => {
+      if (field[0] === 'name') {
+        field[0] = 'first_name';
+      }
 
-            const value = user[field[0] as keyof User];
-            if (typeof value !== 'string') {
-                return false;
-            }
-            return value.toLowerCase().includes(field[1].toLocaleLowerCase());
-        });
+      const value = user[field[0] as keyof User];
+      if (typeof value !== 'string') {
+        return false;
+      }
+      return value.toLowerCase().includes(field[1].toLocaleLowerCase());
     });
+  });
 
-    return filteredUsers;
+  return filteredUsers;
 };
