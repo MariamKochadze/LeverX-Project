@@ -4,12 +4,12 @@ $edit-list-background-color: #fafafa;
 $active-user: #3498db;
 
 .setting__user-list {
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-    padding: 20px;
-    margin: 0 auto;
-    background-color: $edit-list-background-color;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 20px;
+  margin: 0 auto;
+  background-color: vars.$edit-list-background-color;
 }
 
 .edit-user-card {
@@ -30,43 +30,43 @@ $active-user: #3498db;
 }
 
 .edit-user-img {
-    width: 48px;
-    height: 48px;
-    border-radius: 50%;
-    object-fit: cover;
-    margin-right: 24px;
-    border: 2px solid #f0f0f0;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-right: 24px;
+  border: 2px solid #f0f0f0;
 }
 
 .user-info {
-    display: flex;
-    align-items: center;
-    gap: 8px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
 }
 
 .edit-user-name,
 .edit-user-surname {
-    font-size: 16px;
-    color: #2c3e50;
-    font-weight: 500;
+  font-size: 16px;
+  color: #2c3e50;
+  font-weight: 500;
 }
 
 .edit-user-role {
-    padding: 6px 12px;
-    border-radius: 20px;
-    font-size: 14px;
-    font-weight: 600;
-    text-transform: uppercase;
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 14px;
+  font-weight: 600;
+  text-transform: uppercase;
 
-    &.role-admin {
-        background-color: #f7f2f2;
-        color: white;
-    }
+  &.role-admin {
+    background-color: #f7f2f2;
+    color: white;
+  }
 
-    &.role-hr {
-        background-color: $active-user;
-        color: vars.$white;
-    }
+  &.role-hr {
+    background-color: vars.$active-user;
+    color: vars.$white;
+  }
 
     &.role-employee {
         background-color: #f7f2f2;

@@ -82,6 +82,7 @@ export interface EditableData {
   email: string;
   skype: string;
   cnumber: string;
+<<<<<<< HEAD
 }
 
 export interface UserFormData {
@@ -92,4 +93,6 @@ export interface UserFormData {
   building?: string;
   room?: string;
   department?: string;
+=======
+>>>>>>> main
 }
