@@ -1,6 +1,6 @@
 import '../../styles/pages/sign-in.scss';
 
-import { authenticateUser, registerUser } from '../../shared/authenticate-user';
+import { authenticateUser } from '../../shared/authenticateUser';
 
 window.addEventListener('load', () => {
   const form: HTMLFormElement = document.querySelector('#signin-form')!;
