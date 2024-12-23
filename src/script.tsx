@@ -4,7 +4,7 @@ import '../public/index.scss';
 
 import { User, UserFormData } from './models/user.model';
 import { search } from './helpers/advanced-search';
-import { Header } from './components/header/header';
+
 import { isAuthenticatedUser } from './shared/authenticateUser';
 
 interface SearchProps {
@@ -167,7 +167,6 @@ export const HomePage: React.FC = () => {
 
   return (
     <div className="home-page">
-      <Header />
       <main>
         <div className="search-container">
           <BasicSearchForm

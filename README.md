@@ -8,8 +8,12 @@
 
 4. npm start
 
-5. open browser: [localhost:3001](http://localhost:3001/)
+5. open browser: http://localhost:8080
 
-5. HR user credendtial: email: lula.aguilar@leverx.com, password: secret
+## Users
 
-6. ADMIN user credentials: email: luffy.monkey@leverx.com, password: secret
+6. HR user credendtial: email: lula.aguilar@leverx.com, password: secret
+
+7. ADMIN user credentials: email: luffy.monkey@leverx.com, password: secret
+
+8. Employee user credentials: email: fintan.cruz@leverx.com, password: secret
