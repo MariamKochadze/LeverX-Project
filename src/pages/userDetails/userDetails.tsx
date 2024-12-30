@@ -32,7 +32,7 @@ export const UserDetails: React.FC = () => {
 
   const fetchUserData = async () => {
     try {
-      const response = await fetch(`http://localhost:3000/users/${id}`);
+      const response = await fetch(`https://db-qc67.vercel.app/users/${id}`);
       if (!response.ok) {
         navigate('/');
         return;
@@ -74,7 +74,7 @@ export const UserDetails: React.FC = () => {
 
   useEffect(() => {
     if (!isEditMode) {
-      fetch(`http://localhost:3000/users/${id}`, {
+      fetch(`https://db-qc67.vercel.app/users/${id}`, {
         method: 'PATCH',
         body: JSON.stringify(editForm),
       })

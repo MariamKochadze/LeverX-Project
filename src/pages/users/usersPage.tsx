@@ -32,7 +32,7 @@ const UsersPage: React.FC = () => {
 
   const fetchUsers = async () => {
     try {
-      const response = await fetch('http://localhost:3000/users');
+      const response = await fetch('https://db-qc67.vercel.app/users');
       const data = await response.json();
       setUsersData(data);
 

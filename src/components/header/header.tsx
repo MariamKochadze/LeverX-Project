@@ -29,7 +29,7 @@ export const Header: React.FC<HeaderProps> = () => {
 
   const fetchUser = async (id: string) => {
     try {
-      const response = await fetch(`http://localhost:3000/users/${id}`);
+      const response = await fetch(`https://db-qc67.vercel.app/users/${id}`);
       const data = await response.json();
       setUserData(data);
     } catch (error) {

@@ -19,8 +19,8 @@ const Permission: React.FC = () => {
 
   const fetchUsers = async (hrId?: string) => {
     const url = hrId
-      ? `http://localhost:3000/users/?manager.id=${hrId}`
-      : `http://localhost:3000/users/`;
+      ? `https://db-qc67.vercel.app/users/?manager.id=${hrId}`
+      : `https://db-qc67.vercel.app/users/`;
 
     try {
       const response = await request<User[]>(url, 'GET');

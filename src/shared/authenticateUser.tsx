@@ -4,11 +4,14 @@ const API = 'https://www.toptal.com/developers/bcrypt/api';
 
 const findUser = async (email: string) => {
   try {
-    const response = await fetch(`http://localhost:3000/users?email=${email}`, {
-      headers: {
-        Accept: 'application/json',
-      },
-    });
+    const response = await fetch(
+      `https://db-qc67.vercel.app/users?email=${email}`,
+      {
+        headers: {
+          Accept: 'application/json',
+        },
+      }
+    );
 
     if (!response.ok) {
       throw new Error('Network response was not ok');
