@@ -1,6 +1,5 @@
 @use '../../styles/variables.scss' as vars;
 
-
 $headerbackground: rgb(17, 17, 85);
 $headerBackgroundBoxShadow: 0 8px 16px rgba(0, 0, 0, 0.2);
 $headerBackgroundBorder: 1px solid rgba(0, 0, 0, 0.1);
@@ -142,12 +141,14 @@ $inputFieldBorder: 1px solid #ccc;
     }
 
     .login__title {
-      text-align: center;
       padding-right: 0;
-    }
+      text-align: center;
+      width: 100%;
+      justify-content: center;
 
-    .login__title h1 {
-      font-size: 1.5rem;
+      h1 {
+        font-size: 1.5rem;
+      }
     }
   }
 }
@@ -157,7 +158,7 @@ $inputFieldBorder: 1px solid #ccc;
   justify-content: flex-end;
   align-items: center;
   flex: 1;
-  padding-right: 80px;
+  padding-right: 0;
   text-align: center;
 }
 

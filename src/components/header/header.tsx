@@ -75,15 +75,23 @@ export const Header: React.FC<HeaderProps> = () => {
 
   return (
     <header className="header">
+      <div id="header-logo-container">
+        <Link to="/" className="header__title">
+          <span className="header__title--small">LEVERX</span>
+          <span className="header__title--large">EMPLOYEE SERVICES</span>
+        </Link>
+      </div>
       <nav className="header__nav" ref={navRef}>
         <ul className="header__nav-list">
-          <li className="header__logo">
+          {/* Desktop Logo */}
+          <li className="header__logo" id="header__logoo">
             <Link to="/" className="header__title">
               <span className="header__title--small">LEVERX</span>
               <span className="header__title--large">EMPLOYEE SERVICES</span>
             </Link>
           </li>
 
+          {/* Desktop Navigation */}
           <li
             className={`header__tab ${activeTab === 'address-book' ? 'header__active-tab' : ''}`}
           >
@@ -94,10 +102,13 @@ export const Header: React.FC<HeaderProps> = () => {
           >
             {(currentUser?.userRole === Role.ADMIN ||
               currentUser?.userRole === Role.HR) && (
-              <Link to="/permission">Settings</Link>
+              <Link to="/permission" className="settings__tab">
+                Settings
+              </Link>
             )}
           </li>
 
+          {/* Desktop Actions */}
           <li className="header__actions" id="profile__icon">
             <Link to="#" className="header__button">
               <img
@@ -107,7 +118,6 @@ export const Header: React.FC<HeaderProps> = () => {
               />
               SUPPORT
             </Link>
-
             <Link
               to={`/user-details/${userData?.id || '550e8400-e29b-41d4-a716-446655440000'}`}
               className="header__button"
@@ -123,7 +133,6 @@ export const Header: React.FC<HeaderProps> = () => {
                   : 'LUFFY MONKEY'}
               </span>
             </Link>
-
             <Link to="#" className="header__button log-out" onClick={logOut}>
               <img
                 src={powerOffIcon}
@@ -132,13 +141,51 @@ export const Header: React.FC<HeaderProps> = () => {
               />
             </Link>
           </li>
+
+          <li className="mobile-menu-container">
+            <div className="mobile-profile">
+              <div className="mobile-profile__header">
+                <img
+                  src={userAvatar}
+                  alt="Avatar icon"
+                  className="header__profile--icon"
+                />
+                <span className="profile-name">
+                  {userData
+                    ? `${userData.first_name} ${userData.last_name}`
+                    : 'LUFFY MONKEY'}
+                </span>
+              </div>
+              <button className="mobile-logout" onClick={logOut}>
+                Sign out
+              </button>
+            </div>
+
+            <div className="mobile-divider"></div>
+
+            <div className="mobile-nav">
+              <Link to="/" className="mobile-nav__link">
+                Address Book
+              </Link>
+            </div>
+
+            <div className="mobile-support">
+              <Link to="#" className="mobile-support__link">
+                <img
+                  src={questionMarkIcon}
+                  alt="Support Icon"
+                  className="header__button--img"
+                />
+                SUPPORT
+              </Link>
+            </div>
+          </li>
         </ul>
       </nav>
-
+      <div className="overlay"></div>
       <button className="nav-btn nav-close-btn" onClick={showNavBar}>
         <FaTimes />
       </button>
-
       <button className="nav-btn" onClick={showNavBar}>
         <FaBars />
       </button>
